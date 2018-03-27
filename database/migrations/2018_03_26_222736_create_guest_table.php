@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpeakerTable extends Migration
+class CreateGuestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSpeakerTable extends Migration
      */
     public function up()
     {
-        Schema::create('speaker', function (Blueprint $table) {
+        Schema::create('guest', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title'); 
-            $table->integer('phone');
-            $table->string('fields_of_interest');
-            $table->string('email');
-            $table->string('name');
+            $table->string('name'); 
+            $table->string('email'); 
+            $table->integer('phone'); 
+            $table->integer('grade_of_college');
+            $table->integer('college_ID');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateSpeakerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('speaker');
+        Schema::dropIfExists('guest');
     }
 }
