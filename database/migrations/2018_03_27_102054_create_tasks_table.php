@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpeakingineventsTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateSpeakingineventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('speakers_in_events', function (Blueprint $table) {
-            $table->integer('event_id');
-            $table->integer('speaker_id'); 
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('content');
+            $table->integer('receiver');
+            $table->integer('sender');
+            $table->boolean('answer')->nullable();
+            $table->boolean('seen');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateSpeakingineventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('speakers_in_events');
+        Schema::dropIfExists('tasks');
     }
 }

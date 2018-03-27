@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Request extends Model
+class Message extends Model
 {
     // Table name
-    protected $table = 'request';
+    protected $table = 'messages';
     // Primary key
     public $primaryKey = 'id';
     // Timestamps

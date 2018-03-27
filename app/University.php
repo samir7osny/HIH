@@ -12,4 +12,8 @@ class University extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = false;
+
+    public function colleges() {
+        return $this->hasMany('App\College', 'university_id');
+    }
 }

@@ -12,4 +12,8 @@ class Timeline extends Model
     public $primaryKey = 'workshop_id';
     // Timestamps
     public $timestamps = false;
+
+    public function workshop() {
+        return $this->belongsTo('App\Workshop', 'workshop_id');
+    }
 }

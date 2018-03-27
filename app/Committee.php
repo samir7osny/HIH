@@ -12,4 +12,12 @@ class Committee extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = false;
+
+    public function head() {
+        return $this->belongsTo('App\Member', 'head_id');
+    }
+
+    public function members() {
+        return $this->hasMany('App\Member', 'committee_id');
+    }
 }

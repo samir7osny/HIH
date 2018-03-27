@@ -13,11 +13,13 @@ class CreateRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create('request', function (Blueprint $table) {
+        Schema::create('deleting_request', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type'); 
+            $table->string('content');
             $table->integer('receiver');
             $table->integer('sender');
+            $table->integer('member_to_delete_id');
+            $table->boolean('answer')->nullable();
             $table->timestamps();
         });
     }

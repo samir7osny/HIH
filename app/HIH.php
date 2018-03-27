@@ -12,4 +12,8 @@ class HIH extends Model
     public $primaryKey = null;
     // Timestamps
     public $timestamps = false;
+
+    public function president() {
+        return $this->belongsTo('App\Member', 'president_id');
+    }
 }

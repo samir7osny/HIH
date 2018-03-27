@@ -12,4 +12,8 @@ class Speaker extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = false;
+
+    public function speakInEvents(){
+        return $this->belongsToMany('App\Event', 'speakers_in_events', 'speaker_id', 'event_id');
+    }
 }
