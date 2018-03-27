@@ -16,7 +16,7 @@ class CreateSessiontimelineTable extends Migration
         Schema::create('sessiontimeline', function (Blueprint $table) {
             $table->integer('workshop_id');
             $table->integer('session_number');
-            $table->date('dateofsession'); 
+            $table->date('date_of_session'); 
             $table->timestamp('to')->nullable(); 
             $table->timestamp('from')->nullable(); 
            

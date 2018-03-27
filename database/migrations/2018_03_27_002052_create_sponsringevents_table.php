@@ -13,9 +13,9 @@ class CreateSponsringeventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sponsringevents', function (Blueprint $table) {
-            $table->integer('Event_ID');
-            $table->integer('Sponsor_ID'); 
+        Schema::create('sponsring_events', function (Blueprint $table) {
+            $table->integer('event_id');
+            $table->integer('sponsor_id'); 
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateSponsringeventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sponsringevents');
+        Schema::dropIfExists('sponsring_events');
     }
 }

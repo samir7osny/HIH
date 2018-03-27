@@ -14,7 +14,7 @@ class AddPresidencyToCommittee extends Migration
     public function up()
     {
         Schema::table('hih', function($table) {
-            $table->integer('id_of_members');
+            $table->integer('priesdent_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddPresidencyToCommittee extends Migration
     public function down()
     {
         Schema::table('hih', function (Blueprint $table) {
-            $table->dropColumn('id_of_member');
+            $table->dropColumn('priesdent_id');
         });
     }
 }

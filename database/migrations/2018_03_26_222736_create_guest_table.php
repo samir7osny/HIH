@@ -16,10 +16,10 @@ class CreateGuestTable extends Migration
         Schema::create('guest', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); 
-            $table->string('email'); 
-            $table->integer('phone'); 
+            $table->string('email')->unique(); 
+            $table->string('phone_number')->unique(); 
             $table->integer('grade_of_college');
-            $table->integer('college_ID');
+            $table->integer('college_id');
         });
     }
 

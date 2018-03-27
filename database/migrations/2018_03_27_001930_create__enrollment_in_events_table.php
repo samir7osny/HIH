@@ -13,9 +13,9 @@ class CreateEnrollmentInEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('_enrollment_in_events', function (Blueprint $table) {
-            $table->integer('Event_ID');
-            $table->integer('Guest_ID'); 
+        Schema::create('enrollment_in_events', function (Blueprint $table) {
+            $table->integer('event_id');
+            $table->integer('guest_id'); 
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateEnrollmentInEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_enrollment_in_events');
+        Schema::dropIfExists('enrollment_in_events');
     }
 }

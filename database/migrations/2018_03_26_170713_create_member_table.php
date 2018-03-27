@@ -17,8 +17,8 @@ class CreateMemberTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
-            $table->integer('phone_number');
+            $table->string('email')->unique();
+            $table->string('phone_number')->unique();
             $table->string('photo');
             $table->integer('college_id');
             $table->integer('no_of_Rewards'); 

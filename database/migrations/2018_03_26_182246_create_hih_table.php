@@ -14,11 +14,10 @@ class CreateHihTable extends Migration
     public function up()
     {
         Schema::create('hih', function (Blueprint $table) {
-            $table->string('University');
             $table->timestamp('date_of_foundation'); 
-            $table->string('Faculty');
-            $table->string('Mission');
-            $table->string('Vision');
+            $table->string('college_id');
+            $table->string('mission');
+            $table->string('vision');
             $table->string('founder');
             $table->integer('president_id'); 
         });

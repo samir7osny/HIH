@@ -16,7 +16,7 @@ class CreateCollegeTable extends Migration
         Schema::create('college', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('university');
+            $table->integer('university_id');
         });
     }
 

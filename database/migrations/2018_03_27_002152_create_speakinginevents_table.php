@@ -13,9 +13,9 @@ class CreateSpeakingineventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('speakinginevents', function (Blueprint $table) {
-            $table->integer('Events_ID');
-            $table->integer('Speakers_ID'); 
+        Schema::create('speakers_in_events', function (Blueprint $table) {
+            $table->integer('events_id');
+            $table->integer('speakers_id'); 
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateSpeakingineventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('speakinginevents');
+        Schema::dropIfExists('speakers_in_events');
     }
 }

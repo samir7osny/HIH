@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecievingRequestsTable extends Migration
+class CreateModeratingWorkshopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateRecievingRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('_recieving_requests', function (Blueprint $table) {
-            $table->integer('Request_ID');
-            $table->integer('User_ID');
-            $table->timestamps();
+        Schema::create('moderating_workshops', function (Blueprint $table) {
+            $table->integer('workshop_id');
+            $table->integer('member_id');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateRecievingRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_recieving_requests');
+        Schema::dropIfExists('moderating_workshops');
     }
 }

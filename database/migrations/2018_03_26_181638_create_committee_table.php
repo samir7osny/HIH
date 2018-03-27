@@ -15,8 +15,8 @@ class CreateCommitteeTable extends Migration
     {
         Schema::create('committee', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name'); 
-            $table->string('Description');
+            $table->string('name'); 
+            $table->string('description');
             
         });
     }

@@ -14,7 +14,7 @@ class AddIdofmemberToCommittee extends Migration
     public function up()
     {
         Schema::table('committee', function($table) {
-            $table->integer('id_of_members');
+            $table->integer('head_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddIdofmemberToCommittee extends Migration
     public function down()
     {
         Schema::table('committee', function (Blueprint $table) {
-            $table->dropColumn('id_of_members');
+            $table->dropColumn('head_id');
         });
     }
 }
