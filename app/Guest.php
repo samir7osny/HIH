@@ -24,4 +24,8 @@ class Guest extends Model
     public function enrollInEvents(){
         return $this->belongsToMany('App\Event', 'enrollment_in_events', 'guest_id', 'event_id');
     }
+
+    public function user() {
+        return $this->hasOne('App\User', 'id_of');
+    }
 }

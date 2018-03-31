@@ -14,7 +14,7 @@ class AddIdofmemberToCommittee extends Migration
     public function up()
     {
         Schema::table('committee', function($table) {
-            $table->integer('head_id');
+            $table->integer('head_id')->unique()->nullable();
         });
     }
 

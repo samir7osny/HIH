@@ -18,8 +18,8 @@ class CreateEventTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('place');
-            $table->integer('place_cost');
-            $table->timestamp('from');
+            $table->integer('place_cost')->nullable();
+            $table->timestamp('from')->nullable();
             $table->timestamp('to')->nullable();
             $table->date('date');
             $table->integer('no_of_forms');

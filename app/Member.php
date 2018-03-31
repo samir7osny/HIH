@@ -32,4 +32,8 @@ class Member extends Model
     public function moderates(){
         return $this->belongsToMany('App\Workshop', 'moderating_workshops', 'member_id', 'workshop_id');
     }
+
+    public function user() {
+        return $this->hasOne('App\User', 'id_of');
+    }
 }

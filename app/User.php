@@ -8,14 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    // Timestamps
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'password','type','id_of','first_name', 'last_name', 'email', 'phone_number', 'photo_url','college_id'
     ];
 
     /**
@@ -46,5 +47,12 @@ class User extends Authenticatable
     }
     public function inboxMessages() {
         return $this->hasMany('App\Message', 'receiver');
+    }
+    public function userInfo() {
+        if ($this->type == 0) {     // for member
+            return $this->belongsTo('App\Member', 'id_of');
+        } else if ($this->type == 1) {
+            return $this->belongsTo('App\Guest', 'id_of');
+        }
     }
 }

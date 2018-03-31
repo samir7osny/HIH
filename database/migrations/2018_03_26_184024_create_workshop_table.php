@@ -17,10 +17,10 @@ class CreateWorkshopTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->integer('cost');
-            $table->integer('place_cost');
+            $table->integer('cost')->nullable();
+            $table->integer('place_cost')->nullable();
             $table->string('place');
-            $table->timestamp('from');
+            $table->timestamp('from')->nullable();
             $table->timestamp('to')->nullable(); 
         });
     }

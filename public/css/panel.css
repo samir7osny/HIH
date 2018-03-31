@@ -1,0 +1,168 @@
+.panel *{
+    transition: none;
+}
+.panel{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: none;
+    overflow: hidden;
+}
+.panelItem{
+    background-image: url(../background.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.panelItem#panelActive{
+    width: 100%;
+    border-spacing: 0;
+    z-index: 3;
+    opacity: 1;
+}
+.panelItemDarker{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+.panelControl{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: table;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+.panelControl i{
+    font-size: 3.5em;
+    color: #25623f;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.panelControl i:hover{
+    opacity: 1;
+}
+.panelControl:hover .panelPause,
+.panelControl:hover .panelPlay{
+    opacity: 1;
+}
+.panelPause{
+    transition: opacity 0.3s ease-in-out;
+    display: block;
+    position: absolute;
+    right: 45%;
+    left: 45%;
+    top: 45%;
+    bottom: 45%;
+    opacity: 0;
+    text-align: center;
+    cursor: pointer;
+}
+.panelPlay{
+    transition: opacity 0.3s ease-in-out;
+    display: block;
+    position: absolute;
+    right: 45%;
+    left: 45%;
+    top: 45%;
+    bottom: 45%;
+    opacity: 0;
+    display: none;
+    text-align: center;
+    cursor: pointer;
+}
+.panelPause i,
+.panelPlay i{
+    text-shadow: 0px 0px 2px #FFF;
+}
+.panelControlArrows{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+}
+.panelItemText{
+    width: 57%;
+    position: absolute;
+    left: 16%;
+    bottom: 12%;
+    /* background-color: rgba(37, 98, 63,0.5); */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+}
+.panelItemTitle{
+    padding: 20px;
+    color: #FFF;
+}
+.panelItemContent{
+    padding: 20px;
+    color: #DDD;
+}
+.panelArrow{
+    cursor: pointer;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.0);
+    margin: auto;
+    color: #FFF;
+    padding: 50px;
+}
+.panelArrow i{
+    letter-spacing: -22px;
+    transition: all 0.3s ease-in-out;
+}
+.panelRightArrow:hover i:nth-of-type(1){
+    /* background-color: rgba(0,0,0,0.7); */
+    opacity: 1;
+    transition: all 0.3s ease-in-out 0.1s;
+    transform: translateX(20px);
+}
+.panelRightArrow:hover i:nth-of-type(2){
+    opacity: 1;
+    transform: translateX(20px);
+}
+.panelLeftArrow:hover i:nth-of-type(1){
+    /* background-color: rgba(0,0,0,0.7); */
+    opacity: 1;
+    transform: translateX(-20px);
+}
+.panelLeftArrow:hover i:nth-of-type(2){
+    opacity: 1;
+    transition: all 0.3s ease-in-out 0.1s;
+    transform: translateX(-20px);
+}
+.panelLeftArrow{
+    float: left;
+}
+.panelLeftArrow i{
+    text-shadow: 2px 0px 0px #FFF;
+}
+.panelRightArrow{
+    float: right;
+}
+.panelRightArrow i{
+    text-shadow: -2px 0px 0px #FFF;
+}
+.panelTimer{
+    width: 100%;
+    height: 6px;
+    z-index: 3;
+    position: absolute;
+    background-color: #888;
+    bottom: 0;
+    left: 0;
+}
+.panelTimer span{
+    display: inline-block;
+    background-color: rgba(37, 98, 63,1);
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+}

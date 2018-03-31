@@ -16,7 +16,7 @@ class CreateSpeakerTable extends Migration
         Schema::create('speaker', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title'); 
-            $table->string('phone_number');
+            $table->string('phone_number')->unique();
             $table->string('fields_of_interest');
             $table->string('email')->unique();
             $table->string('name');
