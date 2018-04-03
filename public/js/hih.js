@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.outerBox').delay(700).animate({opacity:1},{
+    $('.allowOverflow,.outerBox').delay(700).animate({opacity:1},{
         duration:500,
         start:function(){
             $(this).css('transition','none');

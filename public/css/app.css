@@ -3,11 +3,27 @@
     font-family: Montserrat;
     src: url(../fonts/Montserrat/Montserrat-Bold.ttf);
 }
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway/Raleway-Regular.ttf);
+}
+@font-face {
+    font-family: Titillium;
+    src: url(../fonts/Titillium/TitilliumWeb-Regular.ttf);
+}
+@font-face {
+    font-family: Aller;
+    src: url(../fonts/Aller/Aller-Rg.ttf);
+}
+@font-face {
+    font-family: Poppins;
+    src: url(../fonts/Poppins/Poppins-Regular.ttf);
+}
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Montserrat;
+    font-family: Poppins,Aller,Titillium,Raleway,Montserrat;
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease-in-out;
@@ -61,7 +77,7 @@ hr.green{
     height: 1px;
     border: 0;
     border-top: 1px solid rgba(37, 98, 63,1);
-    padding: 0; 
+    padding: 0;
     width: 80%;
     margin: 10px auto;
 
@@ -213,6 +229,15 @@ div#navContainer.fixedNav nav#mainNav{
 #mainNav div#user ul li:hover{
     transform: none;
     background-color: #DDD;
+}
+#mainNav #user i:hover {
+    transform: translateX(10px);
+}
+#mainNav #user i {
+    font-size: 3em;
+    line-height: 80px;
+    color: #24603d;
+    cursor: pointer;
 }
 #mainNav div.logo{
     padding-left: 5%;
@@ -380,10 +405,11 @@ div#navContainer.fixedNav nav#mainNav{
 }
 .outerBox{
     overflow: hidden;
-    padding: 40px;
+    padding: 0;
     opacity: 0;
     display: flex;
     position: relative;
+    flex-wrap: wrap;
 }
 .fullHeight{
     height: 100%;
@@ -392,6 +418,8 @@ div#navContainer.fixedNav nav#mainNav{
     /* height: 100%; */
     width: 100%;
     display: flex;
+    padding: 40px;
+    position: relative;
 }
 .outerBox.dark{
     background-color: rgb(37, 98, 63);
@@ -412,6 +440,8 @@ div#navContainer.fixedNav nav#mainNav{
     vertical-align: middle;
     height: 100%;
     width: 100%;
+    position: relative;
+    z-index: 10;
 }
 .light .innerBox{
     flex-direction: row-reverse;
@@ -443,6 +473,7 @@ div#navContainer.fixedNav nav#mainNav{
 .leftBox h1{
     margin-top: 10px;
     color: rgba(37, 98, 63,1);
+    margin: auto 5%;
 }
 .rightBox{
     height: 100%;
@@ -470,9 +501,9 @@ div#navContainer.fixedNav nav#mainNav{
     color: rgb(37, 98, 63);
 }
 .rightBox p{
-    font-size: 1.1em;    
-    padding: 5px;
-    margin: 0 10%;
+    font-size: 1.1em;
+    padding: 10px 5%;
+    margin: 0 5%;
 }
 .rightBox h2{
     padding: 5px;
@@ -485,13 +516,13 @@ div#navContainer.fixedNav nav#mainNav{
     color:#DDD;
     font-size: 1.5em;
     width: 150px;
-    text-align: center; 
+    text-align: center;
     display: table-cell;
     vertical-align: middle;
 }
 .rightBox .rightBoxBackground{
     width: auto;
-    transform: translateX(-20px) rotateZ(-10deg) scale(1.8) translateY(20%);
+    transform: scaleX(2) scaleY(2) rotateZ(-10deg) translateY(18%) translateX(-10%);
     opacity: 0.2;
     position: absolute;
     right: 0;
@@ -501,7 +532,7 @@ div#navContainer.fixedNav nav#mainNav{
     width: 100%;
 }
 .light .rightBox .rightBoxBackground{
-    transform: translateX(20px) rotateZ(10deg) scaleX(-1.8) scaleY(1.8) translateY(100px);
+    transform: scaleX(-2) scaleY(2) rotateZ(-10deg) translateY(18%) translateX(-10%);
     left: 0;
     right: auto;
     z-index: 0;
@@ -523,7 +554,7 @@ div#navContainer.fixedNav nav#mainNav{
     position: absolute;
     width: 100%;
     top: 0;
-    text-align: center;    
+    text-align: center;
     height: 120px;
     cursor: pointer;
     z-index: 50;
@@ -531,7 +562,7 @@ div#navContainer.fixedNav nav#mainNav{
 }
 .downArrow:hover,
 .upArrow:hover{
-    
+
 }
 .downArrow:hover i,
 .upArrow:hover i{
@@ -587,8 +618,8 @@ div#navContainer.fixedNav nav#mainNav{
 .contactsBar .contacts .contact{
     padding: 2%;
     padding-left: 10%;
-    height: 10%; 
-    text-align:left; 
+    height: 10%;
+    text-align:left;
     display:table;
     width:100%;
     background-color: #DDD;
@@ -612,7 +643,7 @@ div#navContainer.fixedNav nav#mainNav{
 }
 .contactsBar .contacts .contact h2{
     padding-left: 8%;
-    display:table-cell; 
+    display:table-cell;
     vertical-align:middle;
     color: rgba(37, 98, 63,1);
 }
@@ -782,9 +813,7 @@ div#navContainer.fixedNav nav#mainNav{
     position: relative;
     z-index: 10;
 }
-.leftBox .inputContainer{
-}
-.rightBox .inputContainer{
+.inputContainer{
     display: inline-block;
     width: 60%;
 }
@@ -799,31 +828,32 @@ div#navContainer.fixedNav nav#mainNav{
     color: rgba(37, 98, 63,1);
     cursor: text;
 }
-.rightBox .inputContainer label{
+.inputContainer label{
     font-size: 0.7em;
     top: 25%;
     padding-left: 15px;
     color: #DDD;
 }
-.rightBox .inputContainer input,
-.rightBox .inputContainer select,
-.rightBox .inputContainer button{
+.inputContainer input,
+.inputContainer select,
+.inputContainer button{
     padding-left: 15px;
     color: #DDD;
     width: 100%;
+
 }
-.light .rightBox .inputContainer input,
-.light .rightBox .inputContainer select,
-.light .rightBox .inputContainer button{
+.light .inputContainer input,
+.light .inputContainer select,
+.light .inputContainer button{
     color: #DDD;
     background-color: rgba(37, 98, 63,0.7);
     border-color: rgb(37, 98, 63);
 }
-.rightBox .inputContainer select{
+.inputContainer select{
     font-size: 0.7em;
     height: 2.6em;
 }
-.rightBox .inputContainer select option{
+.inputContainer select option{
     color: rgb(37, 98, 63);
 }
 .inputContainer label.focused{
@@ -842,8 +872,7 @@ button{
     resize: horizontal;
     z-index: 10;
 }
-input:focus,
-select{
+*:focus{
     outline: none;
 }
 .leftBox input{
@@ -854,24 +883,56 @@ select{
     width: 80%;
     font-size: 1.5em;
 }
+.leftBox h1[contenteditable='true'],
+.light .rightBox p[contenteditable='true']{
+    border-bottom: 4px solid rgba(37, 98, 63,1);
+    background-color: rgba(37, 98, 63,0.1);
+    position: relative;
+}
+.rightBox p[contenteditable='true'],
+.light .leftBox h1[contenteditable='true']{
+    border-bottom: 4px solid #DDD;
+    background-color: #DDD2;
+}
+[placeholder]::before{
+    content: attr(placeholder);
+    opacity: 0;
+    transform: scale(0);
+    display: none;
+}
+.light [placeholder][name='name']::before,
+.dark [placeholder][name='description']::before{
+    color: #DDDD;
+}
+.dark [placeholder][name='name']::before,
+.light [placeholder][name='description']::before{
+    color: rgba(37, 98, 63, 0.7);
+}
+[placeholder]:empty::before {
+    opacity: 1;
+    transform: scale(1);
+    display: initial;
+}
+
 .rightBox input[type='submit'],
-.rightBox .inputContainer button{
+.inputContainer button{
     text-align: center;
     padding: 10px 20px;
     width: auto;
     margin: auto;
+    margin-right: 1px;
     margin-top: 5%;
     background-color: #DDD8;
     cursor: pointer;
     color: rgb(37, 98, 63);
 }
-.rightBox input[type='submit']:hover,
-.rightBox button:hover{
+input[type='submit']:hover,
+button:hover{
     background-color: #DDD;
     border-color: rgb(37, 98, 63);
 }
-.light .rightBox input[type='submit']:hover,
-.light .rightBox button:hover{
+.light input[type='submit']:hover,
+.light button:hover{
     background-color: rgb(37, 98, 63);
     border-color: #DDD;
 }
@@ -881,7 +942,110 @@ select{
     text-align: center;
     display: block;
 }
-
+.innerBox.members{
+    background-color: #0002;
+    padding: 3%;
+}
+.innerBox.members .flexBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.members .member{
+    flex-basis: calc(20% - 4px);
+    background: #DDD8;
+    height: 80px;
+    margin-bottom: 2px;
+    display: table;
+    cursor: pointer;
+    color: rgb(37, 98, 63);
+}
+.members:visible{
+    display: flex;
+}
+.members .member:hover{
+    background-color: #DDD;
+}
+.members .member h3{
+    text-align: center;
+}
+.members .member.head{
+    position: relative;
+}
+.members .member.head span{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+    padding: 5px;
+    line-height: 100%;
+}
+.members .member img{
+    width: 80px;
+    height: 80px;
+    display: block;
+    object-fit: cover;
+}
+.light .members .member{
+    background: rgba(37, 98, 63,0.7);
+    color: #DDD;
+}
+.light .members .member:hover{
+    background: rgba(37, 98, 63,1);
+}
+.light .members .member h3{
+}
+.haveSlide::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-color: #DDD;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    z-index: 50;
+}
+.light .haveSlide::after{
+    background-color: rgb(37, 98, 63);
+}
+button.add{
+    width: 100%;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 3em;
+}
+button.addMember {
+    width: 100%;
+    height: 100%;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+}
+button.delete{
+    background-color: rgba(208, 5, 5, 0.617);
+    color: #FFF;
+}
+.light button.delete{
+    background-color: rgba(177, 0, 0, 0.617);
+    color: #FFF;
+}
+button.delete:hover,
+.light button.delete:hover{
+    background-color: #ff0000bf;
+}
+div.addMember{
+    height: 100%;
+}
+button.dark{
+    background-color: rgb(37, 98, 63);
+    color: #DDD;
+}
+button.light{
+    background-color: #DDD;
+    color: rgb(37, 98, 63);
+}
 /* Footer */
 footer{
     height: 400px;

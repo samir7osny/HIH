@@ -24,31 +24,35 @@
                     </form></li>
                 </ul>
             </div>
+        @else
+            <div id="user">
+                <i onclick="openLoginForm()" class="fa fa-sign-in" aria-hidden="true"></i>
+            </div>
         @endif
         <ul>
             <li id="active">Home</li>
-            <li>About us</li>
-            <li onclick="openLoginForm()">Google</li>
+            <li><a href="committee">Committees</a></li>
+            <li>Google</li>
         </ul>
     </nav>
     <div id="backLoginWindow">
-            <form id="loginForm" method="POST" action="{{ route('login') }}">
-                @csrf
-                <input type='text' name='username' placeholder='Username' value="{{ old('email') }}" required autofocus>
-                @if ($errors->has('username'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('username') }}</strong>
-                    </span>
-                @endif
-                <input type='password' name='password' placeholder='Password' required>
-                @if ($errors->has('password'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-                <input type='submit' name='login' value='Login'>
-            </form>
-        </div>
-        <script src="{{ asset('js/loginpopup.js') }}"></script>
-        <script src="{{ asset('js/navbar.js') }}"></script>
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
+            @csrf
+            <input type='text' name='username' placeholder='Username' value="{{ old('email') }}" required autofocus>
+            @if ($errors->has('username'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('username') }}</strong>
+                </span>
+            @endif
+            <input type='password' name='password' placeholder='Password' required>
+            @if ($errors->has('password'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+            <input type='submit' name='login' value='Login'>
+        </form>
+    </div>
+    <script src="{{ asset('js/loginpopup.js') }}"></script>
+    <script src="{{ asset('js/navbar.js') }}"></script>
 </div>

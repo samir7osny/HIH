@@ -14,9 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/committees', function () {
-    return view('committees');
-});
+
+Route::resource('committee', 'CommitteesController');
 
 Auth::routes();
 
