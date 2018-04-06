@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password','type','id_of','first_name', 'last_name', 'email', 'phone_number', 'photo_url','college_id'
+        'username', 'password','type','id_of','first_name', 'last_name', 'email', 'phone_number', 'photo_url','college_id','about'
     ];
 
     /**
@@ -40,6 +40,10 @@ class User extends Authenticatable
     }
     public function inboxTasks() {
         return $this->hasMany('App\Task', 'receiver');
+    }
+
+    public function college() {
+        return $this->belongsTo('App\College', 'college_id');
     }
 
     public function outboxMessages() {

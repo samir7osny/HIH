@@ -13,12 +13,8 @@ class College extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function members() {
-        return $this->hasMany('App\Member', 'college_id');
-    }
-
-    public function guests() {
-        return $this->hasMany('App\Guest', 'college_id');
+    public function students() {
+        return $this->hasMany('App\User', 'college_id');
     }
 
     public function university() {

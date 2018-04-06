@@ -12,12 +12,12 @@
         </div>
         @if (Auth::check())
             <div id="user">
-                <img src="{{ asset('images/temp/tomhanks.jpg') }}" alt="">
-                <ul style="height:0%">
-                    <li>Profile</li>
-                    <li>Message</li>
-                    <li>Tasks</li>
-                    <li>Requests</li>
+                <img src="/storage/usersImages/{{Auth::user()->photo_url}}" alt="">
+                <ul>
+                    <li><a href="/user/{{Auth::user()->username}}">Profile</a></li>
+                    <li><a href="">Message</a></li>
+                    <li><a href="">Tasks</a></li>
+                    <li><a href="">Requests</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -30,29 +30,30 @@
             </div>
         @endif
         <ul>
-            <li id="active">Home</li>
-            <li><a href="committee">Committees</a></li>
+            <li id="active"><a href="/">Home</a></li>
+            <li><a href="/committee">Committees</a></li>
             <li>Google</li>
         </ul>
     </nav>
     <div id="backLoginWindow">
-        <form id="loginForm" method="POST" action="{{ route('login') }}">
+        <form id="loginForm" method="POST" class="dark" action="{{ route('login') }}">
             @csrf
-            <input type='text' name='username' placeholder='Username' value="{{ old('email') }}" required autofocus>
-            @if ($errors->has('username'))
-                <span class="invalid-feedback">
-                    <strong>{{ $errors->first('username') }}</strong>
-                </span>
-            @endif
-            <input type='password' name='password' placeholder='Password' required>
-            @if ($errors->has('password'))
-                <span class="invalid-feedback">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-            @endif
-            <input type='submit' name='login' value='Login'>
+            @include('inc.logo')
+            <div class="tableCell">
+                <div class="inputContainer">
+                    <input type='text' class="requiredInput" name='username' value="{{ old('email') }}" required autofocus>  <label class="" for="username">Username</label>
+                </div>
+                <div class="inputContainer">
+                    <input type='password' class="requiredInput" name='password' required>                        
+                    <label class="" for="password">Password</label>
+                </div>
+                <div class="inputContainer submitInput">
+                    <input type='submit' name='login' value='Login'>
+                </div>
+            </div>
         </form>
     </div>
     <script src="{{ asset('js/loginpopup.js') }}"></script>
     <script src="{{ asset('js/navbar.js') }}"></script>
+    <script src="{{ asset('js/form.js') }}"></script>
 </div>

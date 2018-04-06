@@ -122,6 +122,7 @@ function createForm(button){
     for (let index = 0; index < desc.length; index++) {
         CKEDITOR.inline( desc[index] );
     }
+      
 }
 
 function createSaveForm(button){
@@ -132,6 +133,11 @@ function createSaveForm(button){
     for (let index = 0; index < desc.length; index++) {
         CKEDITOR.inline( desc[index] );
     }
+    CKEDITOR.on("instanceReady", function(event) {
+        for (let index = 0; index < desc.length; index++) {
+            desc.eq(index).empty();
+        } 
+    });
 }
 
 function deleteForm(committeeBox){
@@ -172,7 +178,7 @@ function checkInput(input){
 function submitAJAXEdit(committeeBox){
     
     $.ajax({
-        url: 'committee/'+committeeBox.attr('committee'),
+        url: '/committee/'+committeeBox.attr('committee'),
         type: "PUT",
         data: {
             name:committeeBox.find("[name='name']").html(),
@@ -192,7 +198,7 @@ function submitAJAXEdit(committeeBox){
 
 function submitAJAXSave(committeeBox){
     $.ajax({
-        url: 'committee',
+        url: '/committee',
         type: "POST",
         data: {
             name:committeeBox.find("[name='name']").html(),
@@ -203,7 +209,7 @@ function submitAJAXSave(committeeBox){
             if (response.success) {
                 committeeBox.attr('committee',response.id);
                 deleteForm(committeeBox);
-                committeeBox.find('button.membersButton').after(' <button class="delete">Delete</button>');
+                committeeBox.find('button.edit').after(' <button class="membersButton">Members</button> <button class="delete">Delete</button>');
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -214,7 +220,7 @@ function submitAJAXSave(committeeBox){
 
 function getDataAJAX(committeeBox){
     $.ajax({
-        url: 'committee/' + committeeBox.attr('committee'),
+        url: '/committee/' + committeeBox.attr('committee'),
         type: "GET",
         success: function(response){ // What to do if we succeed
             if (response.success) {
@@ -230,7 +236,7 @@ function getDataAJAX(committeeBox){
 
 function deleteAJAX(committeeBox){
     $.ajax({
-        url: 'committee/' + committeeBox.attr('committee'),
+        url: '/committee/' + committeeBox.attr('committee'),
         type: "DELETE",
         success: function(response){ // What to do if we succeed
             if (response.success) {

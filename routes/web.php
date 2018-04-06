@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/try', function () {
+//     return view('welcome');
+// });
 
 Route::resource('committee', 'CommitteesController');
+Route::resource('user', 'UsersController');
+
+Route::post('/university','UniversitiesController@getColleges');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

@@ -3,9 +3,10 @@
 
 @section('intro')
     <div class="headerVideoContainer">
-        <video poster="{{ asset('images/HIH.png') }}" class="headerVideo" video="video" autobuffer="autobuffer" autoplay="autoplay" onloadstart="this.volume=0.0" onclick="if (this.paused) {this.play();} else {this.pause();}">
-            {{-- <source src="{{ asset('videos/intro.mp4') }}" type="video/mp4"> --}}
-        </video>
+        {{-- <video poster="{{ asset('images/HIH.png') }}" class="headerVideo" video="video" autobuffer="autobuffer" autoplay="autoplay" onloadstart="this.volume=0.0" onclick="if (this.paused) {this.play();} else {this.pause();}">
+            <source src="{{ asset('videos/intro.mp4') }}" type="video/mp4">
+        </video> --}}
+        <img src="{{ asset('images/HIH.png') }}" alt="" style="display:block; width:100%; height:100%; object-fit:cover;">
         <div class="text">
             <h1>Hand In Hand</h1>
             <p>Hint about Hand In Hand</p>

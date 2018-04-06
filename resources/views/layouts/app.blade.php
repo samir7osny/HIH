@@ -19,6 +19,7 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 </head>
 <body>
+    @include('inc.messages')
     @yield('intro')
     @include('inc.navbar')
     @yield('content')

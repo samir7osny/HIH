@@ -31,22 +31,31 @@
 html{
     height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 body{
     background-color: #0d311d;
-    background-image: url(../background.jpg);
+    background-image: url(../images/temp/background.jpg);
     background-attachment: fixed;
     background-size: cover;
     min-height: 100%;
     height: 100%;
     min-width: 100%;
-    display: block;
+    display: inline-block;
 }
-body::-webkit-scrollbar {
+form{
+    display: inline-block;
+
+}
+hr{
+    width: 20%;
+    margin: 20px auto;
+}
+*::-webkit-scrollbar {
     background-color: #DDD;
     width: 10px;
 }
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: rgb(20, 49, 33);
 }
 div.darkBackground{
@@ -160,6 +169,42 @@ hr.green{
     background-color: #FFF;
     z-index: 1000;
 }
+div.notification {
+    position: fixed;
+    bottom: 0;
+    background-color: #25623f00;
+    z-index: 5000;
+    border-top: 5px solid #FFF;
+    /* border-bottom: 5px solid #FFF; */
+    color: #FFF;
+    height: auto;
+    left: -100%;
+    overflow: hidden;
+    transition: none;
+    width: 100%;
+    display: none;
+}
+div.notification button{
+    width: 100%;
+    border-bottom-width: 5px;
+    background-color: #DDD;
+    opacity: 0.9;
+    cursor: pointer;
+}
+div.notification button:hover{
+    opacity: 1;
+    border-color: #DDD;
+}
+div.notification p{
+    background-color: #25623f;
+    padding: 10px;
+    transition: none;
+    display: none;
+    opacity: 0.93;
+}
+div.notification p.error{
+    background-color: #b71818;
+}
 div#navContainer.fixedNav{
     position: fixed;
     top: 0;
@@ -209,22 +254,31 @@ div#navContainer.fixedNav nav#mainNav{
 #mainNav div#user ul{
     position: absolute;
     width: 100%;
-    top: 100%;
+    top: calc(100% + 5px);
     list-style: none;
     display: block;
     right: 0;
     z-index: 50;
     overflow: hidden;
-    transition: none;
-    height: auto;
+    /* transition: none; */
+    height: 0;
     left: 0;
 }
+#mainNav div#user:hover ul{
+    height: 400%;
+}
 #mainNav div#user ul li{
-    display: inline-block;
-    padding: 20px;
-    width: 100%;
-    height: auto;
+    display: table;
+    overflow: hidden;
+    height: 20%;
     line-height: 100%;
+    width: 100%;
+}
+#mainNav div#user ul li a{
+    height: 100%;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
 }
 #mainNav div#user ul li:hover{
     transform: none;
@@ -267,6 +321,11 @@ div#navContainer.fixedNav nav#mainNav{
     font-size: 1.15em;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 1);
+}
+#mainNav ul li a{
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 #mainNav ul li:hover{
     flex-grow: 2;
@@ -355,7 +414,7 @@ div#navContainer.fixedNav nav#mainNav{
     width: 100%;
 }
 .slide.dark{
-    background: url(../green.png);
+    background: url(../images/temp/green.png);
 }
 .slide.dark .text{
     margin-top: 10%;
@@ -414,6 +473,13 @@ div#navContainer.fixedNav nav#mainNav{
 .fullHeight{
     height: 100%;
 }
+.windowHeight{
+    height: calc(100% - 80px);
+    min-height: fit-content;
+}
+.paddedBox{
+    padding: 40px;
+}
 .innerBox{
     /* height: 100%; */
     width: 100%;
@@ -435,7 +501,7 @@ div#navContainer.fixedNav nav#mainNav{
     display: table;
     flex-grow: 10;
 }
-.outerBox .tableCell{
+/* .outerBox */.tableCell{
     display: table-cell;
     vertical-align: middle;
     height: 100%;
@@ -478,12 +544,13 @@ div#navContainer.fixedNav nav#mainNav{
 .rightBox{
     height: 100%;
     width: 70%;
+    padding: 40px 0;
     background-color: rgba(37, 98, 63,1);
     color:#FFF;
     display: table;
     overflow: hidden;
     position: relative;
-    background: url(../green.png);
+    background: url(../images/temp/green.png);
     flex-grow: 10;
 }
 .dark .rightBox,
@@ -500,39 +567,47 @@ div#navContainer.fixedNav nav#mainNav{
 .light .rightBox{
     color: rgb(37, 98, 63);
 }
-.rightBox p{
-    font-size: 1.1em;
+.rightBox p {
+    /* font-size: 1.1em; */
     padding: 10px 5%;
     margin: 0 5%;
+    padding: 5px;
+    font-weight: 100;
+    margin: 0 10%;
+    display: table;
+    width: 80%;
 }
 .rightBox h2{
     padding: 5px;
     font-weight: 100;
     margin: 0 10%;
     display: table;
-    width: 100%;
+    width: 80%;
 }
 .rightBox i{
     color:#DDD;
-    font-size: 1.5em;
+    font-size: 34px;
     width: 150px;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
 }
 .rightBox .rightBoxBackground{
-    width: auto;
-    transform: scaleX(2) scaleY(2) rotateZ(-10deg) translateY(18%) translateX(-10%);
+    transform: scaleX(2) scaleY(2) rotateZ(-10deg) translateX(-10%);
     opacity: 0.2;
     position: absolute;
     right: 0;
+    top: 20%;
+    bottom: 0;
+    width: 30%;
 }
 .rightBox .rightBoxBackground svg{
     fill:#FFF;
     width: 100%;
+    height: 100%;
 }
 .light .rightBox .rightBoxBackground{
-    transform: scaleX(-2) scaleY(2) rotateZ(-10deg) translateY(18%) translateX(-10%);
+    transform: scaleX(-2) scaleY(2) rotateZ(-10deg) translateX(-10%);
     left: 0;
     right: auto;
     z-index: 0;
@@ -632,7 +707,7 @@ div#navContainer.fixedNav nav#mainNav{
     color: #DDD;
 }
 .contactsBar .contacts .contact#opened{
-    background: url(../green.png);
+    background: url(../images/temp/green.png);
 }
 .contactsBar .contacts .contact img{
     float: left;
@@ -813,9 +888,9 @@ div#navContainer.fixedNav nav#mainNav{
     position: relative;
     z-index: 10;
 }
-.inputContainer{
+.rightBox .inputContainer{
     display: inline-block;
-    width: 60%;
+    width: 80%;
 }
 .inputContainer label{
     position: absolute;
@@ -828,15 +903,23 @@ div#navContainer.fixedNav nav#mainNav{
     color: rgba(37, 98, 63,1);
     cursor: text;
 }
-.inputContainer label{
+.rightBox .inputContainer label{
     font-size: 0.7em;
     top: 25%;
     padding-left: 15px;
     color: #DDD;
 }
+.rightBox .inputContainer.submitInput {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: block;
+}
 .inputContainer input,
 .inputContainer select,
-.inputContainer button{
+.inputContainer button,
+.inputContainer textarea,
+.inputContainer p[contenteditable]{
     padding-left: 15px;
     color: #DDD;
     width: 100%;
@@ -848,6 +931,10 @@ div#navContainer.fixedNav nav#mainNav{
     color: #DDD;
     background-color: rgba(37, 98, 63,0.7);
     border-color: rgb(37, 98, 63);
+}
+.inputContainer input:disabled{
+    border: none;
+    background-color: #FFF0;
 }
 .inputContainer select{
     font-size: 0.7em;
@@ -862,7 +949,8 @@ div#navContainer.fixedNav nav#mainNav{
 }
 input,
 select,
-button{
+button,
+textarea{
     color: rgba(37, 98, 63,1);
     background-color: #DDD4;
     border: none;
@@ -872,14 +960,21 @@ button{
     resize: horizontal;
     z-index: 10;
 }
+[contenteditable='true']{
+    cursor: text;
+}
+textarea{
+    resize: vertical;
+    min-height: 150px;
+}
 *:focus{
     outline: none;
 }
 .leftBox input{
     margin-top: 10px;
-    text-align: center;
     border-bottom: 4px solid rgba(37, 98, 63,1);
     background-color: rgba(37, 98, 63,0.1);
+    color: rgb(37, 98, 63);
     width: 80%;
     font-size: 1.5em;
 }
@@ -941,6 +1036,27 @@ button:hover{
     margin: auto;
     text-align: center;
     display: block;
+}
+.inputContainer.name{
+    padding: 0 10%;
+    display: flex;
+}
+.inputContainer.name input:nth-of-type(1){
+    flex-grow: 1;
+    margin-right: 5px;
+    width: 40%;
+}
+.inputContainer.name input:nth-of-type(2){
+    flex-grow: 10;
+    width: 60%;
+}
+.inputContainer.name label:nth-of-type(1){
+    width: auto;
+    left: 13%;
+}
+.inputContainer.name label:nth-of-type(2){
+    width: auto;
+    left: 46%;
 }
 .innerBox.members{
     background-color: #0002;
@@ -1023,7 +1139,8 @@ button.addMember {
     margin: 0;
     padding: 0;
 }
-button.delete{
+button.delete,
+.rightBox .inputContainer input.delete{
     background-color: rgba(208, 5, 5, 0.617);
     color: #FFF;
 }
@@ -1115,19 +1232,33 @@ footer #copyright{
 }
 
 #loginForm {
-    display: inline-block;
+    display: table;
     height: 40%;
-    min-height: 100px;
+    min-height: 400px;
     width: 30%;
     position: relative;
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    margin: auto;
-    padding-top: 95px;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(37, 98, 63, 0.5);
 }
-
+#loginForm svg{
+    fill: #DDD2;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+#loginForm input{
+    color: #DDD;
+    width: 100%;
+    background-color: #DDD7;
+    border: none;
+    border-bottom: 4px solid #DDD;
+    padding: 5px 20px;
+    font-size: 1em;
+    resize: horizontal;
+    z-index: 10;
+}
 #loginForm.on {
     animation: animatezoom 0.5s;
 }
@@ -1136,18 +1267,35 @@ footer #copyright{
     animation: animatezoomout 0.5s;
 }
 
-#loginForm * {
+#loginForm .tableCell * {
     display: block;
-    margin: auto;
-    width: 60%;
-    height: 15%;
-    margin-bottom: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 80%;
+    font-size: 20px;
+    margin: 15px auto;
+    color: #DDD;
+}
+#loginForm .tableCell{
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
+#loginForm .tableCell label{
+    text-align: left;
+    left: 45px;
+    padding: 5px 20px;
+    top: -14px; 
+}
 #loginForm input[name="login"] {
     width: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: auto;
+}
+
+
+#loginForm input[name="login"]:hover {
+    background-color: #DDD;
+    border-color: rgb(37, 98, 63);
+    color: rgb(37, 98, 63);
 }

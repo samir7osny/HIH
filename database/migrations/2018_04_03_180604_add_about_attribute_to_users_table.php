@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCommiteeconsistofToMember extends Migration
+class AddAboutAttributeToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCommiteeconsistofToMember extends Migration
      */
     public function up()
     {
-        Schema::table('member', function($table) {
-            $table->integer('committee_id')->nullable();
+        Schema::table('users', function($table) {
+            $table->mediumText('about')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddCommiteeconsistofToMember extends Migration
      */
     public function down()
     {
-        Schema::table('member', function (Blueprint $table) {
-            $table->dropColumn('committee_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('about');
         });
     }
 }

@@ -13,10 +13,6 @@ class Guest extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function college() {
-        return $this->belongsTo('App\College', 'college_id');
-    }
-
     public function enrollInWorkshops(){
         return $this->belongsToMany('App\Workshop', 'enrollment_in_workshops', 'guest_id', 'workshop_id');
     }

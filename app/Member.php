@@ -25,10 +25,6 @@ class Member extends Model
         return $this->belongsTo('App\Committee', 'committee_id');
     }
 
-    public function college() {
-        return $this->belongsTo('App\College', 'college_id');
-    }
-
     public function moderates(){
         return $this->belongsToMany('App\Workshop', 'moderating_workshops', 'member_id', 'workshop_id');
     }

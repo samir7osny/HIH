@@ -65,6 +65,10 @@
         </style>
     </head>
     <body>
+        <form action="/university" method="POST">
+            <input type="text">
+            <input type="submit" value="bfjdbv">
+        </form>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

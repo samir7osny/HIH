@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,12 +48,22 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'type' => 'required|integer|min:0|max:1',
-            'id_of' => 'required|integer',
-        ]);
+        if($data['type'] == 0){
+            return Validator::make($data, [
+                'username' => 'required|string|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'type' => 'required|integer|min:0|max:1',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'userImage' => 'image|nullable|max:5999',
+                'college' => 'required|integer',
+                'phone_number' => 'required|string|max:11|min:11|unique:users',
+                'email' => 'required|email|unique:users',
+                'about' => 'string|nullable',
+            ]);
+        } else if($data['type'] == 1){
+
+        }
     }
 
     /**
@@ -64,6 +74,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['type'] == 0){
+            $member = new \App\Member;
+            $member->save();
+            $data['id_of'] = $member->id;
+        } else if($data['type'] == 1){
+            
+        }
+        // Handle file upload
+        if(array_key_exists('userImage',$data)){
+            // Get filename with the ext.
+            $fileNameWithExt = $data['userImage']->getClientOriginalName();
+            // Get just filename
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            // Get just ext.
+            $extension = $data['userImage']->getClientOriginalExtension();
+            // FileName To store
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $data['userImage']->storeAs('public/usersImages', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'user.jpg';
+        }
         return User::create([
             'username' => $data['username'],
             'type' => $data['type'],
@@ -71,11 +103,11 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
-            'college_id' => $data['college_id'],
-            'photo_url' => $data['photo_url'],
+            'about' => $data['about'],
+            'college_id' => $data['college'],
+            'photo_url' => $fileNameToStore,
             'id_of' => $data['id_of'],
             'password' => Hash::make($data['password']),
         ]);
     }
-    //'username', 'password','type','id_of','first_name', 'last_name', 'email', 'phone_number', 'photo_url','college_id'
 }

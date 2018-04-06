@@ -2,17 +2,16 @@
     <div class="innerBox haveSlide">
         <div class="leftBox">
             <div class="tableCell">
-                <h1 class="data" name="name"></h1>
+                <h1 placeholder="Enter the name" class="data" name="name"></h1>
             </div>
         </div>
         <div class="rightBox">
             <div class="tableCell">
                 <h1>Description</h1>
-                <p name="description" class="data"></p>
+                <p placeholder="Enter the description" name="description" class="data"></p>
                 <div class="inputContainer Button">
                     <button class="edit">Save</button>
-                    <button class="cancel">Cancel</button>
-                    <button class="membersButton">Members</button> 
+                    <button class="cancel">Cancel</button> 
                 </div>
             </div>
             <div class="rightBoxBackground">
