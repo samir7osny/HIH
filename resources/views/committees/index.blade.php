@@ -31,24 +31,21 @@
     </div>
     <div class="innerBox members" style="display:block">
         <div class="flexBox">
-            @if ($committees[$i]->head != null)
-                <div class="member head">
-                    <img src="{{asset('images/temp/tomhanks.jpg')}}" alt="{{$committees[$i]->head->first_name . " " . $committees[$i]->head->last_name}}">
-                    <h3 class="tableCell">{{$committees[$i]->head->first_name . " " . $committees[$i]->head->last_name}}</h3>
-                    <span><i class="fa fa-header" aria-hidden="true"></i></span>
-                </div>
-            @endif
             @foreach ($committees[$i]->members as $member)
-                @if ($committees[$i]->head->id != $member->id)
-                    <div class="member">
-                        <img src="{{asset('images/temp/tomhanks.jpg')}}" alt="{{$member->first_name . " " . $member->last_name}}">
-                        <h3 class="tableCell">{{$member->first_name . " " . $member->last_name}}</h3>
-                    </div>
-                @endif
+                <a href="/user/{{$member->user->username}}" class="member @if ($committees[$i]->head && $committees[$i]->head->id == $member->id)
+                    head
+                    @endif ">
+                    <img src="/storage/usersImages/{{$member->user->photo_url}}" alt="{{$member->user->first_name . " " . $member->user->last_name}}">
+                    <h3 class="tableCell">{{$member->user->first_name . " " . $member->user->last_name}}</h3>
+                    <span><i class="fa fa-header" aria-hidden="true"></i></span>
+                </a>
             @endforeach
-            <div class="member">
-                <div class="inputContainer Button addMember"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+            <div class="member addMember">
+                <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button></div>
+                    <div class="chooseMember dropdown">
+                            
+                    </div>
             </div>
         </div>
     </div>

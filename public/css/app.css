@@ -463,7 +463,6 @@ div#navContainer.fixedNav nav#mainNav{
     display: inline-block;
 }
 .outerBox{
-    overflow: hidden;
     padding: 0;
     opacity: 0;
     display: flex;
@@ -569,16 +568,15 @@ div#navContainer.fixedNav nav#mainNav{
 }
 .rightBox p {
     /* font-size: 1.1em; */
-    padding: 10px 5%;
+    padding: 10px 5px;
     margin: 0 5%;
-    padding: 5px;
     font-weight: 100;
     margin: 0 10%;
     display: table;
     width: 80%;
 }
 .rightBox h2{
-    padding: 5px;
+    padding: 10px 5px;
     font-weight: 100;
     margin: 0 10%;
     display: table;
@@ -1003,7 +1001,7 @@ textarea{
 .light [placeholder][name='description']::before{
     color: rgba(37, 98, 63, 0.7);
 }
-[placeholder]:empty::before {
+[placeholder]:empty::before{
     opacity: 1;
     transform: scale(1);
     display: initial;
@@ -1061,6 +1059,7 @@ button:hover{
 .innerBox.members{
     background-color: #0002;
     padding: 3%;
+    z-index: 11;
 }
 .innerBox.members .flexBox{
     display: flex;
@@ -1076,26 +1075,37 @@ button:hover{
     display: table;
     cursor: pointer;
     color: rgb(37, 98, 63);
+    position: relative;
+    order: 2;
 }
 .members:visible{
     display: flex;
 }
-.members .member:hover{
+.members .member:not(.addMember):hover{
     background-color: #DDD;
 }
 .members .member h3{
     text-align: center;
 }
 .members .member.head{
-    position: relative;
+    order: 1;
 }
 .members .member.head span{
+    color: gold;
+    opacity: 1;
+}
+.members .member span{
     position: absolute;
     right: 0;
     top: 0;
     font-size: 20px;
     padding: 5px;
     line-height: 100%;
+    opacity: 0.3;
+    z-index: 50;
+}
+.members .member span:hover{
+    opacity: 1;
 }
 .members .member img{
     width: 80px;
@@ -1107,10 +1117,25 @@ button:hover{
     background: rgba(37, 98, 63,0.7);
     color: #DDD;
 }
-.light .members .member:hover{
+.light .members .member:not(.addMember):hover{
     background: rgba(37, 98, 63,1);
 }
 .light .members .member h3{
+}
+.members .member .inputContainer{
+    backface-visibility: hidden;
+}
+.chooseMember.dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgb(37, 98, 63);
+    transition: none;
+    display: none;
+}
+.light .dropdown{
+    background-color: #DDD;
 }
 .haveSlide::after {
     content: "";
@@ -1121,7 +1146,21 @@ button:hover{
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
-    z-index: 50;
+    z-index: 10;
+}
+.members::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-color: #DDD;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    z-index: 10;
+}
+.light .members::after{
+    background-color: rgb(37, 98, 63);
 }
 .light .haveSlide::after{
     background-color: rgb(37, 98, 63);
@@ -1152,7 +1191,7 @@ button.delete:hover,
 .light button.delete:hover{
     background-color: #ff0000bf;
 }
-div.addMember{
+.member.addMember div.inputContainer{
     height: 100%;
 }
 button.dark{

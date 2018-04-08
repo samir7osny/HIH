@@ -19,6 +19,8 @@ Route::resource('committee', 'CommitteesController');
 Route::resource('user', 'UsersController');
 
 Route::post('/university','UniversitiesController@getColleges');
+Route::put('/member/assign','MembersController@assign');
+Route::post('/member/free','MembersController@freeMemebers');
 
 Auth::routes();
 

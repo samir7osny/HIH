@@ -14,7 +14,6 @@ $(document).ready(function () {
         //     }
         //     return;
         // }
-        console.log("fvfv");
         if (!checkInput($(this)) && $(this).prop("tagName") != 'SELECT') {
             $(this).empty();
         }
@@ -22,6 +21,11 @@ $(document).ready(function () {
 
     $('body').on("paste keyup", 'input[name="phone_number"]',function (e) { 
         validatePhone($(this));
+        console.log('fvfv');
+    });
+
+    $('body').on("paste keyup", 'input[name="username"]',function (e) { 
+        validateUsername($(this));
     });
     
     let inputs = $("input,select,textarea");
@@ -80,6 +84,20 @@ $(document).ready(function () {
         input.val(value);   
         checkInput(input);
     }
+    function validateUsername(input){
+        let value = input.val();
+        for (let index = 0; index < value.length; index++) {
+            if( !(  (value[index] >= '0' && value[index] <= '9')    ||
+            (value[index] >= 'a' && value[index] <= 'z')    ||
+            (value[index] >= 'A' && value[index] <= 'Z')    ||
+            (value[index] == '_')    )){
+                value = value.substring(0,index) + value.substring(index + 1, value.length);
+                index--;
+            }
+        }
+        input.val(value);   
+        checkInput(input);
+    }
 
     $("input[type='submit']").click(function (e) {
         let submit = true; 
@@ -87,6 +105,7 @@ $(document).ready(function () {
         for (let index = 0; index < requiredInputs.length; index++) {
             if (requiredInputs.eq(index).val() == "" || requiredInputs.eq(index).val() == null) {
                 requiredInputs.eq(index).css('border-color','red');
+                console.log(requiredInputs.eq(index));
                 submit = false;
              }
         }
