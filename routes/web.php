@@ -20,6 +20,8 @@ Route::resource('user', 'UsersController');
 
 Route::post('/university','UniversitiesController@getColleges');
 Route::put('/member/assign','MembersController@assign');
+Route::put('/member/head','MembersController@assignHead');
+Route::put('/member/unassign','MembersController@unassign');
 Route::post('/member/free','MembersController@freeMemebers');
 
 Auth::routes();

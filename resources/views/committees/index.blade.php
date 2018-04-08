@@ -32,12 +32,13 @@
     <div class="innerBox members" style="display:block">
         <div class="flexBox">
             @foreach ($committees[$i]->members as $member)
-                <a href="/user/{{$member->user->username}}" class="member @if ($committees[$i]->head && $committees[$i]->head->id == $member->id)
+                <a href="/user/{{$member->user->username}}" id="{{$member->id}}" class="member @if ($committees[$i]->head && $committees[$i]->head->id == $member->id)
                     head
                     @endif ">
                     <img src="/storage/usersImages/{{$member->user->photo_url}}" alt="{{$member->user->first_name . " " . $member->user->last_name}}">
                     <h3 class="tableCell">{{$member->user->first_name . " " . $member->user->last_name}}</h3>
-                    <span><i class="fa fa-header" aria-hidden="true"></i></span>
+                    <span class="headButton"><i class="fa fa-header" aria-hidden="true"></i></span>
+                    <span class="removeButton"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
                 </a>
             @endforeach
             <div class="member addMember">
