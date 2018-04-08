@@ -22,9 +22,12 @@
     <div class="innerBox members" style="display:block">
         <div class="flexBox">
             
-            <div class="member">
-                <div class="inputContainer Button addMember"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+            <div class="member addMember">
+                <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
                 </button></div>
+                    <div class="chooseMember dropdown">
+                            
+                    </div>
             </div>
         </div>
     </div>

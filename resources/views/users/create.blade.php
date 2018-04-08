@@ -9,7 +9,7 @@
                 <div class="tableCell">
                     <div class="square">
                         <img id="userImage" src="/storage/usersImages/user.jpg" alt="">
-                        <div class="inputImgHover"><span>Click To Edit</span></div>
+                        <div class="inputImgHover" id="inputImgHover"><span>Click To Edit</span></div>
                         <input type="file" accept="image/*" hidden name="userImage">
                     </div>
                     <div class="inputContainer name">

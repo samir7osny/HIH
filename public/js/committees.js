@@ -46,12 +46,72 @@ $(document).ready(function () {
             deleteAJAX(committeeBox);
         }
     });
+    $("body").on("click", "button.addMember",function (e) {
+        if($(this).parent().parent().find('.dropdown').eq(0).css('display') == 'none'){
+            // close all other dropdown
+            let dropdownBoxes = $('.dropdown');
+            for (let index = 0; index < dropdownBoxes.length; index++) {
+                if(dropdownBoxes.eq(index).css('display') != 'none'){
+                    dropdownBoxes.eq(index).slideToggle(function(){
+                        dropdownBoxes.eq(index).html('');
+                    });
+                }
+            }
+
+            let addMemberButton = $(this);
+            // get the free members
+                // append them and slide the dropdown
+            $.ajax({
+                url : "/member/free",
+                type: "POST",
+                success : function(result){
+                    let dropdownThis = addMemberButton.parent().parent().find('.dropdown');
+                    dropdownThis.html(result);
+                    dropdownThis.slideToggle();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+                }  
+            });
+        } else {
+            $(this).parent().parent().find('.dropdown').eq(0).slideToggle(function(){
+                $(this).html('');
+            });
+        }
+    });
+
+    $("body").on("click", ".freeMember",function (e) {
+        let freeMemeber = $(this);
+        $.ajax({
+            url : "/member/assign",
+            type: "PUT",
+            data: {
+                id: freeMemeber.attr('id'),
+                committeeId: freeMemeber.parents('.outerBox').attr('committee')
+            },
+            success : function(result){
+                if(result.success){
+                    freeMemeber.parents('.member').before("<a href=\"/user/" + result.user.username + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span></a>");
+                } else {
+                    alert("an error occurs");
+                }
+                freeMemeber.parents('.dropdown').slideToggle();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+            }  
+        });
+    });
 
     $("body").on("change paste keyup",".data",function (e) {
-        //checkInput($(this));
+        // if(!checkInput($(this))){
+        //     $(this).empty();
+        // }
 
         if (!checkInput($(this))) {
-            $(this).empty();
+            if($(this).prop('tagName') == 'P'){
+                $(this).html('<br>');
+            }
         }
     });
 
@@ -122,7 +182,6 @@ function createForm(button){
     for (let index = 0; index < desc.length; index++) {
         CKEDITOR.inline( desc[index] );
     }
-      
 }
 
 function createSaveForm(button){

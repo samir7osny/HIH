@@ -112,7 +112,7 @@ class UsersController extends Controller
                 $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
                 // Upload Image
                 $path = $request->file('userImage')->storeAs('public/usersImages', $fileNameToStore);
-                
+
                 if($user->photo_url != 'user.jpg'){
                     // Delete Image
                     Storage::delete('public/usersImages/'.$user->photo_url);
@@ -143,7 +143,7 @@ class UsersController extends Controller
             // Delete Image
             Storage::delete('public/usersImages/'.$user->photo_url);
         }
-        
+
         $user->userInfo->delete();
         $user->delete();
         return redirect('/')->with('success', 'user Removed');
