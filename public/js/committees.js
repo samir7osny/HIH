@@ -87,15 +87,65 @@ $(document).ready(function () {
             type: "PUT",
             data: {
                 id: freeMemeber.attr('id'),
-                committeeId: freeMemeber.parents('.outerBox').attr('committee')
+                committeeId: freeMemeber.parents('[committee]').attr('committee')
             },
             success : function(result){
                 if(result.success){
-                    freeMemeber.parents('.member').before("<a href=\"/user/" + result.user.username + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span></a>");
+                    freeMemeber.parents('.member').before("<a href=\"/user/" + result.user.username + "\" id=\"" + result.member.id + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span class=\"headButton\"><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span><span class=\"removeButton\"><i class=\"fa fa-minus-square\" aria-hidden=\"true\"></i></span>");
                 } else {
                     alert("an error occurs");
                 }
                 freeMemeber.parents('.dropdown').slideToggle();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+            }  
+        });
+    });
+
+    $("body").on("click", ".headButton",function (e) {
+        let toBeHead = $(this);
+        e.preventDefault();
+        if(toBeHead.parents('.member').hasClass('head')){
+            return;
+        }
+        $.ajax({
+            url : "/member/head",
+            type: "PUT",
+            data: {
+                id: toBeHead.parents('.member').attr('id'),
+                committeeId: toBeHead.parents('[committee]').attr('committee')
+            },
+            success : function(result){
+                if(result.success){
+                    toBeHead.parents('.members').find('.member.head').removeClass('head');
+                    toBeHead.parents('.member').addClass('head');
+                } else {
+                    alert(result.desc);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+            }  
+        });
+    });
+
+    $("body").on("click", ".removeButton",function (e) {
+        let toBeHead = $(this);
+        e.preventDefault();
+        $.ajax({
+            url : "/member/unassign",
+            type: "PUT",
+            data: {
+                id: toBeHead.parents('.member').attr('id'),
+                committeeId: toBeHead.parents('[committee]').attr('committee')
+            },
+            success : function(result){
+                if(result.success){
+                    toBeHead.parents('.member').remove();
+                } else {
+                    alert("an error occurs");
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);

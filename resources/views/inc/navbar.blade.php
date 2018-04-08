@@ -32,7 +32,7 @@
         <ul>
             <li id="active"><a href="/">Home</a></li>
             <li><a href="/committee">Committees</a></li>
-            <li>Google</li>
+            <li><a href="/aboutus">About Us</a></li>
         </ul>
     </nav>
     @if (!Auth::check())

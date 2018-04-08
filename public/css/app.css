@@ -1090,11 +1090,11 @@ button:hover{
 .members .member.head{
     order: 1;
 }
-.members .member.head span{
+.members .member.head span.headButton{
     color: gold;
     opacity: 1;
 }
-.members .member span{
+.members .member span.headButton{
     position: absolute;
     right: 0;
     top: 0;
@@ -1103,6 +1103,17 @@ button:hover{
     line-height: 100%;
     opacity: 0.3;
     z-index: 50;
+}
+.members .member span.removeButton{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 20px;
+    padding: 5px;
+    line-height: 100%;
+    opacity: 0.15;
+    z-index: 50;
+    color: rgba(208, 5, 5, 1);
 }
 .members .member span:hover{
     opacity: 1;
