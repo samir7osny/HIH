@@ -27,3 +27,23 @@ Route::post('/member/free','MembersController@freeMemebers');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+//All Events
+Route::get('/event', function(){
+    return view('events');
+});
+
+//Specific event
+Route::get('/event/{id}', function(){
+    return view('event');
+});
+
+//All Workshops
+Route::get('/workshop', function(){
+    return view('workshops');
+});
+
+//Specific Workshop
+Route::get('/workshop/{id}', function(){
+    return view('workshop');
+});
