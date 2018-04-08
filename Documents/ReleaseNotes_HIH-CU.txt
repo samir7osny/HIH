@@ -9,9 +9,12 @@ New Features
 -Edit profile
 -Delete an account
 -Add committee
--Edit committee
+-Edit committee description
 -Delete committee
 -View committees
+-Add member to committee
+-Remove member from committee
+-Assign head to committee
  
 Removed Features 
 None
