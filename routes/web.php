@@ -33,3 +33,13 @@ Route::get('/event', function(){
 Route::get('/event/{id}', function(){
     return view('event');
 });
+
+//All Workshops
+Route::get('/workshop', function(){
+    return view('workshops');
+});
+
+//Specific Workshop
+Route::get('/workshop/{id}', function(){
+    return view('workshop');
+});

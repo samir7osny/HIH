@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f284b2dd707cdcb49aa7ca0e23978b45",
+    "content-hash": "045d97010e4456d98c66376b719ae23a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2541,7 +2541,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
