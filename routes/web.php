@@ -23,3 +23,13 @@ Route::post('/university','UniversitiesController@getColleges');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+//All Events
+Route::get('/event', function(){
+    return view('events');
+});
+
+//Specific event
+Route::get('/event/{id}', function(){
+    return view('event');
+});
