@@ -1,0 +1,36 @@
+SEM-Team 3
+HIH-CU
+Version 1.0
+
+New Features
+-Login
+-Logout
+-Creating an account
+-Edit profile
+-Delete an account
+-Add committee
+-Edit committee
+-Delete committee
+-View committees
+ 
+Removed Features 
+None
+
+Enhanced Performance
+None
+
+Enhanced Look-and-Feel
+None
+
+Unsupported Functionality
+None
+
+Fixed Bugs
+None
+
+
+
+ 
+
+
+
