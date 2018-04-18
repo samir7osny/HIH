@@ -496,44 +496,49 @@ div div.masonryColumn div.outerBox .rightBox{
 }
 div div.masonryColumn div.outerBox .haveSlide{
     overflow: hidden;
-    padding: 0;
 }
 div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even),
 div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd){
     background-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd),
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even){
-    background-color: #DDD;
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) button.delete,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) button.delete{
+    background-color: rgba(177, 0, 0, 0.617);
+    color: #FFF;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer input,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer input,
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer select,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer select,
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer button,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer button{
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) button.delete:hover,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) button.delete:hover{
+    background-color: #ff0000bf;
+}
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) .inputContainer input,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) .inputContainer input,
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) .inputContainer select,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) .inputContainer select,
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) .inputContainer button,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) .inputContainer button{
     color: #DDD;
     background-color: rgba(37, 98, 63,0.7);
     border-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .members .member:not(.addMember):hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .members .member:not(.addMember):hover{
+
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) .members .member:not(.addMember):hover,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) .members .member:not(.addMember):hover{
     background: rgba(37, 98, 63,1);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) button:hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) button:hover{
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) button:hover,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) button:hover{
     background-color: rgb(37, 98, 63);
     border-color: #DDD;
 }
 [placeholder]::before{
     color: #DDDD;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) [placeholder]::before,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) [placeholder]::before{
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) [placeholder]::before,
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) [placeholder]::before{
     color: rgba(37, 98, 63, 0.7);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox [contenteditable='true'],
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox [contenteditable='true']{
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even) .rightBox [contenteditable='true'],
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd) .rightBox [contenteditable='true']{
     border-bottom: 4px solid rgba(37, 98, 63,1);
     background-color: rgba(37, 98, 63,0.1);
     position: relative;
@@ -541,6 +546,10 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox 
 .rightBox [contenteditable='true']{
     border-bottom: 4px solid #DDD;
     background-color: #DDD2;
+}
+div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd),
+div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even){
+    background-color: #DDD;
 }
 div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .haveSlide::after,
 div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .haveSlide::after,
@@ -567,15 +576,6 @@ div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox 
 div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button:hover{
     background-color: rgb(37, 98, 63);
     border-color: #DDD;
-}
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button.delete{
-    background-color: rgba(177, 0, 0, 0.617);
-    color: #FFF;
-}
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete:hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button.delete:hover{
-    background-color: #ff0000bf;
 }
 div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .rightBoxBackground,
 div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .rightBoxBackground{
@@ -701,8 +701,9 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
 }
 .rightBox h1{
     text-align: center;
-    font-size: 2.5em;
-    margin: 2% 10%;
+    font-size: 3em;
+    margin-top: 2%;
+    margin-bottom: 3%;
 }
 .light .rightBox{
     color: rgb(37, 98, 63);
@@ -710,7 +711,6 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
 .rightBox p {
     /* font-size: 1.1em; */
     padding: 10px 5px;
-    font-size: 1em;
     margin: 0 5%;
     font-weight: 100;
     margin: 0 10%;

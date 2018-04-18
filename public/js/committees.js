@@ -4,7 +4,7 @@ $(document).ready(function () {
             createForm($(this));
         }
         else if($(this).html() == 'Submit'){
-            let committeeBox = $(this).parents('.outerBox');
+            let committeeBox = $(this).parents('.outerBox[committee]');
             if( !checkInputsArray(committeeBox.find('.data'))){return;}
             
             if( !submitAJAXEdit(committeeBox) ){return;}
@@ -13,27 +13,19 @@ $(document).ready(function () {
     
         }
         else if($(this).html() == 'Save'){
-            let committeeBox = $(this).parents('.outerBox');
+            let committeeBox = $(this).parents('.outerBox[committee]');
             if( !checkInputsArray(committeeBox.find('.data'))){return;}
             
             submitAJAXSave(committeeBox);
         }
     });
     $("body").on("click", "button.cancel",function (e) {
-        let committeeBox = $(this).parents('.outerBox');
+        let committeeBox = $(this).parents('.outerBox[committee]');
         if(committeeBox.find('button.edit').html() == 'Save'){
             committeeBox.css("transition","none");
             committeeBox.slideToggle("fast",function(){
                 deleteForm(committeeBox);
                 committeeBox.remove();
-                if($('button.add').hasClass('light')){
-                    $('button.add').removeClass('light');
-                    $('button.add').addClass('dark');
-                }
-                else {
-                    $('button.add').removeClass('dark');
-                    $('button.add').addClass('light');
-                }
             });
         } else{
             getDataAJAX(committeeBox);
@@ -41,7 +33,7 @@ $(document).ready(function () {
         }
     });
     $("body").on("click", "button.delete",function (e) {
-        let committeeBox = $(this).parents('.outerBox');
+        let committeeBox = $(this).parents('.outerBox[committee]');
         if(confirm('You want to delete "' + committeeBox.find('h1[name="name"]').text() + '" committee!')){
             deleteAJAX(committeeBox);
         }
@@ -172,49 +164,49 @@ $(document).ready(function () {
     });
 
 
-    if($('.outerBox').length % 2 == 0)
-        $('button.add').addClass('dark');
-    else 
-        $('button.add').addClass('light');
     let members = $('.members');
-    $('.members').slideToggle(1);
+    $('.members').slideToggle(0);
     $("body").on("click", "button.membersButton",function (e) {
-        let members = $(this).parents('.outerBox').find('.members');
+        let members = $(this).parents('.outerBox[committee]').find('.members');
         members.css('transition','none');
         members.slideToggle("fast");
     });
 
-    $("body").on("click", "button.add",function (e) { 
-        let className = "";
-        if($('.outerBox').length % 2 == 0)
-            className = 'dark';
-        else 
-            className = 'light';
-        if($('button.add').hasClass('light')){
-            $('button.add').removeClass('light');
-            $('button.add').addClass('dark');
+    $("body").on("click", "button.add",function (e) {
+        let containerOfTheNew = "";
+        let firstColumn = $('.masonryTwoColumn.committeesContainer .masonryColumn').eq(0);
+        let secondColumn = $('.masonryTwoColumn.committeesContainer .masonryColumn').eq(1);
+        console.log( firstColumn.find('[committee]').length+ "   " + secondColumn.find('[committee]').length);
+        if(firstColumn.find('[committee]').length <= secondColumn.find('[committee]').length){
+            containerOfTheNew=firstColumn;
         }
         else {
-            $('button.add').removeClass('dark');
-            $('button.add').addClass('light');
+            containerOfTheNew=secondColumn;
         }
-        let addButton = $(this);
         $.ajax({
             url : "/committee/create",
             type: "GET",
             success : function(result){
-                addButton.parent().before(result);
-                let newCommittee = addButton.parent().prev();
-                newCommittee.addClass(className);
+                containerOfTheNew.append(result);
+                let newCommittee = containerOfTheNew.find('[committee="new"]');
+                newCommittee.attr('committee','');
                 newCommittee.css('transition','none');
                 newCommittee.css('display','none');
                 newCommittee.css('opacity','1');
                 createSaveForm(newCommittee.find('button.edit'));
-                newCommittee.find(".members").slideToggle(1);
-                newCommittee.slideToggle("fast");
+                newCommittee.find(".members").slideToggle(0,function(){
+                    newCommittee.slideToggle("fast");
+                });
             }
         });
     });
+    // CKEDITOR.on("instanceCreated", function(event) {
+    //     event.editor.on("change", function () {
+    //         console.log(event.editor.element);
+    //         event.editor.element.$.innerHTML = event.editor.getData();
+    //         // $("#trackingDiv").html(event.editor.getData());
+    //     });
+    // });
 });
 
 
@@ -226,9 +218,9 @@ $(document).ready(function () {
 function createForm(button){
     button.html('Submit');
     button.after(' <button class="cancel">Cancel</button>');
-    let inputs = button.parents('.outerBox').find('.data');
+    let inputs = button.parents('.outerBox[committee]').find('.data');
     inputs.attr('contenteditable','true');
-    let desc = button.parents('.outerBox').find('p.data');
+    let desc = button.parents('.outerBox[committee]').find('p.data');
     for (let index = 0; index < desc.length; index++) {
         CKEDITOR.inline( desc[index] );
     }
@@ -236,17 +228,17 @@ function createForm(button){
 
 function createSaveForm(button){
     button.html('Save');
-    let inputs = button.parents('.outerBox').find('.data');
+    let inputs = button.parents('.outerBox[committee]').find('.data');
     inputs.attr('contenteditable','true');
-    let desc = button.parents('.outerBox').find('p.data');
+    let desc = button.parents('.outerBox[committee]').find('p.data');
     for (let index = 0; index < desc.length; index++) {
         CKEDITOR.inline( desc[index] );
     }
-    CKEDITOR.on("instanceReady", function(event) {
-        for (let index = 0; index < desc.length; index++) {
-            desc.eq(index).empty();
-        } 
-    });
+    // CKEDITOR.on("instanceReady", function(event) {
+    //     for (let index = 0; index < desc.length; index++) {
+    //         desc.eq(index).empty();
+    //     } 
+    // });
 }
 
 function deleteForm(committeeBox){
@@ -275,7 +267,8 @@ function checkInputsArray(requiredInputs){
     return allright;
 }
 function checkInput(input){
-    if(input.html().split(' ').join('').split('&nbsp;').join('').split('<br>').join('') == ""){
+    let value = input.html().split('&nbsp;').join('').split('<br>').join('').split('&#8203').join('').split(' ').join('');
+    if(value === '' || value == null){
         input.css('border-color','red');
         return false;
     } else {
@@ -352,14 +345,6 @@ function deleteAJAX(committeeBox){
                 committeeBox.css('transition','none');
                 committeeBox.slideToggle("fast",function(){
                     committeeBox.remove();
-                    if($('button.add').hasClass('light')){
-                        $('button.add').removeClass('light');
-                        $('button.add').addClass('dark');
-                    }
-                    else {
-                        $('button.add').removeClass('dark');
-                        $('button.add').addClass('light');
-                    }
                 });
             }
         },
