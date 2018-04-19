@@ -34,27 +34,29 @@
             <li><a href="/committee">Committees</a></li>
             <li><a href="/event">Events</a></li>
             <li><a href="/workshop">Workshops</a></li>
+            <li><a href="/aboutus">About Us</a></li>
         </ul>
     </nav>
-    <div id="backLoginWindow">
-        <form id="loginForm" method="POST" class="dark" action="{{ route('login') }}">
-            @csrf
-            @include('inc.logo')
-            <div class="tableCell">
-                <div class="inputContainer">
-                    <input type='text' class="requiredInput" name='username' value="{{ old('email') }}" required autofocus>  <label class="" for="username">Username</label>
+    @if (!Auth::check())
+        <div id="backLoginWindow">
+            <form id="loginForm" method="POST" class="dark" action="{{ route('login') }}">
+                @csrf
+                @include('inc.logo')
+                <div class="tableCell">
+                    <div class="inputContainer">
+                        <input type='text' class="requiredInput" name='username' value="{{ old('email') }}" required autofocus>  <label class="" for="username">Username</label>
+                    </div>
+                    <div class="inputContainer">
+                        <input type='password' class="requiredInput" name='password' required>                        
+                        <label class="" for="password">Password</label>
+                    </div>
+                    <div class="inputContainer submitInput">
+                        <input type='submit' name='login' value='Login'>
+                    </div>
                 </div>
-                <div class="inputContainer">
-                    <input type='password' class="requiredInput" name='password' required>                        
-                    <label class="" for="password">Password</label>
-                </div>
-                <div class="inputContainer submitInput">
-                    <input type='submit' name='login' value='Login'>
-                </div>
-            </div>
-        </form>
-    </div>
-    <script src="{{ asset('js/loginpopup.js') }}"></script>
+            </form>
+        </div>
+        <script src="{{ asset('js/loginpopup.js') }}"></script>
+    @endif
     <script src="{{ asset('js/navbar.js') }}"></script>
-    <script src="{{ asset('js/form.js') }}"></script>
 </div>
