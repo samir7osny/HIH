@@ -1062,12 +1062,18 @@ button:hover{
     background-color: #0002;
     padding: 3%;
 }
-.innerBox.members .flexBox{
+ .flexBox{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     flex-direction: row;
 }
+ .flexBox a.eventWorkshopPanel{
+         flex-basis: calc(50% - 4px);
+         margin-bottom: 2px;
+         cursor: pointer;
+         height: 450px;
+ }
 .members .member{
     flex-basis: calc(20% - 4px);
     background: #DDD8;
@@ -1307,40 +1313,59 @@ footer #copyright{
     height: 450px;
 }
 
+.eventWorkshopPanel .innerBox {
+    background-size: cover;
+    height: 100%;
+    padding: 0;
+}
+
 .eventWorkshopInfo {
     display: block;
+    table-layout: fixed;
+    width: 75%;
+    position: relative;
     border-collapse: collapse;
     width: 75%;
-    margin-left: 11%;
-    margin-top: 2%;
+    margin: auto;
     font-size: larger;
 }
 
-.eventWorkshopPanel:hover {
-    background-color: rgba(90, 192, 134, 0.658);
+.eventWorkshopPanel :hover{
+    background: rgb(20, 49, 33);
 }
 
 .dark .eventWorkshopInfo td:nth-of-type(1) {
-    padding-left: 10px;
+    padding-left: 17px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .dark .eventWorkshopInfo td:nth-of-type(2) {
-    padding: 15px;
-    padding-left: 7%;
+    padding-left: 80px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    word-break: break-all;
+    padding-right: 20px;
 }
 
 .dark .eventWorkshopInfo tr {
     border-bottom: 4px solid #DDD;
     border-top: 4px solid #DDD;
+    width: inherit;
 }
 
 .light .eventWorkshopInfo td:nth-of-type(1) {
-    padding-left: 10px;
+    padding-left: 17px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .light .eventWorkshopInfo td:nth-of-type(2) {
-    padding: 15px;
-    padding-left: 7%;
+    padding-left: 80px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
 }
 
 .light .eventWorkshopInfo tr {
@@ -1350,7 +1375,7 @@ footer #copyright{
 
 /*Workshop Timeline Popup*/
 
-.workshopTimelineWindow {
+.popUpWindow {
     height: 100%;
     top: 80px;
     display: none;
@@ -1401,9 +1426,34 @@ footer #copyright{
 }
 
 .workshopTimeline.on {
-    animation: animatezoom 0.5s;
+    animation: animatezoom 0.6s;
 }
 
 .workshopTimeline.out {
-    animation: animatezoomout 0.5s;
+    animation: animatezoomout 0.6s;
+}
+
+/*Event Gallery*/
+.eventGallery{
+    position: relative;
+    width: 75%;
+    margin:auto;
+    margin-top: 50px;
+}
+.eventGalleryImage {
+    display: inline-block;
+    width: 32%;
+    margin:4px 8px;
+}
+.eventGalleryImage img{
+    width:100%;
+    object-fit: cover;
+}
+
+.eventGalleryImage img:hover{
+    background-color: rgba(32, 221, 25, 0.795);
+}
+
+.popUpWindow .eventGalleryImage:hover{
+    background: none;
 }

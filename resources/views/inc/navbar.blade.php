@@ -32,7 +32,8 @@
         <ul>
             <li id="active"><a href="/">Home</a></li>
             <li><a href="/committee">Committees</a></li>
-            <li>Google</li>
+            <li><a href="/event">Events</a></li>
+            <li><a href="/workshop">Workshops</a></li>
         </ul>
     </nav>
     <div id="backLoginWindow">

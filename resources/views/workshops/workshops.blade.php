@@ -11,7 +11,7 @@
                     <div class="tableCell">
                         <h1>Arduino</h1>
                         <p style="text-align:center">Number of Sessions: </p><br>
-                        <p style="position:relative;z-index:100">Shwayet kalam 3n Shwayet kalam 3n l workshop</p>
+                        <p style="position:relative;z-index:100">Hint about the workshop</p>
                     </div>
                     <div class="rightBoxBackground">
                         @include('inc.logo')
@@ -30,7 +30,7 @@
                     <div class="tableCell">
                         <h1>Web Design</h1>
                         <p style="text-align:center">Number of Sessions: </p><br>
-                        <p style="position:relative;z-index:100">Shwayet kalam 3n Shwayet kalam 3n l workshop</p>
+                        <p style="position:relative;z-index:100">Hint about the workshop</p>
                     </div>
                     <div class="rightBoxBackground">
                         @include('inc.logo')
@@ -49,7 +49,7 @@
                     <div class="tableCell">
                         <h1>Project Management</h1>
                         <p style="text-align:center">Number of Sessions: </p><br>
-                        <p style="position:relative;z-index:100">Shwayet kalam 3n Shwayet kalam 3n l workshop</p>
+                        <p style="position:relative;z-index:100">Hint about the workshop</p>
                     </div>
                     <div class="rightBoxBackground">
                         @include('inc.logo')

@@ -24,22 +24,14 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//All Events
-Route::get('/event', function(){
-    return view('events');
-});
-
-//Specific event
-Route::get('/event/{id}', function(){
-    return view('event');
-});
+Route::resource('event','EventsController');
 
 //All Workshops
 Route::get('/workshop', function(){
-    return view('workshops');
+    return view('workshops/workshops');
 });
 
 //Specific Workshop
 Route::get('/workshop/{id}', function(){
-    return view('workshop');
+    return view('workshops/workshop');
 });

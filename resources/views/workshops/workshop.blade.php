@@ -31,14 +31,9 @@
                     </tr>
                     <tr>
                         <td>Description </td>
-                        <td>Shwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet
-                            kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam
-                            3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n
-                            l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l
-                            evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet
-                            kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam
-                            3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n l evenShwayet kalam 3n
-                            l even Shwayet kalam 3n l even</td>
+                        <td>
+                            
+                        </td>
                     </tr>
                 </table>
                 <div class="inputContainer Button">
@@ -53,7 +48,7 @@
         </div>
     </div>
 </div>
-<div class="workshopTimelineWindow">
+<div class="popUpWindow">
     <div class="workshopTimeline">
         <div class="workshopTimelineRow">
             <div class="workshopTimelineColumn">
