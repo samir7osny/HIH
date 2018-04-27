@@ -303,7 +303,7 @@ div#navContainer.fixedNav nav#mainNav{
     position: relative
 }
 #mainNav ul{
-    width: 30%;
+    width: 40%;
     list-style: none;
     display: flex;
     float: right;
@@ -481,59 +481,72 @@ div#navContainer.fixedNav nav#mainNav{
     float: left;
     padding: 10px;
 }
-.outerBox.masonryTwoColumn .masonryColumn:first-of-type{
+.outerBox.masonryTwoColumn div.masonryColumn:first-of-type{
     padding-left: 0;
 }
-.outerBox.masonryTwoColumn .masonryColumn:last-of-type{
+.outerBox.masonryTwoColumn div.masonryColumn:nth-of-type(2){
     padding-right: 0;
 }
-div div.masonryColumn div.outerBox{
-    overflow: initial;
+div div.masonryColumn .outerBox{
+    padding: 0;
+    background-position: 50% 50%;
+    background-size: cover;
 }
-div div.masonryColumn div.outerBox .rightBox{
+div div.masonryColumn .outerBox .rightBox{
     background: none;
     overflow: initial;
 }
-div div.masonryColumn div.outerBox .haveSlide{
+div div.masonryColumn .outerBox .haveSlide{
     overflow: hidden;
-    padding: 0;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(even),
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(odd){
+div div.masonryColumn .outerBox .innerBox.darker{
+    background: rgba(37, 98, 63, 0.65);
+}
+div div.masonryColumn .outerBox .innerBox.darker:hover{
+    background: rgba(37, 98, 63, 0.05);
+}
+div div.masonryColumn .outerBox .innerBox.darker:hover p{
+    opacity: 0.1;
+}
+div div.masonryColumn .outerBox .innerBox.darker:hover h1{
+     text-shadow: 3px 2px 2px rgba(37, 98, 63, 1);
+}
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(even),
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(odd){
     background-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd),
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even){
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd),
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even){
     background-color: #DDD;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer input,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer input,
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer select,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer select,
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .inputContainer button,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .inputContainer button{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .inputContainer input,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .inputContainer input,
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .inputContainer select,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .inputContainer select,
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .inputContainer button,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .inputContainer button{
     color: #DDD;
     background-color: rgba(37, 98, 63,0.7);
     border-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .members .member:not(.addMember):hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .members .member:not(.addMember):hover{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .members .member:not(.addMember):hover,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .members .member:not(.addMember):hover{
     background: rgba(37, 98, 63,1);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) button:hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) button:hover{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) button:hover,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) button:hover{
     background-color: rgb(37, 98, 63);
     border-color: #DDD;
 }
 [placeholder]::before{
     color: #DDDD;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) [placeholder]::before,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) [placeholder]::before{
-    color: rgba(37, 98, 63, 0.7);
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) [placeholder]::before,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) [placeholder]::before{
+    color: rgba(37, 98, 63, 0.8);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox [contenteditable='true'],
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox [contenteditable='true']{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox [contenteditable='true'],
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox [contenteditable='true']{
     border-bottom: 4px solid rgba(37, 98, 63,1);
     background-color: rgba(37, 98, 63,0.1);
     position: relative;
@@ -542,90 +555,102 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox 
     border-bottom: 4px solid #DDD;
     background-color: #DDD2;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .haveSlide::after,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .haveSlide::after,
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .members::after,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .members::after{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .haveSlide::after,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .haveSlide::after,
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .members::after,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .members::after{
     background-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .innerBox,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .innerBox{
-    /* flex-direction: row-reverse; */
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .innerBox.darker,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .innerBox.darker{
+    background: #DDDA;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .innerBox.darker:hover,
+ div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .innerBox.darker:hover{
+    background: #DDD1;
+}
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .innerBox.darker:hover p,
+ div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .innerBox.darker:hover p{
+    opacity: 0.1;
+}
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .innerBox.darker:hover h1,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .innerBox.darker:hover h1{
+     text-shadow: 3px 2px 2px #DDD;
+}
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox{
     color: rgb(37, 98, 63);
     background: none;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .inputContainer button,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .inputContainer button{
     color: #DDD;
     background-color: rgba(37, 98, 63,0.7);
     border-color: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button:hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button:hover{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .inputContainer button:hover,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .inputContainer button:hover{
     background-color: rgb(37, 98, 63);
     border-color: #DDD;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button.delete{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .inputContainer button.delete{
     background-color: rgba(177, 0, 0, 0.617);
     color: #FFF;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete:hover,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .inputContainer button.delete:hover{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .inputContainer button.delete:hover,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .inputContainer button.delete:hover{
     background-color: #ff0000bf;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .rightBoxBackground,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .rightBoxBackground{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .rightBoxBackground,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .rightBoxBackground{
     transform: scaleX(-2) scaleY(2) rotateZ(-10deg) translateX(-10%);
     left: 0;
     right: auto;
     z-index: 0;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .rightBox .rightBoxBackground svg,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .rightBox .rightBoxBackground svg{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .rightBox .rightBoxBackground svg,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .rightBox .rightBoxBackground svg{
     fill: rgb(37, 98, 63);
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .members .member,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .members .member{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .members .member,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .members .member{
     background: rgba(37, 98, 63,0.7);
     color: #DDD;
 }
-div div.masonryColumn:nth-of-type(even) div.outerBox:nth-of-type(odd) .dropdown,
-div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .dropdown,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .dropdown{
     background-color: #DDD;
 }
-.outerBox.committeesContainer{
-    display: block;
-    overflow: initial;
-}
-.outerBox[committee]{
+.outerBox{
     width: 100%;
-    overflow: hidden;
     margin: 10px 0;
-    display: inline-flex;
-    float: left;
-}
-.outerBox[committee]:nth-child(odd){
-    clear:both;
+    padding: 30px;
 }
 .fullHeight{
     height: 100%;
+}
+.fullWidth,
+.rightBox .inputContainer.fullWidth{
+    width: 100%;
+}
+.withoutOverflow{
+    overflow: hidden;
+}
+input[type="time"],input[type="date"]{
+    resize: none;
 }
 .windowHeight{
     height: calc(100% - 80px);
     min-height: fit-content;
 }
 .paddedBox{
-    padding: 40px;
+    padding: 30px;
 }
 .innerBox{
-    /* height: 100%; */
     width: 100%;
     display: flex;
-    padding: 40px;
+    padding: 0;
     position: relative;
 }
 .outerBox.dark{
@@ -702,7 +727,7 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
 .rightBox h1{
     text-align: center;
     font-size: 2.5em;
-    margin: 2% 10%;
+    margin: 20px;
 }
 .light .rightBox{
     color: rgb(37, 98, 63);
@@ -724,7 +749,7 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
     display: table;
     width: 80%;
 }
-.rightBox i{
+.rightBox i.headerIcon{
     color:#DDD;
     font-size: 34px;
     width: 150px;
@@ -1013,6 +1038,7 @@ div div.masonryColumn:nth-of-type(odd) div.outerBox:nth-of-type(even) .dropdown{
     display: inline;
     background-color: rgba(37, 98, 63,0.7);
     cursor: pointer;
+    top: 0;
 }
 .inputImgHover:hover{
     opacity: 1;
@@ -1161,6 +1187,9 @@ textarea{
     cursor: pointer;
     color: rgb(37, 98, 63);
 }
+.inputContainer.between button{
+    margin: 0 0 20px 0;
+}
 input[type='submit']:hover,
 button:hover{
     background-color: #DDD;
@@ -1207,7 +1236,7 @@ button:hover{
 /* .innerBox.members */.flexBox{ 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center/*space-between*/;
     flex-direction: row;
 }
  .flexBox a.eventWorkshopPanel{
@@ -1220,7 +1249,7 @@ button:hover{
     flex-basis: calc(33.333% - 4px);
     background: #DDD8;
     height: 80px;
-    margin-bottom: 2px;
+    margin: 2px;
     display: table;
     cursor: pointer;
     color: rgb(37, 98, 63);
@@ -1513,7 +1542,7 @@ footer #copyright{
 }
 
 .eventWorkshopInfo {
-    display: block;
+    display: table;
     table-layout: fixed;
     width: 75%;
     position: relative;
@@ -1526,28 +1555,103 @@ footer #copyright{
 .eventWorkshopPanel :hover{
     background: rgb(20, 49, 33);
 }
-
-.dark .eventWorkshopInfo td:nth-of-type(1) {
+td>i {
+    padding: 0 20px;
+    width: 50px;
+}
+.eventWorkshopInfo td:nth-of-type(1) {
     padding-left: 17px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.dark .eventWorkshopInfo td:nth-of-type(2) {
+.eventWorkshopInfo td:nth-of-type(2) {
     padding-left: 80px;
     padding-top: 15px;
     padding-bottom: 15px;
-    width: 100%;
+    width: 85%;
     word-break: break-all;
     padding-right: 20px;
 }
 
-.dark .eventWorkshopInfo tr {
+.eventWorkshopInfo tr {
     border-bottom: 4px solid #DDD;
     border-top: 4px solid #DDD;
     width: inherit;
 }
-
+.eventWorkshopInfo .panelContainer{
+    height: 500px;
+}
+.eventWorkshopInfo .gallery{
+}
+.eventWorkshopInfo .gallery>img{
+    flex-basis: 0;
+    display: block;
+    object-fit: cover;
+    margin-left: 2px;
+    margin-right: 2px;
+    flex-grow: 1;
+    min-width: 0;
+    height: 80px;
+}
+.eventWorkshopInfo .gallery.edit .photo,
+.eventWorkshopInfo .gallery.create .photo{
+    flex-basis: calc(20% - 4px);
+    display: block;
+    object-fit: cover;
+    margin:2px;
+    min-width: 0;
+    position: relative;
+    height: 150px;
+}
+.photo .inputImgHover{
+    border-radius: 0;
+    text-align: center
+}
+.eventWorkshopInfo .gallery.edit .photo img,
+.eventWorkshopInfo .gallery.create .photo img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.gallery.edit .photo span.removeButton,
+.gallery.edit .photo span.makeCover,
+.gallery.create .photo span.removeButton,
+.gallery.create .photo span.makeCover{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: initial;
+    font-size: 20px;
+    padding: 5px;
+    line-height: 100%;
+    opacity: 0.5;
+    z-index: 50;
+    color: rgba(208, 5, 5, 1);
+    cursor: pointer;
+    text-shadow: 1px 1px 5px #DDD;
+}
+.gallery.edit .photo span.makeCover,
+.gallery.create .photo span.makeCover{
+    color: rgba(255, 255, 255, 1);    
+    right: initial;
+    left: 0;
+    top: 0;
+    bottom: initial;
+    text-shadow: 1px 1px 5px #000;
+}
+.gallery.edit .photo.cover span.makeCover,
+.gallery.create .photo.cover span.makeCover{
+    color: rgb(255, 255, 0);
+    opacity: 1;
+}
+.gallery.edit .photo span.removeButton:hover,
+.gallery.edit .photo span.makeCover:hover,
+.gallery.create .photo span.removeButton:hover,
+.gallery.create .photo span.makeCover:hover{
+    opacity: 1;
+}
 .light .eventWorkshopInfo td:nth-of-type(1) {
     padding-left: 17px;
     padding-top: 15px;

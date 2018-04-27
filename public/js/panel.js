@@ -14,6 +14,7 @@ let itemClass = 'panelItem';
 
 
 $(document).ready(function () {
+    $('.panel').eq(panelIndex).find('.panelItem').last().attr('id',activeId);
     checkRighteft();
     animateTimer();
     leftArrow.click(function (e) { 

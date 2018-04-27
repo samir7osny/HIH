@@ -25,10 +25,7 @@
             </div>
             <div class="panelContainer" panel='panel'>
                 <div class="panel">
-                    <div
-                        class="panelItem"
-                        id="panelActive"
-                        style="background-image:url(background.jpg);">
+                    <div class="panelItem" style="background-image:url(background.jpg);">
                         <div class="panelItemDarker">
                             <div class="panelItemText">
                                 <h1 class="panelItemTitle">Item Title</h1>
@@ -87,10 +84,7 @@
         <div class="container">
             <div class="panelContainer" panel='panel'>
                 <div class="panel">
-                    <div
-                        class="panelItem"
-                        id="panelActive"
-                        style="background-image:url(background.jpg);">
+                    <div class="panelItem" style="background-image:url(background.jpg);">
                         <div class="panelItemDarker">
                             <div class="panelItemText">
                                 <h1 class="panelItemTitle">Item Title</h1>

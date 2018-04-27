@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('.inputImgHover').click(function (e) {
-        $('input[name="userImage"]')[0].click();
+        //$('input[name="userImage"]')[0].click();
     });
 
     $("label").click(function (e) { 
@@ -100,8 +100,8 @@ $(document).ready(function () {
     }
 
     $("input[type='submit']").click(function (e) {
-        let submit = true; 
-        let requiredInputs = $(".requiredInput");
+        let submit = true;
+        let requiredInputs = $(this).parent('form').find(".requiredInput");
         for (let index = 0; index < requiredInputs.length; index++) {
             if (requiredInputs.eq(index).val() == "" || requiredInputs.eq(index).val() == null) {
                 requiredInputs.eq(index).css('border-color','red');
@@ -117,24 +117,26 @@ $(document).ready(function () {
     // Get the image and check if it isn't image file
     var inputUserImage = $('input[name="userImage"]')[0];
     var userImage = $('#userImage')[0];
-    inputUserImage.onchange = function (evt) {
-        var fileName = inputUserImage.value;
-        var idxDot = fileName.lastIndexOf(".") + 1;
-        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
-            var tgt = evt.target || window.event.srcElement,
-            files = tgt.files;
-
-            // FileReader support
-            if (FileReader && files && files.length) {
-                var fr = new FileReader();
-                fr.onload = function () {
-                    userImage.src = fr.result;
+    if (inputUserImage) {
+        inputUserImage.onchange = function (evt) {
+            var fileName = inputUserImage.value;
+            var idxDot = fileName.lastIndexOf(".") + 1;
+            var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+            if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+                var tgt = evt.target || window.event.srcElement,
+                files = tgt.files;
+    
+                // FileReader support
+                if (FileReader && files && files.length) {
+                    var fr = new FileReader();
+                    fr.onload = function () {
+                        userImage.src = fr.result;
+                    }
+                    fr.readAsDataURL(files[0]);
                 }
-                fr.readAsDataURL(files[0]);
+            }else{
+                alert("Only jpg/jpeg and png files are allowed!");
             }
-        }else{
-            alert("Only jpg/jpeg and png files are allowed!");
-        }
-    };
+        };
+    }
 });

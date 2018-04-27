@@ -1,33 +1,48 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="flexBox innerBox">
-    @if($events->count()!=0)
-        @foreach($events as $event)
-                <a class="eventWorkshopPanel" href="event/{{$event['name']}}">
-                    <div class="innerBox">
-                        <div class="rightBox">
-                            <h1>{{$event['name']}}</h1>
-                            <p style="text-align:center">Number of Forms: {{$event->Audience()->count()}}</p><br>
-                            <p style="position:relative;z-index:100;text-align:center;">{{str_limit($event['description'], 70)}}</p>
+<div class="outerBox masonryTwoColumn paddedBox">
+    <div class="inputContainer Button"><a href="/event/create"><button class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a></div>
+    <div class="masonryColumn">
+            @for ($i = 0; $i < count($events); $i+=2)
+            <a href="/event/{{$events[$i]->name}}" class="outerBox withoutOverflow" event="{{$events[$i]->id}}" style="
+                @if ($events[$i]->cover) background-image:url(/storage/activitiesGallery/{{$events[$i]->cover->url}}); @endif" >
+                <div class="innerBox darker">
+                    <div class="rightBox">
+                        <div class="tableCell">
+                            <h1 class="data" placeholder="Enter the name" name="name">{{$events[$i]->name}}</h1>
+                            <p>Number of forms: {!!$events[$i]->Audience()->count()!!}</p>
+                            <p name="description" placeholder="Enter the description" class="data">{!!$events[$i]->description!!}</p>
+                        </div>
+                        <div class="rightBoxBackground">
+                            @include('inc.logo')
                         </div>
                     </div>
-
-                    {{-- <div class="innerBox" style="background:url({{asset('images/temp/tomhanks.jpg')}});background-size: cover;">
-                        <div class="rightBox" style="background:rgba(0,0, blue, 1)">
-                            <div class="tableCell">
-                                <h1>{{$event['name']}}</h1>
-                                <p style="text-align:center">Number of Forms: {{$event->Audience()->count()}}</p><br>
-                                <p style="position:relative;z-index:100;text-align:center;">{{str_limit($event['description'], 70)}}</p>
-                            </div>
-                            <div class="rightBoxBackground">
-                                @include('inc.logo')
-                            </div>
+                </div>
+            </a>
+            @endfor
+    </div>
+    <div class="masonryColumn">
+            @for ($i = 1; $i < count($events); $i+=2)
+            <a href="/event/{{$events[$i]->name}}" class="outerBox withoutOverflow" event="{{$events[$i]->id}}"  style="
+                @if ($events[$i]->cover) background-image:url(/storage/activitiesGallery/{{$events[$i]->cover->url}}); @endif">
+                <div class="innerBox darker">
+                    <div class="rightBox">
+                        <div class="tableCell">
+                            <h1 class="data" placeholder="Enter the name" name="name">{{$events[$i]->name}}</h1>
+                            <p>Number of forms: {!!$events[$i]->Audience()->count()!!}</p>
+                            <p name="description" placeholder="Enter the description" class="data">{!!$events[$i]->description!!}</p>
                         </div>
-                    </div> --}}
-                </a>
-        @endforeach
-    @else
-            <h1>No Events To Show</h1>
-    @endif
+                        <div class="rightBoxBackground">
+                            @include('inc.logo')
+                        </div>
+                    </div>
+                </div>
+            </a>
+            @endfor
+    </div>
 </div>
+<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('js/events.js') }}"></script>
+
 @endsection

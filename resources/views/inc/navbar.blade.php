@@ -1,7 +1,7 @@
 <div id="navContainer">
     <nav id="mainNav">
         <div class="logo">
-            <a href="/home">
+            <a href="/">
                 @include('inc.logo')
             </a>
         </div>

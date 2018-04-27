@@ -15,8 +15,8 @@
 //     return view('welcome');
 // });
 
-Route::resource('committee', 'CommitteesController');
-Route::resource('user', 'UsersController');
+Route::resource('/committee', 'CommitteesController');
+Route::resource('/user', 'UsersController');
 
 Route::post('/university','UniversitiesController@getColleges');
 Route::put('/member/assign','MembersController@assign');
@@ -28,14 +28,15 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('event','EventsController');
+Route::resource('/event','EventsController');
+Route::resource('/workshop','WorkshopsController');
 
-//All Workshops
-Route::get('/workshop', function(){
-    return view('workshops/workshops');
-});
+// //All Workshops
+// Route::get('/workshop', function(){
+//     return view('workshops/workshops');
+// });
 
-//Specific Workshop
-Route::get('/workshop/{id}', function(){
-    return view('workshops/workshop');
-});
+// //Specific Workshop
+// Route::get('/workshop/{id}', function(){
+//     return view('workshops/workshop');
+// });

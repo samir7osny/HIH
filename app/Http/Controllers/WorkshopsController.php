@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Http\Request;
 
-class EventsController extends Controller
+class WorkshopsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events= \App\Event::all();
-        return  view('events.index')->with('events',$events);
+        $workshops= \App\Workshop::all();
+        return  view('workshops.index')->with('workshops',$workshops);
     }
 
     /**
@@ -26,7 +24,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        return view('workshops.create');
     }
 
     /**
@@ -49,16 +47,16 @@ class EventsController extends Controller
             'galleryPhoto.*' => 'image'
         ]);
 
-        $event = new \App\Event;
-        $event->name = $request->input('name');
-        $event->description = $request->input('description');
-        $event->place = $request->input('place');
-        $event->place_cost = $request->input('place_cost');
-        $event->from = $request->input('from');
-        $event->to = $request->input('to');
-        $event->date = $request->input('date');
-        $event->no_of_forms = 0;
-        $event->save();
+        $workshop = new \App\Workshop;
+        $workshop->name = $request->input('name');
+        $workshop->description = $request->input('description');
+        $workshop->place = $request->input('place');
+        $workshop->place_cost = $request->input('place_cost');
+        $workshop->from = $request->input('from');
+        $workshop->to = $request->input('to');
+        $workshop->date = $request->input('date');
+        $workshop->no_of_forms = 0;
+        $workshop->save();
 
         $files = $request->file('galleryPhoto');
 
@@ -77,21 +75,21 @@ class EventsController extends Controller
                 $path = $file->storeAs('/public/activitiesGallery/', $fileNameToStore);
 
                 // save the photo to the gallery
-                $gallaeryPhoto = new \App\EventPhoto;
+                $gallaeryPhoto = new \App\WorkshopPhoto;
                 $gallaeryPhoto->url = $fileNameToStore;
-                $gallaeryPhoto->event_id = $event->id;
+                $gallaeryPhoto->workshop_id = $workshop->id;
                 $gallaeryPhoto->save();
 
                 // save the cover
                 if($request->input('coverName') == $fileNameWithExt){
-                    $event->cover_id = $gallaeryPhoto->id;
-                    $event->save();
+                    $workshop->cover_id = $gallaeryPhoto->id;
+                    $workshop->save();
                 }
             }
         }
 
 
-        return redirect('/event')->with('success', 'The event created');
+        return redirect('/workshop')->with('success', 'The workshop created');
     }
 
     /**
@@ -102,8 +100,8 @@ class EventsController extends Controller
      */
     public function show($name)
     {
-        $event= \App\Event::where('name',$name)->first();
-        return view('events.show')->with('event',$event);
+        $workshop= \App\Workshop::where('name',$name)->first();
+        return view('workshops.show')->with('workshop',$workshop);
     }
 
     /**
@@ -114,8 +112,8 @@ class EventsController extends Controller
      */
     public function edit($name)
     {
-        $event= \App\Event::where('name',$name)->first();
-        return view('events.edit')->with('event',$event);
+        $workshop= \App\Workshop::where('name',$name)->first();
+        return view('workshops.edit')->with('workshop',$workshop);
     }
 
     /**
@@ -141,15 +139,15 @@ class EventsController extends Controller
             'deletePhoto.*' => 'string'
         ]);
 
-        $event = \App\Event::where('name',$name)->first();
-        $event->name = $request->input('name');
-        $event->description = $request->input('description');
-        $event->place = $request->input('place');
-        $event->place_cost = $request->input('place_cost');
-        $event->from = $request->input('from');
-        $event->to = $request->input('to');
-        $event->date = $request->input('date');
-        $event->save();
+        $workshop = \App\Workshop::where('name',$name)->first();
+        $workshop->name = $request->input('name');
+        $workshop->description = $request->input('description');
+        $workshop->place = $request->input('place');
+        $workshop->place_cost = $request->input('place_cost');
+        $workshop->from = $request->input('from');
+        $workshop->to = $request->input('to');
+        $workshop->date = $request->input('date');
+        $workshop->save();
 
         $files = $request->file('galleryPhoto');
 
@@ -168,25 +166,25 @@ class EventsController extends Controller
                 $path = $file->storeAs('/public/activitiesGallery/', $fileNameToStore);
 
                 // save the photo to the gallery
-                $gallaeryPhoto = new \App\EventPhoto;
+                $gallaeryPhoto = new \App\WorkshopPhoto;
                 $gallaeryPhoto->url = $fileNameToStore;
-                $gallaeryPhoto->event_id = $event->id;
+                $gallaeryPhoto->workshop_id = $workshop->id;
                 $gallaeryPhoto->save();
 
                 // save the cover
                 if($request->input('coverName') == $fileNameWithExt){
-                    $event->cover_id = $gallaeryPhoto->id;
-                    $event->save();
+                    $workshop->cover_id = $gallaeryPhoto->id;
+                    $workshop->save();
                 }
             }
         }
         if ($request->has('deletePhoto')){
             foreach ($request->get('deletePhoto') as  $photo) {
-                $gallaeryPhoto = \App\EventPhoto::where('url',$photo)->first();
+                $gallaeryPhoto = \App\WorkshopPhoto::where('url',$photo)->first();
                 if ($gallaeryPhoto){
-                    if ($gallaeryPhoto->id == $event->cover_id){
-                        $event->cover_id = null;
-                        $event->save();
+                    if ($gallaeryPhoto->id == $workshop->cover_id){
+                        $workshop->cover_id = null;
+                        $workshop->save();
                     }
                     $gallaeryPhoto->delete();
                     Storage::delete('/public/activitiesGallery/' . $photo);
@@ -195,13 +193,13 @@ class EventsController extends Controller
         }
 
         $cover = $request->input('coverName');
-        $cover = \App\EventPhoto::where('url',$cover)->first();
+        $cover = \App\WorkshopPhoto::where('url',$cover)->first();
         if ($cover){
-            $event->cover_id = $cover->id;
-            $event->save();
+            $workshop->cover_id = $cover->id;
+            $workshop->save();
         }
 
-        return redirect('/event')->with('success', 'The event updated');
+        return redirect('/workshop')->with('success', 'The workshop updated');
     }
 
     /**
@@ -212,12 +210,12 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        $event= \App\Event::find($id);
-        foreach ($event->gallery as $photo) {
+        $workshop= \App\Workshop::find($id);
+        foreach ($workshop->gallery as $photo) {
             Storage::delete('/public/activitiesGallery/' . $photo->url);
             $photo->delete();
         }
-        $event->delete();
-        return redirect('/event')->with('success', 'The event has been deleted.');
+        $workshop->delete();
+        return redirect('/workshop')->with('success', 'The workshop has been deleted.');
     }
 }
