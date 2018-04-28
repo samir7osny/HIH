@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    function selectActiveNavbar() {
+        let elements = $('#mainNav>ul li a');
+        for (let index = 0; index < elements.length; index++) {
+            if(elements.eq(index).attr('href') == window.location.pathname){
+                elements.eq(index).parents('li').attr('id', 'active');
+            }
+        }
+    }
+    selectActiveNavbar();
+
     $('.allowOverflow,.outerBox').delay(700).animate({opacity:1},{
         duration:500,
         start:function(){

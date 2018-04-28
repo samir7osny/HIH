@@ -1086,6 +1086,9 @@ input[type="time"],input[type="date"]{
     display: inline-block;
     padding-left: 15px;
 }
+.timelineHeader div *{
+    padding-left: 0;
+}
 .timeline input[type="date"],
 .timelineHeader .date,
 .timeline .date{

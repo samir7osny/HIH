@@ -32,37 +32,46 @@ $(document).ready(function () {
         photo.remove();
     });
 
-    // make the photo cover
+    // add timelines
+    let timelineAnimation = true;
     $('body').on("click", '.timeline span.add',function (e) { 
         e.preventDefault();
-        $('.timeline').parent('.inputContainer').append('<div style="display:none;" class="timeline">'
-        + '<div class="flexBox">'
-        + '<input required class="requiredInput" type="date" name="timelineDate[]">'
-        + '<input required class="requiredInput" type="time" name="timelineFrom[]">'
-        + '<input required class="requiredInput" type="time" name="timelineTo[]">'
-        + '<span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>'
-        + '<span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>'
-        + '</div>'
-        + '</div>');
-        $('.timeline[style="display:none;"]').slideToggle({
-            start:function(){
-                $(this).css("transition","none");
-            },
-            complete:function(){
-                $(this).removeAttr('style');
-            }
-        });
+        if (timelineAnimation) {
+            $('.timeline').parent('.inputContainer').append('<div style="display:none;" class="timeline">'
+            + '<div class="flexBox">'
+            + '<input required class="requiredInput" type="date" name="timelineDate[]">'
+            + '<input required class="requiredInput" type="time" name="timelineFrom[]">'
+            + '<input required class="requiredInput" type="time" name="timelineTo[]">'
+            + '<span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>'
+            + '<span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>'
+            + '</div>'
+            + '</div>');
+            $('.timeline[style="display:none;"]').slideToggle({
+                duration:250,
+                start:function(){
+                    timelineAnimation = false;
+                    $(this).css("transition","none");
+                },
+                complete:function(){
+                    timelineAnimation = true;
+                    $(this).removeAttr('style');
+                }
+            });
+        }
     });
 
     // Delete the photo
     $('body').on("click", '.timeline span.delete',function (e) { 
         e.preventDefault();
-        if($('.timeline').length > 1){
+        if($('.timeline').length > 1 && timelineAnimation){
             $(this).parents('.timeline').slideToggle({
+                duration:250,
                 start:function(){
+                    timelineAnimation = false;
                     $(this).css("transition","none");
                 },
                 complete:function(){
+                    timelineAnimation = true;
                     $(this).remove();
                 }
             });
