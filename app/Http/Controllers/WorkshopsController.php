@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 
 class WorkshopsController extends Controller
@@ -36,15 +38,19 @@ class WorkshopsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
-            'from' => 'required|date_format:H:i',
-            'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
+            'name' => 'required|string|unique:workshop',
             'place' => 'required|string',
-            'place_cost' => 'required|integer',
+            'cost' => 'integer',
+            'place_cost' => 'integer',
             'description' => 'required|string',
             'galleryPhoto' => 'array',
-            'galleryPhoto.*' => 'image'
+            'galleryPhoto.*' => 'image',
+            'timelineDate' => 'required|array',
+            'timelineFrom' => 'required|array',
+            'timelineTo' => 'required|array',
+            'timelineDate.*' => 'required|date',
+            'timelineFrom.*' => 'required|date_format:H:i',
+            'timelineTo.*' => 'required|date_format:H:i',
         ]);
 
         $workshop = new \App\Workshop;
@@ -52,10 +58,7 @@ class WorkshopsController extends Controller
         $workshop->description = $request->input('description');
         $workshop->place = $request->input('place');
         $workshop->place_cost = $request->input('place_cost');
-        $workshop->from = $request->input('from');
-        $workshop->to = $request->input('to');
-        $workshop->date = $request->input('date');
-        $workshop->no_of_forms = 0;
+        $workshop->cost = $request->input('cost');
         $workshop->save();
 
         $files = $request->file('galleryPhoto');
@@ -88,6 +91,20 @@ class WorkshopsController extends Controller
             }
         }
 
+        if ($request->has('timelineDate')){
+            $timelineDates = $request->get('timelineDate');
+            $timelineFrom = $request->get('timelineFrom');
+            $timelineTo = $request->get('timelineTo');
+            foreach ($timelineDates as  $key=>$timeline) {
+                $timeline = new \App\Timeline;
+                $timeline->workshop_id = $workshop->id;
+                $timeline->date_of_session = $timelineDates[$key];
+                $timeline->from = $timelineFrom[$key];
+                $timeline->to = $timelineTo[$key];
+                $timeline->session_number = $key;
+                $timeline->save();
+            }
+        }
 
         return redirect('/workshop')->with('success', 'The workshop created');
     }
@@ -123,30 +140,27 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $name)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|string',
-            'from' => 'required|date_format:H:i',
-            'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
             'place' => 'required|string',
-            'place_cost' => 'required|integer',
+            'cost' => 'integer',
+            'place_cost' => 'integer',
             'description' => 'required|string',
             'galleryPhoto' => 'array',
             'galleryPhoto.*' => 'image',
-            'deletePhoto' => 'array',
-            'deletePhoto.*' => 'string'
+            'timelineDate' => 'required|array',
+            'timelineFrom' => 'required|array',
+            'timelineTo' => 'required|array',
+            'timelineDate.*' => 'required|date',
+            'timelineFrom.*' => 'required|date_format:H:i',
+            'timelineTo.*' => 'required|date_format:H:i',
         ]);
 
-        $workshop = \App\Workshop::where('name',$name)->first();
-        $workshop->name = $request->input('name');
+        $workshop = \App\Workshop::find($id);
         $workshop->description = $request->input('description');
         $workshop->place = $request->input('place');
         $workshop->place_cost = $request->input('place_cost');
-        $workshop->from = $request->input('from');
-        $workshop->to = $request->input('to');
-        $workshop->date = $request->input('date');
         $workshop->save();
 
         $files = $request->file('galleryPhoto');
@@ -199,6 +213,24 @@ class WorkshopsController extends Controller
             $workshop->save();
         }
 
+        foreach ($workshop->timelines as $timeline) {
+            $timeline->delete();
+        }
+        if ($request->has('timelineDate')){
+            $timelineDates = $request->get('timelineDate');
+            $timelineFrom = $request->get('timelineFrom');
+            $timelineTo = $request->get('timelineTo');
+            foreach ($timelineDates as  $key=>$timeline) {
+                $timeline = new \App\Timeline;
+                $timeline->workshop_id = $workshop->id;
+                $timeline->date_of_session = $timelineDates[$key];
+                $timeline->from = $timelineFrom[$key];
+                $timeline->to = $timelineTo[$key];
+                $timeline->session_number = $key;
+                $timeline->save();
+            }
+        }
+
         return redirect('/workshop')->with('success', 'The workshop updated');
     }
 
@@ -214,6 +246,9 @@ class WorkshopsController extends Controller
         foreach ($workshop->gallery as $photo) {
             Storage::delete('/public/activitiesGallery/' . $photo->url);
             $photo->delete();
+        }
+        foreach ($workshop->timelines as $timeline) {
+            $timeline->delete();
         }
         $workshop->delete();
         return redirect('/workshop')->with('success', 'The workshop has been deleted.');

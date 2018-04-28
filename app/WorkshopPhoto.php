@@ -16,4 +16,7 @@ class WorkshopPhoto extends Model
     public function workshop() {
         return $this->belongsTo('App\Workshop', 'workshop_id');
     }
+    public function coverOf() {
+        return $this->hasOne('App\Workshop', 'cover_id');
+    }
 }

@@ -33,6 +33,43 @@ $(document).ready(function () {
     });
 
     // make the photo cover
+    $('body').on("click", '.timeline span.add',function (e) { 
+        e.preventDefault();
+        $('.timeline').parent('.inputContainer').append('<div style="display:none;" class="timeline">'
+        + '<div class="flexBox">'
+        + '<input required class="requiredInput" type="date" name="timelineDate[]">'
+        + '<input required class="requiredInput" type="time" name="timelineFrom[]">'
+        + '<input required class="requiredInput" type="time" name="timelineTo[]">'
+        + '<span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>'
+        + '<span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>'
+        + '</div>'
+        + '</div>');
+        $('.timeline[style="display:none;"]').slideToggle({
+            start:function(){
+                $(this).css("transition","none");
+            },
+            complete:function(){
+                $(this).removeAttr('style');
+            }
+        });
+    });
+
+    // Delete the photo
+    $('body').on("click", '.timeline span.delete',function (e) { 
+        e.preventDefault();
+        if($('.timeline').length > 1){
+            $(this).parents('.timeline').slideToggle({
+                start:function(){
+                    $(this).css("transition","none");
+                },
+                complete:function(){
+                    $(this).remove();
+                }
+            });
+        }
+    });
+
+    // make the photo cover
     $('body').on("click", '.gallery.edit .photo .makeCover',function (e) { 
         e.preventDefault();
         let oldCover = $('.photo.cover');

@@ -15,12 +15,12 @@ class CreateEventTable extends Migration
     {
         Schema::create('event', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('description');
             $table->string('place');
             $table->integer('place_cost')->nullable();
-            $table->timestamp('from')->nullable();
-            $table->timestamp('to')->nullable();
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
             $table->date('date');
             $table->integer('no_of_forms');
         });

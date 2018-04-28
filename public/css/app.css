@@ -1069,6 +1069,77 @@ input[type="time"],input[type="date"]{
     color: rgba(37, 98, 63,1);
     cursor: text;
 }
+.timeline,
+.timelineHeader{
+    width: 100%;
+    overflow: hidden;
+}
+.timeline .flexBox,
+.timelineHeader .flexBox{
+    flex-wrap: initial;
+}
+
+.timeline div *,
+.timelineHeader div * {
+    margin: 5px 0.2%;
+    padding: 5px 0.2%;
+    display: inline-block;
+    padding-left: 15px;
+}
+.timeline input[type="date"],
+.timelineHeader .date,
+.timeline .date{
+    /* flex-grow: 3.5; */
+    flex-basis: 50%;
+    text-align: left;
+}
+.timeline input[type="time"],
+.timelineHeader .time,
+.timeline .time{
+    /* flex-grow: 1.5; */
+    flex-basis: 25%;
+    text-align: left;
+}
+h5.date:nth-of-type(even){
+    background: brown;
+}
+.timelineHeader h5{
+    background: none;
+
+}
+.timeline h4{
+    background: #EEEE;
+    color: rgb(37, 98, 63);
+}
+.timeline h4:nth-of-type(odd){
+    background: #DDDD;
+    color: rgb(37, 98, 63);
+}
+.timeline:nth-of-type(odd) h4{
+    background: #EEEE;
+    color: rgb(37, 98, 63);
+}
+.timeline:nth-of-type(odd) h4:nth-of-type(even){
+    background: #DDDD;
+    color: rgb(37, 98, 63);
+}
+.timeline span,
+.timelineHeader span {
+    display: inline-block;
+    padding: 0;
+    cursor: pointer;
+    flex-basis: 5%;
+}
+.timeline span i,
+.timelineHeader span i {    
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+}
+.timeline span.delete,
+.timelineHeader span.delete{
+    color: #e42121;
+}
 .rightBox .inputContainer label{
     font-size: 0.7em;
     top: 25%;

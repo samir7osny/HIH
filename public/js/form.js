@@ -99,13 +99,12 @@ $(document).ready(function () {
         checkInput(input);
     }
 
-    $("input[type='submit']").click(function (e) {
+    $('body').on("click", "input[type='submit']",function (e) {
         let submit = true;
-        let requiredInputs = $(this).parent('form').find(".requiredInput");
+        let requiredInputs = $(this).parents('form').find(".requiredInput");
         for (let index = 0; index < requiredInputs.length; index++) {
             if (requiredInputs.eq(index).val() == "" || requiredInputs.eq(index).val() == null) {
                 requiredInputs.eq(index).css('border-color','red');
-                console.log(requiredInputs.eq(index));
                 submit = false;
              }
         }

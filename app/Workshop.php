@@ -14,7 +14,7 @@ class Workshop extends Model
     public $timestamps = false;
 
     public function timelines() {
-        return $this->hasMany('App\Timline', 'workshop_id');
+        return $this->hasMany('App\Timeline', 'workshop_id');
     }
 
     public function moderatedBy(){
@@ -32,4 +32,7 @@ class Workshop extends Model
     public function gallery() {
         return $this->hasMany('App\WorkshopPhoto', 'workshop_id');
     }
+    public function cover() {
+        return $this->belongsTo('App\WorkshopPhoto', 'cover_id');
+    }  
 }

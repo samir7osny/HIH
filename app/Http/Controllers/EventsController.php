@@ -38,7 +38,6 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
             'date' => 'required|date',
@@ -50,7 +49,6 @@ class EventsController extends Controller
         ]);
 
         $event = new \App\Event;
-        $event->name = $request->input('name');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
         $event->place_cost = $request->input('place_cost');
@@ -125,7 +123,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $name)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|string',
@@ -141,7 +139,7 @@ class EventsController extends Controller
             'deletePhoto.*' => 'string'
         ]);
 
-        $event = \App\Event::where('name',$name)->first();
+        $event = \App\Event::find($id);
         $event->name = $request->input('name');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
