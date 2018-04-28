@@ -1533,7 +1533,7 @@ footer #copyright{
     z-index: 10000;
 }
 
-#loginForm {
+#loginForm:not(.windowHeight) {
     display: table;
     height: 40%;
     min-height: 400px;
@@ -1542,7 +1542,8 @@ footer #copyright{
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    background-color: rgba(37, 98, 63, 0.5);
+    background-color: rgba(37, 98, 63, 1);
+   background: url(/images/temp/green.png);
 }
 #loginForm svg{
     fill: #DDD2;
@@ -1550,9 +1551,8 @@ footer #copyright{
     height: 100%;
     width: 100%;
 }
-#loginForm input{
+#loginForm .tableCell input{
     color: #DDD;
-    width: 100%;
     background-color: #DDD7;
     border: none;
     border-bottom: 4px solid #DDD;
@@ -1569,12 +1569,23 @@ footer #copyright{
     animation: animatezoomout 0.5s;
 }
 
-#loginForm .tableCell * {
-    display: block;
-    width: 80%;
+#loginForm:not(.windowHeight) .tableCell *{
     font-size: 20px;
-    margin: 15px auto;
     color: #DDD;
+}
+#loginForm.windowHeight .tableCell span.checkmark,
+#loginForm.windowHeight .tableCell label#remembermeDiv,
+#loginForm.windowHeight .tableCell #forgotPassword {
+    font-size: 20px;
+    color: #DDD;
+}
+#loginForm.windowHeight .tableCell #forgotPassword i{
+    font-size: 2em;
+    width: 45px;
+}
+#loginForm .tableCell .inputContainer{
+    margin: 15px auto;
+    width: 60%;
 }
 #loginForm .tableCell{
     width: 100%;
@@ -1584,24 +1595,96 @@ footer #copyright{
 
 #loginForm .tableCell label{
     text-align: left;
-    left: 45px;
-    padding: 5px 20px;
-    top: -14px; 
 }
-#loginForm input[name="login"] {
+#loginForm:not(.windowHeight) .tableCell label{
+    left: 0;
+    padding: 5px 20px;
+    top: 0; 
+}
+#loginForm .tableCell input[name="login"] {
     width: auto;
     padding: 10px 20px;
     cursor: pointer;
     margin: auto;
 }
-
-
-#loginForm input[name="login"]:hover {
+#loginForm .tableCell input[name="login"]:hover {
     background-color: #DDD;
     border-color: rgb(37, 98, 63);
     color: rgb(37, 98, 63);
 }
-
+#loginForm .tableCell span.checkmark{
+    position: relative;
+    height: 27px;
+    padding-left: 27px;
+    background-color: #eee;
+    border: 1px solid rgb(100, 100, 100);
+    margin: 6px;
+    cursor: pointer;
+}
+#loginForm .tableCell span.checkmark:after{
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 12px;
+    border: solid rgb(37, 98, 63);
+    border-width: 0 3px 3px 0;
+    content: "";
+    position: absolute;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+#loginForm .tableCell .inputContainer:hover input ~ span.checkmark {
+    background-color: #ccc;
+}
+#loginForm .tableCell input:checked ~ span.checkmark {
+    /* background-color: #053b6b; */
+}
+#loginForm .tableCell input:checked ~ span.checkmark:after {
+    opacity: 1;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+#loginForm .tableCell label#remembermeDiv{
+    position: initial;
+    cursor: pointer;
+    padding-left: 0;
+    text-align: left;
+}
+#loginForm .tableCell #forgotPassword{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 10px 10px;
+    word-wrap: break-word;
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+}
+#loginForm .tableCell #forgotPassword *{
+    display: inline-block;
+    float: left;
+}
+#loginForm .tableCell #forgotPassword i{
+    font-size: 1.5em;
+    padding-right: 10px;
+    width: 37px;
+}
+#loginForm .tableCell #forgotPassword span{
+    width: 0;
+    text-decoration: underline;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+    transform: translateY(14%);
+    cursor: pointer;
+}
+#loginForm .tableCell #forgotPassword:hover span{
+    width: 180px;
+    width: 80%;
+}
 .eventWorkshopPanel {
     display: flex;
     float: left;

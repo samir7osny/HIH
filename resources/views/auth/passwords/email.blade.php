@@ -1,47 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Reset Password</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<form class="outerBox windowHeight" method="POST" action="{{ route('password.email') }}">
+    @csrf
+    <div class="innerBox">
+        <div class="rightBox">
+            <div class="tableCell">
+                <h1>Request password reset link</h1>
+                <div class="inputContainer" style="width:50%;margin:10px auto;font-size:1.5em;display:block;">
+                    <input class="requiredInput" type="email" name="email" value="{{ old('email') }}" required>
+                    <label class="" for="email">Enter The email</label>
                 </div>
+            
+                <div class="inputContainer fullWidth submitInput">
+                    <input type="submit" style="margin-top: 30px;" value="Send Password Reset Link">
+                </div>
+            </div>
+            
+            <div class="rightBoxBackground">
+                @include('inc.logo')
             </div>
         </div>
     </div>
-</div>
+</form>
+<script src="{{ asset('js/form.js') }}"></script>
 @endsection

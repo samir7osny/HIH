@@ -17,6 +17,8 @@
 
 Route::resource('/committee', 'CommitteesController');
 Route::resource('/user', 'UsersController');
+Route::get('/password/change', 'UsersController@changePasswordForm');
+Route::post('/password/change', 'UsersController@changePassword');
 
 Route::post('/university','UniversitiesController@getColleges');
 Route::put('/member/assign','MembersController@assign');

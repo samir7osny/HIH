@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -147,5 +154,45 @@ class UsersController extends Controller
         $user->userInfo->delete();
         $user->delete();
         return redirect('/')->with('success', 'user Removed');
+    }
+    
+    
+    /**
+     * Change the password.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changePasswordForm()
+    {
+        return view('auth.passwords.change');
+    }
+
+
+    /**
+     * Change the password.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request)
+    {
+        if (!(Hash::check($request->get('old-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+        }
+        if(strcmp($request->get('old-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        }
+        $validatedData = $request->validate([
+            'old-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
+        ]);
+        //Change Password
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
+        return redirect('/')->with("success","Password changed successfully !");
     }
 }

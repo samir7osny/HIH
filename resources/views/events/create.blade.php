@@ -95,6 +95,9 @@
                     <input type="submit" value="Submit">
                 </div>
             </div>
+            <div class="rightBoxBackground">
+                    @include('inc.logo')
+                </div>
         </div>
     </div>
 {!! Form::close() !!}

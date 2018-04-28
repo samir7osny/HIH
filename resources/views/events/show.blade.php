@@ -82,6 +82,10 @@
                         </tr>
                     </table>
                 </div>
+            
+                <div class="rightBoxBackground">
+                    @include('inc.logo')
+                </div>
             </div>
         </div>
     @else

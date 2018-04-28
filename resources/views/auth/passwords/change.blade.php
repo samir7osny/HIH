@@ -1,26 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="outerBox windowHeight" method="POST" action="{{ route('password.request') }}">
+<form class="outerBox windowHeight" method="POST" action="/password/change">
         @csrf
-        <input type="hidden" name="token" value="{{ $token }}">
         <div class="innerBox">
                 <div class="rightBox">
                         <div class="tableCell">
-                                <h1>Reset the password</h1>
+                                <h1>Change Your Password</h1>
                                 <div class="inputContainer" style="width:50%;margin:10px auto;font-size:1.5em;display:block;">
-                                        <input class="requiredInput" type="email" name="email" value="{{ $email or old('email') }}" required autofocus>
-                                        <label class="" for="email">Enter The email</label>
+                                        <input class="requiredInput" type="password" name="old-password" required autofocus>
+                                        <label class="" for="old-password">Enter The old password</label>
                                 </div>
 
                                 <div class="inputContainer" style="width:50%;margin:10px auto;font-size:1.5em;display:block;">
-                                        <input class="requiredInput" type="password" name="password" required>
-                                        <label class="" for="password">Enter The password</label>
+                                        <input class="requiredInput" type="password" name="new-password" required>
+                                        <label class="" for="new-password">Enter The password</label>
                                 </div>
 
                                 <div class="inputContainer" style="width:50%;margin:10px auto;font-size:1.5em;display:block;">
-                                        <input class="requiredInput" type="password" name="password_confirmation" required>
-                                        <label class="" for="password_confirmation">Enter The password again</label>
+                                        <input class="requiredInput" type="password" name="new-password_confirmation" required>
+                                        <label class="" for="new-password_confirmation">Enter The new password again</label>
                                 </div>
                         
                                 <div class="inputContainer fullWidth submitInput">

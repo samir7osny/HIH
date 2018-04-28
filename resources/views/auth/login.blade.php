@@ -1,69 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Login</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="username" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="username" type="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+<form id="loginForm" method="POST" class="outerBox windowHeight" action="{{ route('login') }}">
+        @csrf
+        <div class="innerBox">
+                <div class="rightBox">
+                        <div class="tableCell">
+                                <h1>Login</h1>
+                                <div class="inputContainer"  style="width:30%;margin:10px auto;font-size:1.5em;display:block;">
+                                    <input type='text' class="requiredInput" name='username' value="{{ old('username') }}" required autofocus>  
+                                    <label class="" for="username">Username</label>
                                 </div>
-                            </div>
+                                <div class="inputContainer"  style="width:30%;margin:10px auto;font-size:1.5em;display:block;">
+                                    <input type='password' class="requiredInput" name='password' required>                        
+                                    <label class="" for="password">Password</label>
+                                </div>
+                                <div class="inputContainer"  style="width:30%;margin:10px auto;font-size:1.5em;display:block;">
+                                        <input hidden id="remembermeInput" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <span class="checkmark" onclick="$('#remembermeInput').click()"></span>
+                                        <label id="remembermeDiv" onclick="$('#remembermeInput').click()" for="remember">Remember Me</label>
+                                </div>
+                                <div class="inputContainer submitInput">
+                                    <input type='submit' name='login' value='Login'>
+                                </div>
+                                <a href="/user/create" style="color:#BBB;text-decoration:underline;">Don't have account?</a>
+                                <a id="forgotPassword" href="{{ route('password.request') }}"><i class="fa fa-meh-o" aria-hidden="true"></i><span>Forgot Your Password?</span></a>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
+                        
+                        <div class="rightBoxBackground">
+                                @include('inc.logo')
                         </div>
-                    </form>
                 </div>
-            </div>
         </div>
-    </div>
-</div>
+</form>
+<script src="{{ asset('js/form.js') }}"></script>
 @endsection

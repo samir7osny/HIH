@@ -16,6 +16,7 @@
         <div class="rightBox">
             <div class="tableCell">
                 <h2><i class="headerIcon fa fa-user" aria-hidden="true"></i>{{$user->username}}</h2>
+                <h2><i class="headerIcon fa fa-key" aria-hidden="true"></i><a href="/password/change" style="text-decoration:underline">Change my password</a></h2>
                 <h2><i class="headerIcon fa fa-university" aria-hidden="true"></i>{{$user->college->university->name}}</h2>
                 <h2><i class="headerIcon fa fa-graduation-cap" aria-hidden="true"></i>{{$user->college->name}}</h2>
                 <h2><i class="headerIcon fa fa-phone" aria-hidden="true"></i>{{$user->phone_number}}</h2>

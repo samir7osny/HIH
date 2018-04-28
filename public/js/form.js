@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('.inputImgHover').click(function (e) {
-        //$('input[name="userImage"]')[0].click();
+    $('#inputImgHover').click(function (e) {
+        $('input[name="userImage"]')[0].click();
     });
 
     $("label").click(function (e) { 

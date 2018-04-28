@@ -1,3 +1,32 @@
+@if (!Auth::check() && Request::path() != 'login')
+    <div id="backLoginWindow">
+        <form id="loginForm" method="POST" class="dark" action="{{ route('login') }}">
+            @csrf
+            @include('inc.logo')
+            <div class="tableCell">
+                <div class="inputContainer">
+                    <input type='text' class="requiredInput" name='username' value="{{ old('username') }}" required autofocus>  <label class="" for="username">Username</label>
+                </div>
+                <div class="inputContainer">
+                    <input type='password' class="requiredInput" name='password' required>                        
+                    <label class="" for="password">Password</label>
+                </div>
+                <div class="inputContainer">
+                        <input hidden id="remembermeInput" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <span class="checkmark" onclick="$('#remembermeInput').click()"></span>
+                        <label id="remembermeDiv" onclick="$('#remembermeInput').click()" for="remember">Remember Me</label>
+                </div>
+                <div class="inputContainer submitInput">
+                    <input type='submit' name='login' value='Login'>
+                </div>
+
+                <a href="/user/create" style="color:#BBB;text-decoration:underline;">Don't have account?</a>
+                <a id="forgotPassword" href="{{ route('password.request') }}"><i class="fa fa-meh-o" aria-hidden="true"></i><span>Forgot Your Password?</span></a>
+            </div>
+        </form>
+    </div>
+    <script src="{{ asset('js/loginpopup.js') }}"></script>
+@endif
 <div id="navContainer">
     <nav id="mainNav">
         <div class="logo">
@@ -24,7 +53,7 @@
                     </form></li>
                 </ul>
             </div>
-        @else
+        @elseif (Request::path() != 'login')
             <div id="user">
                 <i onclick="openLoginForm()" class="fa fa-sign-in" aria-hidden="true"></i>
             </div>
@@ -37,26 +66,6 @@
             <li><a href="/aboutus">About Us</a></li>
         </ul>
     </nav>
-    @if (!Auth::check())
-        <div id="backLoginWindow">
-            <form id="loginForm" method="POST" class="dark" action="{{ route('login') }}">
-                @csrf
-                @include('inc.logo')
-                <div class="tableCell">
-                    <div class="inputContainer">
-                        <input type='text' class="requiredInput" name='username' value="{{ old('email') }}" required autofocus>  <label class="" for="username">Username</label>
-                    </div>
-                    <div class="inputContainer">
-                        <input type='password' class="requiredInput" name='password' required>                        
-                        <label class="" for="password">Password</label>
-                    </div>
-                    <div class="inputContainer submitInput">
-                        <input type='submit' name='login' value='Login'>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <script src="{{ asset('js/loginpopup.js') }}"></script>
-    @endif
+    
     <script src="{{ asset('js/navbar.js') }}"></script>
 </div>
