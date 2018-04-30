@@ -692,7 +692,12 @@ input[type="time"],input[type="date"]{
     content: "";
     display: block;
     padding-bottom: 100%;
-  }
+}
+.square span {
+    position: absolute;
+    width: 24%;
+    bottom: 0;
+}
 .leftBox img{
     position: absolute;
     width: 100%;
@@ -1049,6 +1054,7 @@ input[type="time"],input[type="date"]{
     left: 0;
     right: 0;
     color: #FFF;
+    width: 100%;
 }
 .inputContainer{
     position: relative;
@@ -1301,11 +1307,66 @@ button:hover{
     width: auto;
     left: 46%;
 }
+.inputContainer.name input[name='title']{
+    flex-grow: 1;
+    margin-right: 5px;
+    flex-basis: 20%;
+}
+.inputContainer.name input[name='first_name'].withTitle{
+    flex-grow: 1;
+    margin-right: 5px;
+    flex-basis: 40%;
+}
+.inputContainer.name input[name='last_name'].withTitle{
+    flex-grow: 10;
+    flex-basis: 60%;
+}
+.inputContainer.name label[for='title']{
+    width: auto;
+    left: 13%;
+}
+.inputContainer.name label[for='first_name'].withTitle{
+    width: auto;
+    left: 27%;
+}
+.inputContainer.name label[for='last_name'].withTitle{
+    width: auto;
+    left: 54%; /* 54 */
+}
 .innerBox.members{
     background-color: #0002;
     padding: 3%;
     z-index: 11;
     padding-top: 50px;
+}
+.flexBox .flexChild{
+    flex-basis: calc(25% - 4px);
+    background: #DDDD;
+    height: 120px;
+    margin: 2px;
+    display: table;
+    cursor: pointer;
+    color: rgb(37, 98, 63);
+    position: relative;
+}
+.flexBox .flexChild:hover{
+    background: rgb(255, 255, 255);
+}
+.flexBox .flexChild img{
+    width: 120px;
+    height: 120px;
+    display: block;
+    object-fit: cover;
+}
+.flexBox .flexChild h3{
+    text-align: center;
+}
+.flexBox .flexChild h3 span{
+    font-weight: 100;
+    font-size: 0.9em;
+}
+.flexBox .flexChild h3 span i{
+    margin-right: 10px;
 }
 /* .innerBox.members */.flexBox{ 
     display: flex;

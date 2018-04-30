@@ -99,6 +99,16 @@ class UsersController extends Controller
      */
     public function update(Request $request, $username)
     {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'userImage' => 'image|nullable|max:5999',
+            'college' => 'required|integer',
+            'phone_number' => 'required|string|max:11|min:11|unique:users',
+            'email' => 'required|email|unique:users',
+            'about' => 'string|nullable',
+        ]);
+
         $user = \App\User::where('username' , '=', $username)->firstOrFail();
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');

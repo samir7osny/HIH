@@ -3,7 +3,7 @@ $(document).ready(function () {
         $('input[name="userImage"]')[0].click();
     });
 
-    $("label").click(function (e) { 
+    $("body").on("click","label",function (e) { 
         $(this).prev().focus();
     });
 

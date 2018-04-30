@@ -19,7 +19,9 @@ class CreateSpeakerTable extends Migration
             $table->string('phone_number')->unique();
             $table->string('fields_of_interest');
             $table->string('email')->unique();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('photo_url')->nullable();
         });
     }
 
