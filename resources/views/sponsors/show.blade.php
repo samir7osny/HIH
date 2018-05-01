@@ -7,26 +7,23 @@
             <div class="darkBackground">
                 <div class="tableCell">
                     <div class="square">
-                        <img src="/storage/usersImages/{{$user->photo_url}}" alt="">
+                        <img src="/storage/sponsorsImages/{{$sponsor->photo_url}}" alt="">
+                        <span>@include('inc.money')</span>
                     </div>
-                    <h1>{{$user->first_name . " " . $user->last_name}}</h1>
+                    <h1>{{$sponsor->name}}</h1>
                 </div>
             </div>
         </div>
         <div class="rightBox">
             <div class="tableCell">
-                <h2><i class="headerIcon fa fa-user" aria-hidden="true"></i>{{$user->username}}</h2>
-                <h2><i class="headerIcon fa fa-key" aria-hidden="true"></i><a href="/password/change" style="text-decoration:underline">Change my password</a></h2>
-                <h2><i class="headerIcon fa fa-university" aria-hidden="true"></i>{{$user->college->university->name}}</h2>
-                <h2><i class="headerIcon fa fa-graduation-cap" aria-hidden="true"></i>{{$user->college->name}}</h2>
-                <h2><i class="headerIcon fa fa-phone" aria-hidden="true"></i>{{$user->phone_number}}</h2>
-                <h2><i class="headerIcon fa fa-address-book-o" aria-hidden="true"></i>{{$user->email}}</h2>
-                @if ($user->about != null)
-                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{{$user->about}}</p>
+                <h2><i class="headerIcon fa fa-phone" aria-hidden="true"></i>{{$sponsor->phone_number}}</h2>
+                <h2><i class="headerIcon fa fa-address-book-o" aria-hidden="true"></i>{{$sponsor->email}}</h2>
+                @if ($sponsor->about != null)
+                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{{$sponsor->about}}</p>
                 @endif
                 <div class="inputContainer submitInput">
-                    <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
-                    {!! Form::open(['action' => ['UsersController@destroy', $user->username], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $user->username . '\" user? ")']) !!}
+                    <a href="/sponsor/{{$sponsor->id}}/edit"><button>Edit</button></a>
+                    {!! Form::open(['action' => ['SponsorsController@destroy', $sponsor->id], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $sponsor->name . '\" profile? ")']) !!}
                         {{Form::hidden('_method', 'DELETE')}}
                         <input class="delete" type="submit" value="Delete">
                     {!! Form::close() !!}

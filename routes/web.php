@@ -33,6 +33,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('/event','EventsController');
 Route::resource('/workshop','WorkshopsController');
+Route::resource('/sponsor','SponsorsController');
 
 // //All Workshops
 // Route::get('/workshop', function(){

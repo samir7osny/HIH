@@ -12,7 +12,7 @@
                     <div class="inputContainer Button between">
                         <a href=""><button>Enroll</button></a>
                         <a href="/workshop/{{$workshop['name']}}/edit"><button >Edit</button></a>
-                        {!! Form::open(['action'=>['WorkshopsController@destroy',$workshop['id']],'onsubmit'=>'return confirm("Do you want to delete this event?");','method'=>'POST'])!!}    
+                        {!! Form::open(['action'=>['WorkshopsController@destroy',$workshop['id']],'onsubmit'=>'return confirm("Do you want to delete this workshop?");','method'=>'POST'])!!}    
                             {{Form::submit('Delete',['class'=>'delete'])}}
                             {!!Form::hidden('_method','DELETE')!!}
                         {!!Form::close()!!}
