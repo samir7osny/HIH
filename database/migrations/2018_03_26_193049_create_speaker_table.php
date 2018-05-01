@@ -21,6 +21,7 @@ class CreateSpeakerTable extends Migration
             $table->string('email')->unique();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('about');
             $table->string('photo_url')->nullable();
         });
     }

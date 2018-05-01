@@ -80,4 +80,36 @@ $(document).ready(function () {
         });
     }
     
+    var confirmation = false;
+    $(".popUpWindow").click(function () {
+        if (confirmation == true) {
+            confirmation = false;
+            $('.confirmationPopup').animate({
+                width: '0%'
+            }, 500, function () {
+                $('.popUpWindow').css('display', 'none');
+            });
+        }
+    });
+
+    $(".confirmCancel").click(function () {
+        if (confirmation == true) {
+            confirmation = false; $('.confirmationPopup').animate({
+                width: '0%'
+            }, 500, function () {
+                $('.popUpWindow').css('display', 'none');
+            });
+        }
+    });
+
+    $('.confirmationPopup').click(function (e) {
+        e.stopPropagation();
+    });
+
+    $('.delete').click(function () {
+        $('.popUpWindow').css('display', 'block');
+        confirmation = true; $('.confirmationPopup').animate({
+            width: '50%'
+        }, 500);
+    });
 });

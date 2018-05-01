@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = \App\User::all();
         return view('users.index')->with('users', $users);
     }
 

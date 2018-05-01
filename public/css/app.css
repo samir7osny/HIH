@@ -2060,3 +2060,53 @@ a.messageControll:not(#activeSection):hover::before {
 a.request-task {
     width: 100%;
 }
+.popUpWindow  .confirmationPopup {
+    width: 0%;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    position: relative;
+    margin: auto;
+    height: 250px;
+    background: #DDD;
+    transform: translateY(-50%);
+    top: 50%;
+    transition: none;
+}
+
+.popUpWindow .confirmationPopup form {
+    width: 45px;
+    height: 45px;
+}
+
+.popUpWindow .confirmationPopup h1 {
+    color: #24603d;
+    background: #cecece;
+    padding: 15px;
+    margin-bottom: 32px;
+    padding-left: 18px;
+}
+
+.popUpWindow .confirmationPopup p{
+    color: #24603d;
+    margin-bottom: 15px;
+    padding-left: 60px;
+    font-size: 2em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.popUpWindow .confirmationPopup .confirmYes {
+    color: #DDD;
+    width: 120px;
+    font-weight: bold;
+    position: absolute;
+    right: 22%;
+}
+.popUpWindow .confirmationPopup .confirmCancel {
+    background: #24603d;
+    width: 120px;
+    color: #DDD;
+    font-weight: bold;
+    position: absolute;
+    right: 8%;
+}
