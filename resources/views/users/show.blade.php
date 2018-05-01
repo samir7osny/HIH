@@ -26,15 +26,25 @@
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
-                    {!! Form::open(['action' => ['UsersController@destroy', $user->username], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $user->username . '\" user? ")']) !!}
-                        {{Form::hidden('_method', 'DELETE')}}
-                        <input class="delete" type="submit" value="Delete">
-                    {!! Form::close() !!}
+                    <button class="delete">Delete</button>
                 </div>
             </div>
             <div class="rightBoxBackground">
                 @include('inc.logo');
             </div>
+        </div>
+    </div>
+</div>
+<div class="popUpWindow">
+    <div class="confirmationPopup">
+        <h1>Confirm</h1>
+        <p>Do you want to delete "{{ $user->username }}"  profile? </p>
+        <div class="inputContainer Button between">
+                {!! Form::open(['action' => ['UsersController@destroy', $user->username], 'method' => 'POST'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                    <input class="delete confirmYes" type="submit" value="Delete">
+                {!! Form::close() !!}
+                <button class="confirmCancel">Cancel</button>
         </div>
     </div>
 </div>

@@ -24,15 +24,25 @@
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/speaker/{{$speaker->id}}/edit"><button>Edit</button></a>
-                    {!! Form::open(['action' => ['SpeakersController@destroy', $speaker->id], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $speaker->title . ". " . $speaker->first_name . " " . $speaker->last_name . '\" profile? ")']) !!}
-                        {{Form::hidden('_method', 'DELETE')}}
-                        <input class="delete" type="submit" value="Delete">
-                    {!! Form::close() !!}
+                    <input class="delete" type="submit" value="Delete">
                 </div>
             </div>
             <div class="rightBoxBackground">
                 @include('inc.logo');
             </div>
+        </div>
+    </div>
+</div>
+<div class="popUpWindow">
+    <div class="confirmationPopup">
+        <h1>Confirm</h1>
+        <p>Do you want to delete "{{ $speaker->name }}"  profile? </p>
+        <div class="inputContainer Button between">
+                {!! Form::open(['action' => ['SpeakersController@destroy', $speaker->id], 'method' => 'POST']) !!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    <button class="delete confirmYes">Confirm</button>
+                {!! Form::close() !!}
+                <button class="confirmCancel">Cancel</button>
         </div>
     </div>
 </div>

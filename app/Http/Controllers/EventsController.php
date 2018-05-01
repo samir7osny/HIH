@@ -38,6 +38,7 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'name'=>'required|string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
             'date' => 'required|date',
@@ -49,6 +50,7 @@ class EventsController extends Controller
         ]);
 
         $event = new \App\Event;
+        $event->name = $request->input('name');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
         $event->place_cost = $request->input('place_cost');

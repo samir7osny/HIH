@@ -23,10 +23,7 @@
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/sponsor/{{$sponsor->id}}/edit"><button>Edit</button></a>
-                    {!! Form::open(['action' => ['SponsorsController@destroy', $sponsor->id], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $sponsor->name . '\" profile? ")']) !!}
-                        {{Form::hidden('_method', 'DELETE')}}
-                        <input class="delete" type="submit" value="Delete">
-                    {!! Form::close() !!}
+                    <input class="delete" type="submit" value="Delete">
                 </div>
             </div>
             <div class="rightBoxBackground">
@@ -35,4 +32,18 @@
         </div>
     </div>
 </div>
+<div class="popUpWindow">
+    <div class="confirmationPopup">
+        <h1>Confirm</h1>
+        <p>Do you want to delete "{{ $sponsor->name }}"  profile? </p>
+        <div class="inputContainer Button between">
+                {!! Form::open(['action' => ['SponsorsController@destroy', $sponsor->id], 'method' => 'POST']) !!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    <button class="delete confirmYes">Confirm</button>
+                {!! Form::close() !!}
+                <button class="confirmCancel">Cancel</button>
+        </div>
+    </div>
+</div>
+<script src="{{asset('js/sponsor.js')}}"></script>
 @endsection

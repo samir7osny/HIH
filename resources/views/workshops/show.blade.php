@@ -12,10 +12,7 @@
                     <div class="inputContainer Button between">
                         <a href=""><button>Enroll</button></a>
                         <a href="/workshop/{{$workshop['name']}}/edit"><button >Edit</button></a>
-                        {!! Form::open(['action'=>['WorkshopsController@destroy',$workshop['id']],'onsubmit'=>'return confirm("Do you want to delete this workshop?");','method'=>'POST'])!!}    
-                            {{Form::submit('Delete',['class'=>'delete'])}}
-                            {!!Form::hidden('_method','DELETE')!!}
-                        {!!Form::close()!!}
+                        <button class="delete">Delete</button>
                     </div>
                     <table class="eventWorkshopInfo">
                         <tr>
@@ -102,6 +99,17 @@
     @endif
 </div>
 <div class="popUpWindow">
+    <div class="confirmationPopup">
+        <h1>Confirm</h1>
+        <p>Do you want to delete "{{ $workshop->name }}"  workshop? </p>
+        <div class="inputContainer Button between">
+                {!! Form::open(['action' => ['WorkshopsController@destroy', $workshop->id], 'method' => 'POST']) !!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    <button class="delete confirmYes">Confirm</button>
+                {!! Form::close() !!}
+                <button class="confirmCancel">Cancel</button>
+        </div>
+    </div>
 </div>
 <script src="{{asset('js/panelCreator.js')}}"></script>
 <script>addPanelS()</script>
