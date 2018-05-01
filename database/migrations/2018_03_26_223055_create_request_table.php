@@ -16,10 +16,13 @@ class CreateRequestTable extends Migration
         Schema::create('deleting_request', function (Blueprint $table) {
             $table->increments('id');
             $table->string('content');
-            $table->integer('receiver');
+            $table->string('deleted_user_name')->nullable();
             $table->integer('sender');
             $table->integer('member_to_delete_id');
             $table->boolean('answer')->nullable();
+            $table->boolean('answered');
+            $table->boolean('seen');
+            $table->timpstamp('seen_at');
             $table->timestamps();
         });
     }

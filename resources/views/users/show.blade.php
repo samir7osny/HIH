@@ -26,10 +26,7 @@
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
-                    {!! Form::open(['action' => ['UsersController@destroy', $user->username], 'method' => 'POST','onsubmit'=>'return confirm("Do you want to delete \"' . $user->username . '\" user? ")']) !!}
-                        {{Form::hidden('_method', 'DELETE')}}
-                        <input class="delete" type="submit" value="Delete">
-                    {!! Form::close() !!}
+                    <a href="/request/create/{{$user->id}}"><button class="delete">Delete</button></a>
                 </div>
             </div>
             <div class="rightBoxBackground">

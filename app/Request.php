@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     // Table name
-    protected $table = 'request';
+    protected $table = 'deleting_request';
     // Primary key
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
 
-    public function sender() {
+    public function userSender() {
         return $this->belongsTo('App\User', 'sender');
     }
 
-    public function receiver() {
-        return $this->belongsTo('App\User', 'receiver');
+    public function userToDelete() {
+        return $this->belongsTo('App\User', 'member_to_delete_id');
     }
 }

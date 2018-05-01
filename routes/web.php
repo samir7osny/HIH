@@ -11,13 +11,13 @@
 |
 */
 
-// Route::get('/try', function () {
-//     return view('welcome');
-// });
-
 Route::resource('/committee', 'CommitteesController');
 Route::resource('/user', 'UsersController');
 Route::resource('/speaker', 'SpeakersController');
+Route::get('/request/inbox', 'RequestsController@inbox');
+Route::get('/request/outbox', 'RequestsController@outbox');
+Route::resource('/request', 'RequestsController')->except(['create', 'edit']);
+Route::get('/request/create/{userId}','RequestsController@create');
 Route::get('/password/change', 'UsersController@changePasswordForm');
 Route::post('/password/change', 'UsersController@changePassword');
 

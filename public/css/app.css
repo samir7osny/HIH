@@ -644,9 +644,6 @@ input[type="time"],input[type="date"]{
     height: calc(100% - 80px);
     min-height: fit-content;
 }
-.paddedBox{
-    padding: 30px;
-}
 .innerBox{
     width: 100%;
     display: flex;
@@ -723,6 +720,9 @@ input[type="time"],input[type="date"]{
     position: relative;
     background: url(../images/temp/green.png);
     flex-grow: 10;
+}
+.paddedBox{
+    padding: 30px;
 }
 .dark .rightBox,
 .light .rightBox{
@@ -1349,6 +1349,13 @@ button:hover{
     color: rgb(37, 98, 63);
     position: relative;
 }
+.flexBox .flexChild.toDelete{
+    background: #a00000;
+    color: #DDD;
+}
+.flexBox .flexChild.toDelete:hover{
+    background: #b10000;
+}
 .flexBox .flexChild:hover{
     background: rgb(255, 255, 255);
 }
@@ -1503,7 +1510,7 @@ button.addMember {
     padding: 0;
 }
 button.delete,
-.rightBox .inputContainer input.delete{
+.rightBox .inputContainer /*input*/.delete{
     background-color: rgba(208, 5, 5, 0.617);
     color: #FFF;
 }
@@ -1905,46 +1912,88 @@ td>i {
     z-index: 10000;
 }
 
-.workshopTimeline {
-    width: 75%;
-    position: relative;
-    margin: auto;
-    top: 40%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    display: inline-block;
-    margin: auto;
+.Table {
+    width: 100%;
+    margin: 20px auto;
 }
 
-.workshopTimeline .workshopTimelineRow {
-    display: block;
+.Table .TableRow,
+.Table .TableHeader{
+    display: flex;
     width: 100%;
 }
+.Table .TableRow:nth-of-type(odd),
+.Table .TabelHeader {
+    background: #25623f;
+    color: #DDD;
+}
+.Table .TableRow:nth-of-type(even) {
+    background: #DDD;
+    color: #25623f;
+}
+.Table .TableRow:nth-of-type(odd):hover {
+    background-color: #18412a;
+}
+.Table .TableRow:nth-of-type(even):hover {
+    background-color:rgb(150, 150, 150);
+}
 
-.workshopTimeline .workshopTimelineRow:nth-of-type(odd) {
+.Table .TableHeader {
     background: #DDD;
     color: #25623f;
 }
 
-.workshopTimeline .workshopTimelineRow:nth-of-type(even) {
-    background: #25623f;
-    color: #DDD;
+.Table .TableRow:nth-of-type(odd) .TableColumn,
+.Table .TableHeader  .TableColumn{
+    border-right: 0.5px solid #DDD3;
+    border-left: 0.5px solid #DDD3;
 }
-
-.workshopTimeline .workshopTimelineRow .workshopTimelineColumn {
+.Table .TableRow:nth-of-type(even) .TableColumn{
+    border-right: 0.5px solid #25623f44;
+    border-left: 0.5px solid #25623f44;
+}
+.Table .TableHeader .TableColumn{
+    border-right: 0.5px solid #25623f44;
+    border-left: 0.5px solid #25623f44;
+}
+.Table .TableRow .TableColumn,
+.Table .TableHeader .TableColumn {
     display: inline-block;
-    width: 24.7%;
+    flex-basis: 25%;
+    flex-grow: 1;
     padding-left: 25px;
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: larger;
 }
+.Table .TableRow .seen-answered{
+    flex-basis: 0;
+    padding-left: 6.5px;
+    padding-right: 6.5px;
+    flex-grow: 0;
+    color:transparent;
+}
+.Table .TableHeader .seen-answered{
+    flex-basis: 0;
+    padding-left: 6.5px;
+    padding-right: 6.5px;
+    flex-grow: 0;
+}
 
-.workshopTimeline.on {
+.Table .TableRow .TableColumn:nth-of-type(1),
+.Table div.TableRow .TableColumn:nth-of-type(1){
+    border-left: 1px solid #DDD3;
+}
+.Table .TableRow .TableColumn:last-of-type,
+.Table div.TableRow .TableColumn:last-of-type{
+    border-right: 1px solid #DDD3;
+}
+
+.Table.on {
     animation: animatezoom 0.6s;
 }
 
-.workshopTimeline.out {
+.Table.out {
     animation: animatezoomout 0.6s;
 }
 
@@ -1971,4 +2020,43 @@ td>i {
 
 .popUpWindow .eventGalleryImage:hover{
     background: none;
+}
+
+/* Request */
+a.messageControll {
+    flex-basis: calc(50%);
+    height: auto;
+    width: auto;
+    text-align: center;
+    padding: 5px 20px;
+    font-size: 1.8em;
+    position: relative;
+    color: #DDD8;
+    font-weight: bolder;
+}
+a.messageControll:hover{
+    background: #DDD1;
+}
+a.messageControll::before{
+    content: attr(content);
+    color: #DDD;
+    clip-path: inset(100% 0 0 0);
+    position: absolute;
+    padding: 5px 20px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+}
+a.messageControll#activeSection {
+    color: #DDD;
+    border-bottom: 2px solid #DDD5;
+}
+a.messageControll:not(#activeSection):hover::before {
+    clip-path: inset(0 0 0 0);
+    transition: all 0.6s ease-out;
+}
+a.request-task {
+    width: 100%;
 }

@@ -104,8 +104,8 @@ class UsersController extends Controller
             'last_name' => 'required|string|max:255',
             'userImage' => 'image|nullable|max:5999',
             'college' => 'required|integer',
-            'phone_number' => 'required|string|max:11|min:11|unique:users',
-            'email' => 'required|email|unique:users',
+            'phone_number' => 'required|string|max:11|min:11',
+            'email' => 'required|email',
             'about' => 'string|nullable',
         ]);
 
@@ -152,9 +152,9 @@ class UsersController extends Controller
         $user = \App\User::where('username' , '=', $username)->firstOrFail();
 
         // Check for correct user
-        if(auth()->user()->id !== $user->id){
+        /*if(auth()->user()->id !== $user->id){
             return redirect('/')->with('error', 'Unauthorized page');
-        }
+        }*/
 
         if($user->photo_url != 'user.jpg'){
             // Delete Image

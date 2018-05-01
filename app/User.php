@@ -31,8 +31,9 @@ class User extends Authenticatable
     public function outboxRequests() {
         return $this->hasMany('App\Request', 'sender');
     }
-    public function inboxRequests() {
-        return $this->hasMany('App\Request', 'receiver');
+
+    public function deletingRequest() {
+        return $this->hasOne('App\Request', 'member_to_delete_id');
     }
 
     public function outboxTasks() {

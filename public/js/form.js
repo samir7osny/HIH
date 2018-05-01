@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#inputImgHover').click(function (e) {
+    $('.inputImgHover').click(function (e) {
         $('input[name="userImage"]')[0].click();
     });
 
