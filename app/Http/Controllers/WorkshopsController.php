@@ -48,7 +48,7 @@ class WorkshopsController extends Controller
             'timelineDate' => 'required|array',
             'timelineFrom' => 'required|array',
             'timelineTo' => 'required|array',
-            'timelineDate.*' => 'required|date',
+            'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
         ]);
@@ -152,7 +152,7 @@ class WorkshopsController extends Controller
             'timelineDate' => 'required|array',
             'timelineFrom' => 'required|array',
             'timelineTo' => 'required|array',
-            'timelineDate.*' => 'required|date',
+            'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
         ]);

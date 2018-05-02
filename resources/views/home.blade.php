@@ -23,16 +23,17 @@
                 <h1>Upcoming Events</h1>
             </div>
             <div class="panelContainer" panel='panel'>
-                @foreach($upcomingEvents as $upcomingEvent)
                     <div class="panel">
-                        <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->covergit add ->url}});">
+                        @foreach($upcomingEvents as $upcomingEvent)
+                        <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->cover->url}});">
                             <div class="panelItemDarker">
                                 <div class="panelItemText">
-                                    <h1 class="panelItemTitle">{{$upcomingEvent['name']}}</h1>
-                                    <p class="panelItemContent">{{$upcomingEvent['description']}}</p>
+                                    <h1 class="panelItemTitle">{{$upcomingEvent->name}}</h1>
+                                    <p class="panelItemContent">{{$upcomingEvent->description}}</p>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                         <div class="panelControl">
                             <span class="panelPause">
                                 <i class="fa fa-pause" aria-hidden="true"></i>
@@ -55,7 +56,6 @@
                             </span>
                         </div>
                     </div>
-                @endforeach
             </div>
         </div>
     </div>

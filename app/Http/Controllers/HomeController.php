@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $upcomingEvents = \App\Event::where('date', '>=', date("Y-m-d"))->orderBy('date')->get();
+        //$upcomingWorkshops = \App\Workshop::where('date', '>=', date("Y-m-d"))->sortBy('date');
+        $data = [
+            'upcomingEvents' => $upcomingEvents
+        ];
+        return view('home')->with($data);
     }
 }

@@ -19,6 +19,15 @@ Route::get('/request/outbox', 'RequestsController@outbox');
 Route::resource('/request', 'RequestsController')->except(['create', 'edit']);
 Route::get('/request/create/{userId}','RequestsController@create');
 Route::get('/password/change', 'UsersController@changePasswordForm');
+Route::get('/chat', 'MessagesController@index');
+Route::post('/chat/send', 'MessagesController@send');
+Route::get('/chat/receive', 'MessagesController@new');
+Route::put('/chat/seeall', 'MessagesController@seeAll');
+Route::get('/chat/checksee', 'MessagesController@checkSee');
+Route::get('/chat/all', 'MessagesController@getChat');
+Route::get('/chat/search', 'MessagesController@chatSearch');
+Route::get('/chat/checkcontacts', 'MessagesController@checkContacts');
+Route::get('/chat/contacts', 'MessagesController@Contacts');
 Route::post('/password/change', 'UsersController@changePassword');
 
 Route::post('/university','UniversitiesController@getColleges');

@@ -832,20 +832,41 @@ input[type="time"],input[type="date"]{
     display: flex;
     flex-flow: column;
 }
-.contactsBar input{
+.contactsBar input[name='search']{
     padding: 10px 20px;
     width: 90%;
     margin: auto;
     margin-top: 4%;
+    border: none;
 }
 .contactsBar input::placeholder{
-    color: #CCC;
+    /* color: #CCC; */
 }
 .contactsBar .contacts{
     direction:rtl;
     overflow: hidden;
     overflow-y: scroll;
     width: 100%;
+    height: 100%;
+}
+.contactsBar .contacts.search{
+    direction: rtl;
+    overflow: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+    width: 90%;
+    margin: 0 5%;
+    position: absolute;
+    height: auto;
+    transition: none;
+    display: none;
+    background: transparent;
+    z-index: 500;
+}
+.contactsBar .contacts.search .contact{
+    background: #AAA;
+    padding: 15px;
 }
 .contactsBar .contacts *{
     direction: ltr;
@@ -900,10 +921,26 @@ input[type="time"],input[type="date"]{
 }
 .chat{
     width: 100%;
-    height: 92%;
+    height: calc(100% - 62px);
     overflow-x:hidden;
     overflow-y:scroll;
     transform-origin: top left;
+    padding: 20px 0 0 0;
+}
+.chat button.showMore{
+    font-size: 1.5em;
+    padding: 14px;
+    margin: auto;
+    width: 60%;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    color: #DDD;
+    cursor: pointer;
+}
+.chat button.showMore:hover{
+    background: #DDD8;
+    color: rgb(37, 98, 63);
 }
 .chat::-webkit-scrollbar {
     background-color: rgba(37, 98, 63,0);
@@ -938,7 +975,7 @@ input[type="time"],input[type="date"]{
 .chat div span{
     width: 100%;
     display: inline-block;
-    color: #DDD4;
+    color: #DDD7;
     font-size: 1em;
 }
 .chat div span i{
@@ -980,19 +1017,20 @@ input[type="time"],input[type="date"]{
     left: -16px;
 }
 .messageInput{
-    height: 8%;
+    height: 62px;
     display: flex;
 }
-.messageInput textarea{
-    flex-grow: 15;
-    padding: 20px 30px;
-    height: 100%;
-    max-height: 100%;
+.messageInput input[name='message']{
+    flex-basis: calc(100% - 70px);
+    height: 62px;
     overflow-y: scroll;
     resize: none;
     color: rgba(37, 98, 63,1);
-    padding-top: 25px;
     border: none;
+    min-height: unset;
+    background: #FFF;
+    font-size: 20px;
+    padding: 0 20px;
 }
 .messageInput textarea::placeholder{
     color: #AAA;
@@ -1013,6 +1051,9 @@ input[type="time"],input[type="date"]{
     height: 100%;
     border: 0px solid #FFF;
     cursor: pointer;
+    flex-basis: 70px;
+    color: #DDD;
+    font-size: 22px;
  }
  .messageInput button:hover{
     background-color: #DDD;
