@@ -21,6 +21,8 @@ class CreateTasksTable extends Migration
             $table->boolean('answer')->nullable();
             $table->boolean('seen');
             $table->timestamps();
+            $table->timestamp('seen_at')->nullable();
+            $table->boolean('answered');
         });
     }
 
