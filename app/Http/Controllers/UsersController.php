@@ -205,4 +205,5 @@ class UsersController extends Controller
         $user->save();
         return redirect('/')->with("success","Password changed successfully !");
     }
+    
 }
