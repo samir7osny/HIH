@@ -41,7 +41,7 @@ class EventsController extends Controller
             'name'=>'required|string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'place' => 'required|string',
             'place_cost' => 'required|integer',
             'description' => 'required|string',
@@ -130,7 +130,7 @@ class EventsController extends Controller
         $this->validate($request, [
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'place' => 'required|string',
             'place_cost' => 'required|integer',
             'description' => 'required|string',

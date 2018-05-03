@@ -22,7 +22,7 @@ class CreateRequestTable extends Migration
             $table->boolean('answer')->nullable();
             $table->boolean('answered');
             $table->boolean('seen');
-            $table->timpstamp('seen_at');
+            $table->timpstamp('seen_at')->nullable();
             $table->timestamps();
         });
     }
