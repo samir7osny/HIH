@@ -22,7 +22,7 @@ class Workshop extends Model
     }
 
     public function Audience(){
-        return $this->belongsToMany('App\Guest', 'enrollment_in_workshops', 'workshop_id', 'guest_id');
+        return $this->hasMany('App\WorkshopEnrollment', 'workshop_id');
     }
 
     public function Sponsers(){

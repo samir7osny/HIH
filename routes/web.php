@@ -31,9 +31,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+
+Route::put('/workshop/enroll/{guestId}' , 'WorkshopsController@enroll');
+Route::put('/event/enroll/{guestId}', 'EventsController@enroll');
 Route::resource('/event','EventsController');
 Route::resource('/workshop','WorkshopsController');
 Route::resource('/sponsor','SponsorsController');
+
 
 // //All Workshops
 // Route::get('/workshop', function(){

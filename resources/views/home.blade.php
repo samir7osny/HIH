@@ -19,179 +19,102 @@
 @section('content')
     <div class="slide dark">
         <div class="container">
-            <div class="text">
-                <h1>Upcoming Events</h1>
-            </div>
-            <div class="panelContainer" panel='panel'>
-                @foreach($upcomingEvents as $upcomingEvent)
-                    <div class="panel">
-                        <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->covergit add ->url}});">
-                            <div class="panelItemDarker">
-                                <div class="panelItemText">
-                                    <h1 class="panelItemTitle">{{$upcomingEvent['name']}}</h1>
-                                    <p class="panelItemContent">{{$upcomingEvent['description']}}</p>
+            @if($upcomingActivities['upcomingEvents']->count()>0)
+                <div class="text">
+                    <h1>Upcoming Events</h1>
+                </div>
+                <div class="panelContainer" panel='panel'>
+                        <div class="panel">
+                            @foreach($upcomingActivities['upcomingEvents'] as $upcomingEvent)
+                                <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->cover->url}});">
+                                    <div class="panelItemDarker">
+                                        <div class="panelItemText">
+                                            <h1 class="panelItemTitle">{{$upcomingEvent['name']}}</h1>
+                                            <p class="panelItemContent">{{$upcomingEvent['description']}}</p>
+                                        </div>
+                                    </div>
                                 </div>
+                            @endforeach
+                            <div class="panelControl">
+                                <span class="panelPause">
+                                    <i class="fa fa-pause" aria-hidden="true"></i>
+                                </span>
+                                <span class="panelPlay">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                </span>
+                                <div class="panelControlArrows">
+                                    <span class="panelArrow panelLeftArrow">
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="panelArrow panelRightArrow">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <span class="panelTimer">
+                                    <span></span>
+                                </span>
                             </div>
                         </div>
-                        <div class="panelControl">
-                            <span class="panelPause">
-                                <i class="fa fa-pause" aria-hidden="true"></i>
-                            </span>
-                            <span class="panelPlay">
-                                <i class="fa fa-play" aria-hidden="true"></i>
-                            </span>
-                            <div class="panelControlArrows">
-                                <span class="panelArrow panelLeftArrow">
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                </span>
-                                <span class="panelArrow panelRightArrow">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <span class="panelTimer">
-                                <span></span>
-                            </span>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+                </div>
+            @else
+                <div class="text">
+                    <h1>Upcoming Events</h1>
+                    <h2 style="margin-top: 30px;margin-bottom: 50px;margin-left: 60px;color: white;">No upcoming events at this time</h2>
+                </div>
+            @endif
         </div>
     </div>
     <div class="slide light">
         <div class="container">
-            <div class="panelContainer" panel='panel'>
-                <div class="panel">
-                    <div class="panelItem" style="background-image:url(background.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
+            @if($upcomingActivities['upcomingWorkshops']->count()>0)
+                <div class="panelContainer" panel='panel'>
+                    <div class="panel">
+                            @foreach($upcomingActivities['upcomingWorkshops'] as $upcomingWorkshop)
+                                <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingWorkshop->cover->url}});">
+                                    <div class="panelItemDarker">
+                                        <div class="panelItemText">
+                                            <h1 class="panelItemTitle">{{$upcomingWorkshop->name}}</h1>
+                                            <p class="panelItemContent">{{$upcomingWorkshop->description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="panelControl">
+                                <span class="panelPause">
+                                    <i class="fa fa-pause" aria-hidden="true"></i>
+                                </span>
+                                <span class="panelPlay">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                </span>
+                                <div class="panelControlArrows">
+                                    <span class="panelArrow panelLeftArrow">
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="panelArrow panelRightArrow">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <span class="panelTimer">
+                                    <span></span>
+                                </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background2.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelItem" style="background-image:url(background3.jpg);">
-                        <div class="panelItemDarker">
-                            <div class="panelItemText">
-                                <h1 class="panelItemTitle">Item Title</h1>
-                                <p class="panelItemContent">Item Content, feeh klam kteeer gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn
-                                    gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn gdn</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panelControl">
-                        <span class="panelPause">
-                            <i class="fa fa-pause" aria-hidden="true"></i>
-                        </span>
-                        <span class="panelPlay">
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </span>
-                        <div class="panelControlArrows">
-                            <span class="panelArrow panelLeftArrow">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </span>
-                            <span class="panelArrow panelRightArrow">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <span class="panelTimer">
-                            <span></span>
-                        </span>
-                    </div>
                 </div>
-            </div>
-            <div class="text">
-                <h1>Upcoming Workshops</h1>
-                <p>Hint about Workshops</p>
-            </div>
+                <div class="text">
+                    <h1>Upcoming Workshops</h1>
+                </div>
+            @else
+                <div class="text">
+                    <h1>Upcoming Workshops</h1>
+                    <h2 style="margin-top: 30px;margin-bottom: 50px;margin-left: 60px;color:#25623f;">No upcoming workshops at this time</h2>
+                </div>
+            @endif
         </div>
-
     </div>
-    <script src="{{ asset('js/panelCreator.js') }}"></script>
-    <script>addPanelS()</script>
+<script src="{{ asset('js/panelCreator.js') }}"></script>
+<script>addPanelS()</script>
 @endsection
