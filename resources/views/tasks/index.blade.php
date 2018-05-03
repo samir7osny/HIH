@@ -43,12 +43,11 @@
                                         #31c531
                                     @else
                                         #d02727  
-                                        "
-                                    @endif>
+                                    @endif">
                                         S
                                     </div>
                                     <div class="TableColumn">
-                                        {{ $task->sender->first_name . " " . $task->sender->last_name }}
+                                        {{ $task->userSender->first_name . " " . $task->userSender->last_name }}
                                     </div>
                                     <div class="TableColumn">
                                         {{substr(preg_replace( "/\r|\n/", "", $task->content), 0, 100) . "... "}}
@@ -90,12 +89,11 @@
                                         #31c531
                                     @else
                                         #d02727  
-                                        "
-                                    @endif>
+                                    @endif">
                                         S
                                     </div>
                                     <div class="TableColumn">
-                                        {{ $task->receiver->first_name . " " . $task->receiver->last_name }}
+                                        {{ $task->userReceiver->first_name . " " . $task->userReceiver->last_name }}
                                     </div>
                                     <div class="TableColumn">
                                         {{substr(preg_replace( "/\r|\n/", "", $task->content), 0, 100) . "... "}}

@@ -10,18 +10,18 @@
                         <tr>
                             <td style="width:30%;">
                                 <div class="flexBox">
-                                    @if(Auth::user->id===$task->receiver->id)
-                                        <a style="flex-basis:100%;" href="/user/{{$task->sender->username}}" class="flexChild" style="height:80px;">
-                                            <img src="/storage/usersImages/{{$task->sender->photo_url}}" alt="{{$task->sender->first_name . " " . $task->sender->last_name}}">
+                                    @if(Auth::user()->id===$task->userReceiver->id)
+                                        <a style="flex-basis:100%;" href="/user/{{$task->userSender->username}}" class="flexChild" style="height:80px;">
+                                            <img src="/storage/usersImages/{{$task->userSender->photo_url}}" alt="{{$task->userSender->first_name . " " . $task->userSender->last_name}}">
                                             <h3 class="tableCell">
-                                                    {{$task->sender->first_name . " " . $task->sender->last_name}}
+                                                    {{$task->userSender->first_name . " " . $task->userSender->last_name}}
                                             </h3>
                                         </a>
                                     @else
-                                        <a style="flex-basis:100%;" href="/user/{{$task->receiver->username}}" class="flexChild" style="height:80px;">
-                                            <img src="/storage/usersImages/{{$task->receiver->photo_url}}" alt="{{$task->receiver->first_name . " " . $task->receiver->last_name}}">
+                                        <a style="flex-basis:100%;" href="/user/{{$task->userReceiver->username}}" class="flexChild" style="height:80px;">
+                                            <img src="/storage/usersImages/{{$task->userReceiver->photo_url}}" alt="{{$task->userReceiver->first_name . " " . $task->userReceiver->last_name}}">
                                             <h3 class="tableCell">
-                                                    {{$task->receiver->first_name . " " . $task->receiver->last_name}}
+                                                    {{$task->userReceiver->first_name . " " . $task->userReceiver->last_name}}
                                             </h3>
                                         </a>   
                                     @endif    
@@ -43,12 +43,12 @@
                     <div class="inputContainer Button between">
                         @if ($task->answered)
                             @if ($task->answer)
-                                <h2 style="background:brown; color:#DDD;">The task has been accepted</h2>
+                                <h2 style=" background:#DDD; color:rgb(37, 98, 63);">The task has been accepted</h2>
                             @else
-                                <h2 style="background:#DDD; color:rgb(37, 98, 63);">The task has been denied</h2>
+                                <h2 style="background:brown; color:#DDD;">The task has been denied</h2>
                             @endif
                         @else
-                            @if (Auth::user()->id !== $task->sender)
+                            @if (Auth::user()->id !== $task->userSender)
                                 {!! Form::open(['action'=>['TasksController@update',$task->id],'method'=>'PUT'])!!}
                                     <input type="checkbox" checked hidden name="answer">
                                     {{Form::submit('Accept',['class'=>'accept'])}}

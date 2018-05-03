@@ -25,6 +25,7 @@
                     <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{{$user->about}}</p>
                 @endif
                 <div class="inputContainer submitInput">
+                    <a href="/task/create/{{$user->id}}"><button class="">Send task</button></a>
                     <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
                     <a href="/request/create/{{$user->id}}"><button class="delete">Delete</button></a>
                 </div>

@@ -641,7 +641,7 @@ input[type="time"],input[type="date"]{
     resize: none;
 }
 .windowHeight{
-    height: calc(100% - 80px);
+    min-height: calc(100% - 80px);
     min-height: fit-content;
 }
 .innerBox{
@@ -709,9 +709,12 @@ input[type="time"],input[type="date"]{
     color: rgba(37, 98, 63,1);
     margin: auto 5%;
 }
+.leftBox + .rightBox{
+    width: 70%;
+}
 .rightBox{
     height: 100%;
-    width: 70%;
+    width: 100%;
     padding: 40px 0;
     background-color: rgba(37, 98, 63,1);
     color:#FFF;
@@ -838,9 +841,6 @@ input[type="time"],input[type="date"]{
     margin: auto;
     margin-top: 4%;
     border: none;
-}
-.contactsBar input::placeholder{
-    /* color: #CCC; */
 }
 .contactsBar .contacts{
     direction:rtl;
@@ -1186,9 +1186,10 @@ h5.date:nth-of-type(even){
     width: 100%;
     text-align: center;
 }
-.timeline span.delete,
-.timelineHeader span.delete{
+.rightBox .timeline span.delete,
+.rightBox .timelineHeader span.delete{
     color: #e42121;
+    background: none;
 }
 .rightBox .inputContainer label{
     font-size: 0.7em;

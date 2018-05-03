@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     $("#loginForm input[type='submit']").click(function (e) {
         let submit = true; 
-        let requiredInputs = $(".requiredInput");
+        let requiredInputs = $("#loginForm .requiredInput");
         for (let index = 0; index < requiredInputs.length; index++) {
             if (requiredInputs.eq(index).val() == "" || requiredInputs.eq(index).val() == null) {
                 requiredInputs.eq(index).css('border-color','red');
