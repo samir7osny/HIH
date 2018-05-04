@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -41,7 +41,7 @@ class EventsController extends Controller
             'name'=>'required|string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'place' => 'required|string',
             'place_cost' => 'required|integer',
             'description' => 'required|string',
@@ -130,7 +130,7 @@ class EventsController extends Controller
         $this->validate($request, [
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
-            'date' => 'required|date',
+            'date' => 'required|date|after:today',
             'place' => 'required|string',
             'place_cost' => 'required|integer',
             'description' => 'required|string',
@@ -217,5 +217,36 @@ class EventsController extends Controller
         }
         $event->delete();
         return redirect('/event')->with('success', 'The event has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function enroll(Request $request,$id)
+    {
+        $event= \App\Event::find($id);
+        if(Auth::user()){
+        $checkExist=\App\EventEnrollment::where([
+            ['event_id','=',$id],
+            ['guest_id','=',Auth::user()->id]
+            ])->get();
+        }
+        else{
+            return redirect('/login');
+        }
+        if($checkExist->count()==0)
+        {
+            $enroll=new \App\EventEnrollment;
+            $enroll->event_id=$id;
+            $enroll->guest_id=Auth::user()->id;
+            $enroll->save();        
+            return redirect('/event/'.$event->name)->with('success', 'You have been enrolled in '.$event->name. ' event.');
+        }
+        
+        return redirect('/event/'.$event->name)->with('error', 'You have already been enrolled in '.$event->name. ' event.');
     }
 }

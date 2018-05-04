@@ -14,14 +14,17 @@ class Guest extends Model
     public $timestamps = false;
 
     public function enrollInWorkshops(){
-        return $this->belongsToMany('App\Workshop', 'enrollment_in_workshops', 'guest_id', 'workshop_id');
+        return $this->hasMany('App\WorkshopEnrollment', 'guest_id');
     }
 
     public function enrollInEvents(){
-        return $this->belongsToMany('App\Event', 'enrollment_in_events', 'guest_id', 'event_id');
+        return $this->hasMany('App\EventEnrollment', 'guest_id');
     }
 
     public function user() {
         return $this->hasOne('App\User', 'id_of');
+    }
+    public function isMember(){
+        return false;
     }
 }

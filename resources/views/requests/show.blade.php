@@ -32,7 +32,7 @@
                         @if ($request->userToDelete)
                             <a style="flex-basis:23%; height:80px;" href="/user/{{$request->userToDelete->username}}" class="flexChild toDelete">
                                 <img src="/storage/usersImages/{{$request->userToDelete->photo_url}}" alt="{{$request->userToDelete->first_name . " " . $request->userToDelete->last_name}}">
-                                <h3 class="tableCell">
+                                <h3 class="tableCell" style="padding: 20px; width: initial;">
                                         {{$request->userToDelete->first_name . " " . $request->userToDelete->last_name}}
                                 </h3>
                             </a>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class WorkshopsController extends Controller
@@ -48,7 +48,7 @@ class WorkshopsController extends Controller
             'timelineDate' => 'required|array',
             'timelineFrom' => 'required|array',
             'timelineTo' => 'required|array',
-            'timelineDate.*' => 'required|date',
+            'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
         ]);
@@ -152,7 +152,7 @@ class WorkshopsController extends Controller
             'timelineDate' => 'required|array',
             'timelineFrom' => 'required|array',
             'timelineTo' => 'required|array',
-            'timelineDate.*' => 'required|date',
+            'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
         ]);
@@ -252,5 +252,35 @@ class WorkshopsController extends Controller
         }
         $workshop->delete();
         return redirect('/workshop')->with('success', 'The workshop has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function enroll(Request $request,$id)
+    {
+        $workshop= \App\Workshop::find($id);
+        if(Auth::user()){
+        $checkExist=\App\WorkshopEnrollment::where([
+            ['workshop_id','=',$id],
+            ['guest_id','=',Auth::user()->id]
+            ])->get();
+        }
+        else{
+            return redirect('/login');
+        }
+        if($checkExist->count()==0)
+        {
+            $enroll=new \App\WorkshopEnrollment();
+            $enroll->workshop_id=$id;
+            $enroll->guest_id=Auth::user()->id;
+            $enroll->save();        
+            return redirect('/workshop/'.$workshop->name)->with('success', 'You have been enrolled in '.$workshop->name. ' workshop.');
+        }
+        return redirect('/workshop/'.$workshop->name)->with('error', 'You have already been enrolled in '.$workshop->name. ' workshop.');
     }
 }

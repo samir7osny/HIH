@@ -14,7 +14,7 @@ class Event extends Model
     public $timestamps = false;
 
     public function Audience(){
-        return $this->belongsToMany('App\Guest', 'enrollment_in_events', 'event_id', 'guest_id');
+        return $this->hasMany('App\EventEnrollment', 'event_id');
     }
 
     public function Speakers(){

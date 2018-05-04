@@ -1,11 +1,10 @@
 <?php
 
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommitteeTable extends Migration
+class CreateHighboardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,8 @@ class CreateCommitteeTable extends Migration
      */
     public function up()
     {
-        Schema::create('committee', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique(); 
-            $table->string('description');
+        Schema::create('highboards', function (Blueprint $table) {
+            $table->integer('member_id');
         });
     }
 
@@ -28,6 +25,6 @@ class CreateCommitteeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('committee');
+        Schema::dropIfExists('highboards');
     }
 }

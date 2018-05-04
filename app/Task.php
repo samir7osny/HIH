@@ -13,11 +13,11 @@ class Task extends Model
     // Timestamps
     public $timestamps = true;
 
-    public function sender() {
+    public function userSender() {
         return $this->belongsTo('App\User', 'sender');
     }
 
-    public function receiver() {
+    public function userReceiver() {
         return $this->belongsTo('App\User', 'receiver');
     }
 }

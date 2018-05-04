@@ -1,11 +1,10 @@
 <?php
 
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommitteeTable extends Migration
+class CreateCommitteesCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,9 @@ class CreateCommitteeTable extends Migration
      */
     public function up()
     {
-        Schema::create('committee', function (Blueprint $table) {
+        Schema::create('committees_codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique(); 
-            $table->string('description');
+            $table->string('shortcut');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateCommitteeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('committee');
+        Schema::dropIfExists('committees_codes');
     }
 }

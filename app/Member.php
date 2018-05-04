@@ -2,6 +2,8 @@
 
 namespace App;
 
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
@@ -31,5 +33,14 @@ class Member extends Model
 
     public function user() {
         return $this->hasOne('App\User', 'id_of');
+    }
+    public function isHead(){
+        if (DB::table('highboards')->where('member_id',$this->id)->count() != 0) {
+            return true;
+        }
+        return false;
+    }
+    public function isMember(){
+        return true;
     }
 }
