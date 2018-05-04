@@ -21,8 +21,8 @@ class Event extends Model
         return $this->belongsToMany('App\Speaker', 'speakers_in_events', 'event_id', 'speaker_id');
     }
 
-    public function Sponsers(){
-        return $this->belongsToMany('App\Sponsor', 'sponsring_events', 'event_id', 'sponser_id');
+    public function Sponsors(){
+        return $this->belongsToMany('App\Sponsor', 'sponsring_events', 'event_id', 'sponsor_id');
     }
     public function gallery() {
         return $this->hasMany('App\EventPhoto', 'event_id');
