@@ -1,5 +1,15 @@
+<?php
+use Illuminate\Support\Facades\DB;
+?>
+
 @foreach ($contacts as $contact)
-    <div class="contact" u="{{$contact->id}}" @if ($opened == $contact->id)
+    <?php
+        $lastM = DB::table('messages')->where('sender',$contact->id)->where('receiver',Auth::user()->id)->orderBy('created_at','DESC')->first();
+    ?>
+    <div class="contact
+    @if ($lastM != null && $lastM->seen==0)
+        unseen
+    @endif" u="{{$contact->id}}" @if ($opened == $contact->id)
         id="opened"
     @endif>
         <img src="/storage/usersImages/{{$contact->photo_url}}" alt="">

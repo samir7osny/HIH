@@ -1,14 +1,25 @@
 $(document).ready(function () {
     
+    let finishRetrieve = true;
+    let finishRetrieveSeen = true;
+    let finishCheckContacts = true;
+    let chater = 0;
+    let chatBox = $('.chat').eq(0);
+    let chatInput = $('input[name="message"]').eq(0);
+
+
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    let chater = 0;
-    let chatBox = $('.chat').eq(0);
-    let chatInput = $('input[name="message"]').eq(0);
+    let firstChat = $('.contacts:not(.search) .contact').first();
+    let id = firstChat.attr('u');
+    $('#opened').attr('id','');
+    firstChat.attr('id','opened');
+    getChat(id);
+
     chatBox.css('transition','none');
     function scrollDown(animation = false){
         if (animation) {
@@ -65,9 +76,6 @@ $(document).ready(function () {
     }
 
     
-    let finishRetrieve = true;
-    let finishRetrieveSeen = true;
-    let finishCheckContacts = true;
     setInterval(function(){
         if (finishRetrieve) {
             receiveNewMessage();
@@ -98,7 +106,12 @@ $(document).ready(function () {
             },
             success: function(response){ // What to do if we succeed
                 if (response.success) {
-                    for (let index = 0; index < response.data.length; index++) {            
+                    var flag = true;
+                    for (let index = 0; index < response.data.length; index++) {  
+                        if (flag) {
+                            $('.contacts:not(.search) .contact#opened').addClass('unseen');
+                            flag = false;
+                        }          
                         chatBox.append(response.data[index]);
                         scrollDown(true);
                     }
@@ -139,6 +152,7 @@ $(document).ready(function () {
                     $('.chat .receive i').filter(function() {
                         return $(this).parents('.receive').attr("m") <= lastMessage && $(this).hasClass('fa-square-o');
                       }).addClass('fa-check-square-o').removeClass('fa-square-o');
+                      $('.contacts:not(.search) .contact#opened').removeClass('unseen');
                 }
                 finishRetrieveSeen = true;
             },

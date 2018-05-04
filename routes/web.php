@@ -14,6 +14,7 @@
 Route::resource('/committee', 'CommitteesController');
 Route::resource('/user', 'UsersController');
 Route::resource('/speaker', 'SpeakersController');
+Route::get('/member', 'MembersController@index');
 Route::get('/request/inbox', 'RequestsController@inbox');
 Route::get('/request/outbox', 'RequestsController@outbox');
 Route::resource('/request', 'RequestsController')->except(['create', 'edit']);
