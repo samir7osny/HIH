@@ -200,6 +200,6 @@ class MessagesController extends Controller
 
 
         $data = view('messages.contacts')->with(['contacts'=>$contacts,'opened'=>$request->chater])->render();
-        return array("desc"=>"The messages has been updated.","success"=>true,"data"=>$data);
+        return array("desc"=>"The messages has been updated.","success"=>true,"data"=>$data, "first_id"=>$contacts[0]->id);
     }
 }

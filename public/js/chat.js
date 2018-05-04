@@ -76,7 +76,7 @@ $(document).ready(function () {
             updateAllToGetSeen();
         }
         if (finishCheckContacts){
-            checkContacts()
+            refreshContacts()
         }
     },500);
     // check messages
@@ -270,7 +270,7 @@ $(document).ready(function () {
     });
 
     // refresh contacts
-    function checkContacts(){
+    /*function checkContacts(){
         finishCheckContacts = false;
         $.ajax({
             url: '/chat/checkcontacts',
@@ -288,10 +288,10 @@ $(document).ready(function () {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 console.log(XMLHttpRequest);
-                //alert("an error has occured"/* + textStatus + errorThrown + XMLHttpRequest*/);
+                //alert("an error has occured");
             }  
         });
-    }
+    }*/
     function refreshContacts(){
         finishCheckContacts = false;
         let id = $('.contacts:not(.search) .contact#opened').attr('u');
@@ -304,7 +304,10 @@ $(document).ready(function () {
             success: function(response){ // What to do if we succeed
                 finishCheckContacts = true;
                 if (response.success) {
-                    $('.contacts:not(.search)').html(response.data);
+                    if (response.first_id != $('.contacts:not(.search) .contact').eq(0).attr('u')) {
+                        $('.contacts:not(.search)').html(response.data);
+                    }
+                    
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 

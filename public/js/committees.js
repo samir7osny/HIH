@@ -197,7 +197,11 @@ $(document).ready(function () {
                 newCommittee.find(".members").slideToggle(0,function(){
                     newCommittee.slideToggle("fast");
                 });
-            }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                //alert("an error has occured"/* + textStatus + errorThrown + XMLHttpRequest*/);
+                console.log(XMLHttpRequest);
+            }  
         });
     });
     // CKEDITOR.on("instanceCreated", function(event) {
@@ -245,6 +249,7 @@ function deleteForm(committeeBox){
     let desc = committeeBox.find('p.data');
     committeeBox.find('button.edit').html('Edit');
     committeeBox.find('button.cancel').remove();
+    committeeBox.find('select[name="type"]').remove();
     for(let name in CKEDITOR.instances) {
         let instance = CKEDITOR.instances[name];
         for (let index = 0; index < desc.length; index++) {
@@ -267,6 +272,14 @@ function checkInputsArray(requiredInputs){
     return allright;
 }
 function checkInput(input){
+    if (input.attr('name') == 'type') {
+        if (input.val() == 0 || input.val() == null) {
+            input.css('border-color','red');
+            return false;
+        }
+        input.css('border-color','');
+        return true;
+    }
     let value = input.html().split('&nbsp;').join('').split('<br>').join('').split('&#8203').join('').split(' ').join('');
     if(value === '' || value == null){
         input.css('border-color','red');
@@ -305,6 +318,7 @@ function submitAJAXSave(committeeBox){
         data: {
             name:committeeBox.find("[name='name']").html(),
             description:committeeBox.find("[name='description']").html(),
+            type:committeeBox.find("[name='type']").val()
         },
         success: function(response){ // What to do if we succeed
             alert(response.desc);

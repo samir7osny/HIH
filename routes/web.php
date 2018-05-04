@@ -43,6 +43,11 @@ Route::post('/member/free','MembersController@freeMemebers');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/aboutus', 'HomeController@aboutus');
+Route::get('/aboutus/create', 'HomeController@create');
+Route::get('/aboutus/edit', 'HomeController@edit');
+Route::post('/aboutus', 'HomeController@store');
+Route::put('/aboutus', 'HomeController@update');
 
 
 Route::put('/workshop/enroll/{guestId}' , 'WorkshopsController@enroll');

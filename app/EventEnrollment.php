@@ -9,7 +9,7 @@ class EventEnrollment extends Model
     // Table name
     protected $table = 'enrollment_in_events';
     // Primary key
-    public $primaryKey = ['event_id','guest_id'];
+    public $primaryKey = 'event_id';
     // Timestamps
     public $timestamps = false;
 

@@ -9,7 +9,7 @@ class WorkshopEnrollment extends Model
     // Table name
     protected $table = 'enrollment_in_workshops';
     // Primary key
-    public $primaryKey = ['workshop_id','guest_id'];
+    public $primaryKey = 'workshop_id';
     // Timestamps
     public $timestamps = false;
 

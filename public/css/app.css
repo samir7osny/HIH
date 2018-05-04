@@ -642,7 +642,9 @@ input[type="time"],input[type="date"]{
 }
 .windowHeight{
     min-height: calc(100% - 80px);
-    min-height: fit-content;
+    height: calc(100% - 80px);
+    margin: 0;
+    /*min-height: fit-content;*/
 }
 .innerBox{
     width: 100%;

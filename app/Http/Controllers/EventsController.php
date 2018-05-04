@@ -228,6 +228,7 @@ class EventsController extends Controller
      */
     public function enroll(Request $request,$id)
     {
+        $event= \App\Event::find($id);
         if(Auth::user()){
         $checkExist=\App\EventEnrollment::where([
             ['event_id','=',$id],
@@ -243,7 +244,7 @@ class EventsController extends Controller
             $enroll->event_id=$id;
             $enroll->guest_id=Auth::user()->id;
             $enroll->save();        
-            return redirect('/workshop/'.$event->name)->with('success', 'You have been enrolled in '.$event->name. ' event.');
+            return redirect('/event/'.$event->name)->with('success', 'You have been enrolled in '.$event->name. ' event.');
         }
         
         return redirect('/event/'.$event->name)->with('error', 'You have already been enrolled in '.$event->name. ' event.');

@@ -9,11 +9,14 @@ class HIH extends Model
     // Table name
     protected $table = 'hih';
     // Primary key
-    public $primaryKey = null;
+    public $primaryKey = 'college_id';
     // Timestamps
     public $timestamps = false;
 
     public function president() {
         return $this->belongsTo('App\Member', 'president_id');
+    }
+    public function college() {
+        return $this->belongsTo('App\College', 'college_id');
     }
 }
