@@ -23,7 +23,7 @@
     <div class="outerBox light windowHeight">
         <div class="innerBox">
             <div class="leftBox">
-                <img src="mission.jpg" alt="" class="fullArea">
+                <img src="vision.jpg" alt="" class="fullArea">
             </div>
             <div class="rightBox">
                 <div class="tableCell">

@@ -10,9 +10,7 @@
                         <p style="font-size:0.4em;text-align:center">Number of Forms: {{$event->Audience()->count()}}</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        {!! Form::open(['action' => ['EventsController@enroll',$event->id], 'method' => 'PUT']) !!}
-                            {{Form::submit('Enroll',['class'=>'enroll'])}}
-                        {!! Form::close() !!}
+                        <button class="eventEnrollButton">Enroll</button>
                         <a href="/event/{{$event['name']}}/edit"><button >Edit</button></a>
                         <button class="membersButton">Sponsors</button>
                         <button class="delete">Delete</button>
@@ -83,7 +81,7 @@
                     </table>
                     <div class="innerBox members" style="display:block;margin-top:50px">
                         <div class="flexBox">
-                            @if($event->Sponsors)
+                            @if($event->Sponsors) 
                                 @foreach ($event->Sponsors as $sponsor)
                                     <a href="/sponsor/{{$sponsor->id}}" id="{{$sponsor->id}}">
                                         <img src="/storage/sponsorsImages/{{$sponsor->photo_url}}" alt="{{$sponsor->name}}">
