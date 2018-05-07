@@ -116,8 +116,8 @@ class SponsorsController extends Controller
         $this->validate($request, [
             'name' => 'required|max:25',
             'userImage' => 'image|nullable|max:5999',
-            'phone_number' => 'required|string|max:11|min:11|unique:sponsor',
-            'email' => 'required|email|unique:sponsor',
+            'phone_number' => 'required|string|max:11|min:11',
+            'email' => 'required|email',
             'about' => 'string|nullable',
         ]);
         

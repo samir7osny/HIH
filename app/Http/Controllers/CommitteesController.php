@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class CommitteesController extends Controller
@@ -24,7 +26,8 @@ class CommitteesController extends Controller
      */
     public function create()
     {
-        $contents = view('committees.create')->render();
+        $committees_shortcuts = DB::table('committees_codes')->get();
+        $contents = view('committees.create')->with('committees_codes', $committees_shortcuts)->render();
         
         return $contents;
     }
@@ -39,12 +42,18 @@ class CommitteesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'type' => 'required'
         ]);
+        $shortcut = DB::table('committees_codes')->where('id', $request->type)->get();
+        if ($shortcut == null) {
+            return array("desc"=>"The choosen type doesn't exist!","success"=>false);
+        }
         $committee = new \App\Committee;
 
         $committee->name = $request->name;
         $committee->description = $request->description;
+        $committee->shortcut_id = $request->type;
         $committee->save();
 
         return array("desc"=>"The committee has been saved.","success"=>true,"id"=>$committee->id);

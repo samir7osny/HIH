@@ -24,4 +24,7 @@ class Guest extends Model
     public function user() {
         return $this->hasOne('App\User', 'id_of');
     }
+    public function isMember(){
+        return false;
+    }
 }

@@ -124,8 +124,8 @@ class SpeakersController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'userImage' => 'image|nullable|max:5999',
-            'phone_number' => 'required|string|max:11|min:11|unique:speaker',
-            'email' => 'required|email|unique:speaker',
+            'phone_number' => 'required|string|max:11|min:11',
+            'email' => 'required|email',
             'interests' => 'required|string',
             'about' => 'string|nullable',
         ]);

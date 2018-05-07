@@ -14,6 +14,7 @@
 Route::resource('/committee', 'CommitteesController');
 Route::resource('/user', 'UsersController');
 Route::resource('/speaker', 'SpeakersController');
+Route::get('/member', 'MembersController@index');
 Route::get('/request/inbox', 'RequestsController@inbox');
 Route::get('/request/outbox', 'RequestsController@outbox');
 Route::resource('/request', 'RequestsController')->except(['create', 'edit']);
@@ -43,6 +44,11 @@ Route::post('/member/free','MembersController@freeMemebers');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/aboutus', 'HomeController@aboutus');
+Route::get('/aboutus/create', 'HomeController@create');
+Route::get('/aboutus/edit', 'HomeController@edit');
+Route::post('/aboutus', 'HomeController@store');
+Route::put('/aboutus', 'HomeController@update');
 
 
 Route::put('/workshop/enroll/{guestId}' , 'WorkshopsController@enroll');

@@ -128,6 +128,7 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'name' => 'string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
             'date' => 'required|date|after:today',
@@ -141,6 +142,7 @@ class EventsController extends Controller
         ]);
 
         $event = \App\Event::find($id);
+        $event->name=$request->input('name');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
         $event->place_cost = $request->input('place_cost');
@@ -228,7 +230,7 @@ class EventsController extends Controller
      */
     public function enroll(Request $request,$id)
     {
-        $event=\App\Event::find($id);
+        $event= \App\Event::find($id);
         if(Auth::user()){
         $checkExist=\App\EventEnrollment::where([
             ['event_id','=',$id],

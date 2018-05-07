@@ -518,6 +518,14 @@ div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(odd){
 div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd),
 div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even){
     background-color: #DDD;
+    color: rgba(37, 98, 63, 0.8);
+}
+div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) select option,
+div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) select option{
+    color: rgba(37, 98, 63, 0.8);
+}
+option{
+    color: rgba(37, 98, 63, 0.8);
 }
 div div.masonryColumn:nth-of-type(even) .outerBox:nth-of-type(odd) .inputContainer input,
 div div.masonryColumn:nth-of-type(odd) .outerBox:nth-of-type(even) .inputContainer input,
@@ -642,7 +650,9 @@ input[type="time"],input[type="date"]{
 }
 .windowHeight{
     min-height: calc(100% - 80px);
-    min-height: fit-content;
+    height: calc(100% - 80px);
+    margin: 0;
+    /*min-height: fit-content;*/
 }
 .innerBox{
     width: 100%;
@@ -2098,6 +2108,19 @@ a.messageControll#activeSection {
 a.messageControll:not(#activeSection):hover::before {
     clip-path: inset(0 0 0 0);
     transition: all 0.6s ease-out;
+}
+.contact.unseen {
+    position: relative;
+}
+
+.unseen::after {
+    content: "";
+    background: #00af48;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 8%;
+    border-radius: 50%;
 }
 a.request-task {
     width: 100%;
