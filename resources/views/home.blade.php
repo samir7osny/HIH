@@ -26,7 +26,10 @@
                 <div class="panelContainer" panel='panel'>
                         <div class="panel">
                             @foreach($upcomingActivities['upcomingEvents'] as $upcomingEvent)
-                                <div class="panelItem" style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->cover->url}});">
+                                <div class="panelItem" 
+                                    @if($upcomingEvent->cover)
+                                        style="background-image:url(/storage/activitiesGallery/{{$upcomingEvent->cover->url}});"
+                                    @endif>
                                     <div class="panelItemDarker">
                                         <div class="panelItemText">
                                             <h1 class="panelItemTitle">{{$upcomingEvent['name']}}</h1>
