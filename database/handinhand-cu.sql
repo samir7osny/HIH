@@ -53,18 +53,18 @@ INSERT INTO `hih` (`date_of_foundation`, `college_id`, `mission`, `vision`, `fou
 ('2018-05-06 07:53:43', '1', 'we aim to build a new generation of the Egyptian Youth and be like UNICEF', 'Be a multinational non profit organization', 'Omar Touny', 2, 0),
 ('2018-05-06 07:53:43', '1', 'we aim to build a new generation of the Egyptian Youth and be like UNICEF', 'Be a multinational non profit organization', 'Omar Touny', 2, 0);
 
-INSERT INTO `member` (`id`, `no_of_Rewards`, `Rate`, `id_college`, `committee_id`, `workshop_id`) VALUES
-(3, NULL, NULL, 0, 17, 0),
-(4, NULL, NULL, 0, NULL, 0),
-(5, NULL, NULL, 0, NULL, 0),
-(6, NULL, NULL, 0, 17, 0),
-(7, NULL, NULL, 0, 19, 0),
-(8, NULL, NULL, 0, 20, 0),
-(9, NULL, NULL, 0, NULL, 0),
-(10, NULL, NULL, 0, NULL, 0),
-(11, NULL, NULL, 0, NULL, 0),
-(12, NULL, NULL, 0, NULL, 0),
-(13, NULL, NULL, 0, NULL, 0);
+INSERT INTO `member` (`id`, `no_of_Rewards`, `Rate`, `committee_id`, `workshop_id`) VALUES
+(3, NULL, NULL, 17, 0),
+(4, NULL, NULL, NULL, 0),
+(5, NULL, NULL, NULL, 0),
+(6, NULL, NULL,17, 0),
+(7, NULL, NULL,19, 0),
+(8, NULL, NULL,20, 0),
+(9, NULL, NULL,NULL, 0),
+(10, NULL, NULL,NULL, 0),
+(11, NULL, NULL,NULL, 0),
+(12, NULL, NULL,NULL, 0),
+(13, NULL, NULL,NULL, 0);
 
 INSERT INTO `messages` (`id`, `content`, `receiver`, `sender`, `seen`, `created_at`, `updated_at`) VALUES
 (45, 'first message', 3, 2, 0, '2018-05-02 01:04:10', '2018-05-02 01:04:10'),
@@ -181,71 +181,6 @@ INSERT INTO `workshop` (`id`, `name`, `description`, `cost`, `place_cost`, `plac
 
 INSERT INTO `workshop_gallary` (`id`, `url`, `workshop_id`) VALUES
 (13, 'd_1525600266.jpg', 4);
-
-ALTER TABLE `college`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `committee`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `committee_name_unique` (`name`),
-  ADD UNIQUE KEY `committee_head_id_unique` (`head_id`);
-
-ALTER TABLE `committees_codes`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `deleting_request`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `event`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `event_name_unique` (`name`);
-
-ALTER TABLE `event_gallary`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `guest`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `member`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
-ALTER TABLE `speaker`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `speaker_phone_number_unique` (`phone_number`),
-  ADD UNIQUE KEY `speaker_email_unique` (`email`);
-
-ALTER TABLE `sponsor`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `sponsor_email_unique` (`email`),
-  ADD UNIQUE KEY `sponsor_phone_number_unique` (`phone_number`);
-
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `university`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD UNIQUE KEY `users_phone_number_unique` (`phone_number`);
-
-ALTER TABLE `workshop`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `workshop_name_unique` (`name`);
-
-ALTER TABLE `workshop_gallary`
-  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `college`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
