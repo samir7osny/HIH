@@ -1,0 +1,53 @@
+SEM-Team 3
+HIH-CU
+Version 2.0
+
+New Features
+-Add event
+-Edit event
+-View event
+-Delete event
+-Add workshop
+-Edit workshop
+-View workshop
+-Delete workshop
+-Reset password
+-Change password
+-Add speakers
+-Edit speakers
+-View speakers
+-Delete speakers
+-Add sponsors
+-Edit sponsors
+-View sponsors
+-Delete sponsors
+-Add request
+-View request
+-Answer request
+-Seen request
+-Chat
+-Add task
+-View task
+-Answer task
+-Seen task
+-Enroll in event
+-Enroll in workshop
+-View HIH information
+-Edit HIH information
+-Users privileges
+ 
+Removed Features 
+None
+
+Enhanced Performance
+None
+
+Enhanced Look-and-Feel
+None
+
+Unsupported Functionality
+None
+
+Fixed Bugs
+None
+

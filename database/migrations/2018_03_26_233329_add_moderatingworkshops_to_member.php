@@ -14,7 +14,7 @@ class AddModeratingworkshopsToMember extends Migration
     public function up()
     {
         Schema::table('member', function($table) {
-            $table->integer('workshop_id');
+            $table->integer('workshop_id')->nullable();
         });
     }
 
