@@ -61,8 +61,11 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/committee">Committees</a></li>
+            <li><a href="/member">Members</a></li>
             <li><a href="/event">Events</a></li>
             <li><a href="/workshop">Workshops</a></li>
+            <li><a href="/sponsor">Sponsors</a></li>
+            <li><a href="/speaker">Speakers</a></li>
             <li><a href="/aboutus">About Us</a></li>
         </ul>
     </nav>
