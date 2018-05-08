@@ -122,7 +122,7 @@ class SponsorsController extends Controller
         ]);
         
         $sponsor = \App\Sponsor::find($id);
-        $sponsor->title = $request->input('name');
+        $sponsor->name = $request->input('name');
         $sponsor->phone_number = $request->input('phone_number');
         $sponsor->email = $request->input('email');
         $sponsor->about = $request->input('about');
