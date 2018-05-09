@@ -13,7 +13,7 @@ class Speaker extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function speakInEvents(){
+    public function speakInEvents(){//Many to Many relationship
         return $this->belongsToMany('App\Event', 'speakers_in_events', 'speaker_id', 'event_id');
     }
 }

@@ -17,6 +17,7 @@ class MessagesController extends Controller
      */
     public function __construct()
     {
+        /*Middlewares to prevent someone from mainpulating with chat*/
         // $this->middleware('auth');
          $this->middleware('member');
         // $this->middleware('highboard');
@@ -28,6 +29,7 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for get all messages from the database
     public function index()
     {
         $contacts = DB::table('users as contact')
@@ -60,6 +62,7 @@ class MessagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for sending a message to a user
     public function send(Request $request)
     {
         $message = new \App\Message;

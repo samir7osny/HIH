@@ -15,23 +15,23 @@ class Member extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function headOf() {
+    public function headOf() {//One to One relationship
         return $this->hasOne('App\Committee', 'head_id');
     }
 
-    public function hihPresident() {
+    public function hihPresident() {//One to One relationship
         return $this->hasOne('App\HIH', 'president_id');
     }
 
-    public function committee() {
+    public function committee() {//Many to One relationship
         return $this->belongsTo('App\Committee', 'committee_id');
     }
 
-    public function moderates(){
+    public function moderates(){//Many to many relationship
         return $this->belongsToMany('App\Workshop', 'moderating_workshops', 'member_id', 'workshop_id');
     }
 
-    public function user() {
+    public function user() {//One to One relationship
         return $this->hasOne('App\User', 'id_of');
     }
     public function isHead(){

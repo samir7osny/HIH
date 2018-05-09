@@ -15,6 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        //To prevent any attemps to manipulate with HIH info "only for highboards and president"
         // $this->middleware('highboard')->except('index','aboutus');
         // $this->middleware('president')->except('index','aboutus');
     }
@@ -24,6 +25,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Home page data "Upcoming events and workshops"
     public function index()
     {
         $upcomingEvents=\App\Event::orderBy('date','desc')->get();
@@ -46,6 +48,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //About us page with mission and vision
     public function aboutus()
     {
         $hih = \App\HIH::first();
@@ -60,6 +63,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Create the information of HIH
     public function create()
     {
         $hih = \App\HIH::count();
@@ -76,6 +80,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Edit the information of HIH
     public function edit()
     {
         $hih = \App\HIH::count();
@@ -95,6 +100,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Store creating form for HIH Information
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -126,6 +132,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Update the Information of HIH
     public function update(Request $request)
     {
         $this->validate($request, [

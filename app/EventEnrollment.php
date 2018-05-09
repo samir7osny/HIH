@@ -13,11 +13,11 @@ class EventEnrollment extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function event(){
+    public function event(){//One to One relationship
         return $this->belongsTo('App\Event', 'event_id');
     }
 
-    public function guest(){
+    public function guest(){//One to One relationship
         return $this->belongsTo('App\Guest', 'guest_id');
     }
 }

@@ -28,35 +28,35 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function outboxRequests() {
+    public function outboxRequests() {//One to many relationship
         return $this->hasMany('App\Request', 'sender');
     }
 
-    public function deletingRequest() {
+    public function deletingRequest() {//One to One relationship
         return $this->hasOne('App\Request', 'member_to_delete_id');
     }
 
-    public function outboxTasks() {
+    public function outboxTasks() {//One to many relationship
         return $this->hasMany('App\Task', 'sender');
     }
-    public function inboxTasks() {
+    public function inboxTasks() {//One to many relationship
         return $this->hasMany('App\Task', 'receiver');
     }
 
-    public function college() {
+    public function college() {//One to One relationship
         return $this->belongsTo('App\College', 'college_id');
     }
 
-    public function outboxMessages() {
+    public function outboxMessages() {//One to many relationship
         return $this->hasMany('App\Message', 'sender');
     }
-    public function inboxMessages() {
+    public function inboxMessages() {//One to many relationship
         return $this->hasMany('App\Message', 'receiver');
     }
-    public function userInfo() {
+    public function userInfo() {//One to one relationship
         if ($this->type == 0) {     // for member
             return $this->belongsTo('App\Member', 'id_of');
-        } else if ($this->type == 1) {
+        } else if ($this->type == 1) {  //for guest
             return $this->belongsTo('App\Guest', 'id_of');
         }
     }

@@ -13,10 +13,10 @@ class HIH extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function president() {
+    public function president() {//One to One relationship
         return $this->belongsTo('App\Member', 'president_id');
     }
-    public function college() {
+    public function college() {//One to One relationship
         return $this->belongsTo('App\College', 'college_id');
     }
 }

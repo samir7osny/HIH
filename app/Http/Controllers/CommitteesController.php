@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
+
+//This Controller is responsible for all functions manipulated with Committee Model
 class CommitteesController extends Controller
 {
     /**
@@ -15,6 +17,7 @@ class CommitteesController extends Controller
      */
     public function __construct()
     {
+        /*Middlewares to prevent any one from creating,editing or deleting committees*/
         // $this->middleware('highboard')->except('index','show');
         // $this->middleware('president')->except('index','show');
     }
@@ -24,6 +27,7 @@ class CommitteesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for get all committees from the database
     public function index()
     {
         $committees = \App\Committee::all();
@@ -35,6 +39,7 @@ class CommitteesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for  return the form of creating event to the user
     public function create()
     {
         $committees_shortcuts = DB::table('committees_codes')->get();
@@ -49,8 +54,10 @@ class CommitteesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for storing the form of creating committee in the database
     public function store(Request $request)
-    {
+    {        
+        //Validation for the input
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
@@ -76,21 +83,11 @@ class CommitteesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for showing the panel of certain committee
     public function show($id)
     {
         $committee = \App\Committee::find($id);
         return array("desc"=>"The committee exists","success"=>true,"name"=>$committee->name,"description"=>$committee->description);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -100,6 +97,7 @@ class CommitteesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for storing the form of editing committee in the database
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -122,6 +120,7 @@ class CommitteesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for deleting a certain committee from the database
     public function destroy($id)
     {
         $committee = \App\Committee::find($id);

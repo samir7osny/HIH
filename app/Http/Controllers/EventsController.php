@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use Illuminate\Http\Request;
 
+//This Controller is responsible for all functions manipulated with Event Model
 class EventsController extends Controller
 {
     /**
@@ -15,6 +16,7 @@ class EventsController extends Controller
      */
     public function __construct()
     {
+        /*Middlewares to prevent any one from creating ,editing or deleting events*/
          $this->middleware('marketing_head')->except('enroll','index','show');
         // $this->middleware('highboard')->except('enroll','index','show');
         // $this->middleware('president')->except('enroll','index','show');
@@ -26,6 +28,7 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for get all events from the database
     public function index()
     {
         $events= \App\Event::all();
@@ -37,6 +40,7 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for  return the form of creating event to the user
     public function create()
     {
         return view('events.create');
@@ -48,8 +52,10 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for storing the form of creating event in the database
     public function store(Request $request)
     {
+        //Validation for the input
         $this->validate($request, [
             'name'=>'required|string',
             'from' => 'required|date_format:H:i',
@@ -113,6 +119,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for showing the page of certain event
     public function show($name)
     {
         $event= \App\Event::where('name',$name)->first();
@@ -125,6 +132,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for return the form of editing event
     public function edit($name)
     {
         $event= \App\Event::where('name',$name)->first();
@@ -138,6 +146,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for storing the form of editing event in the database
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -223,6 +232,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for deleting certain event from the database
     public function destroy($id)
     {
         $event= \App\Event::find($id);
@@ -241,6 +251,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //This function is responsible for enrollment from the guests in a certain event
     public function enroll(Request $request,$id)
     {
         $event= \App\Event::find($id);

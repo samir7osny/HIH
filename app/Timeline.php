@@ -13,7 +13,7 @@ class Timeline extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function workshop() {
+    public function workshop() {//One to One relationship
         return $this->belongsTo('App\Workshop', 'workshop_id');
     }
 }

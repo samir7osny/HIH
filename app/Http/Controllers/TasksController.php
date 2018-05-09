@@ -15,6 +15,7 @@ class TasksController extends Controller
      */
     public function __construct()
     {
+        /*Middlewares to prevent someone from mainpulating with tasks*/
         // $this->middleware('auth');
         //  $this->middleware('member')->except('create','store');
         //  $this->middleware('committee_head')->except('update');

@@ -13,11 +13,11 @@ class Task extends Model
     // Timestamps
     public $timestamps = true;
 
-    public function userSender() {
+    public function userSender() {//One to One relationship
         return $this->belongsTo('App\User', 'sender');
     }
 
-    public function userReceiver() {
+    public function userReceiver() {//One to One relationship
         return $this->belongsTo('App\User', 'receiver');
     }
 }

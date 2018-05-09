@@ -23,6 +23,7 @@ class MembersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //To get all members
     public function index()
     {
         $members = \App\Member::all();
@@ -33,7 +34,7 @@ class MembersController extends Controller
         return view('members.index')->with($data);
     }
 
-
+    //To assign a certain member to a certain committee
     public function assign(Request $request){
         $member = \App\Member::find($request->id);
         if(! $member){
@@ -50,7 +51,7 @@ class MembersController extends Controller
         $member->save();
         return array("desc"=>"The member is assigned to the committee.","success"=>true,"member"=> $member->toArray(),"user"=>$member->user->toArray());
     }
-
+    //To assign a certain member to a certain committee as a head
     public function assignHead(Request $request){
         $member = \App\Member::find($request->id);
         if(! $member){
@@ -67,7 +68,7 @@ class MembersController extends Controller
         $committee->save();
         return array("desc"=>"The member is assigned as head in the committee.","success"=>true);
     }
-
+    //To delete a certain member from a certain committee
     public function unassign(Request $request){
         $member = \App\Member::find($request->id);
         if(! $member){
@@ -82,8 +83,7 @@ class MembersController extends Controller
         $member->save();
         return array("desc"=>"The member is unassigned from the committee.","success"=>true);
     }
-
-
+    //To get all members that are not in any committee
     public function freeMemebers()
     {
         $members = \App\Member::with(['user'])->whereNull('committee_id')->get();

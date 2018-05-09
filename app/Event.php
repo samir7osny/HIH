@@ -13,21 +13,21 @@ class Event extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function Audience(){
+    public function Audience(){//One to many relationship
         return $this->hasMany('App\EventEnrollment', 'event_id');
     }
 
-    public function Speakers(){
+    public function Speakers(){//One to many relationship
         return $this->belongsToMany('App\Speaker', 'speakers_in_events', 'event_id', 'speaker_id');
     }
 
-    public function Sponsors(){
+    public function Sponsors(){//One to many relationship
         return $this->belongsToMany('App\Sponsor', 'sponsring_events', 'event_id', 'sponsor_id');
     }
-    public function gallery() {
+    public function gallery() {//One to many relationship
         return $this->hasMany('App\EventPhoto', 'event_id');
     }
-    public function cover() {
+    public function cover() {//One to many relationship
         return $this->belongsTo('App\EventPhoto', 'cover_id');
     }  
 }

@@ -13,14 +13,14 @@ class Committee extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function head() {
+    public function head() {//One to One relationship
         return $this->belongsTo('App\Member', 'head_id');
     }
 
-    public function members() {
+    public function members() {//One to many relationship
         return $this->hasMany('App\Member', 'committee_id');
     }
-    public function shortcut(){
+    public function shortcut(){//One to One relationship
         return $this->belongsTo('App\CommitteeShortcut', 'shortcut_id');
     }
 }

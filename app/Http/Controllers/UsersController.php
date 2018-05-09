@@ -33,10 +33,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $universities = \App\University::all();
-        if(Auth::check()){
-            return view('users.create')->with('universities',$universities);
-        }
+        $universities = \App\University::all();            
         return view('users.create')->with('universities',$universities);
     }
 

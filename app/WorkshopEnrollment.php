@@ -13,11 +13,11 @@ class WorkshopEnrollment extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function workshop(){
+    public function workshop(){//One to One relationship
         return $this->belongsTo('App\Workshop', 'workshop_id');
     }
 
-    public function guest(){
+    public function guest(){//One to One relationship
         return $this->belongsTo('App\Guest', 'guest_id');
     }
 }
