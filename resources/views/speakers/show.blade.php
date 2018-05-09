@@ -36,7 +36,7 @@
 <div class="popUpWindow">
     <div class="confirmationPopup">
         <h1>Confirm</h1>
-        <p>Do you want to delete "{{ $speaker->name }}"  profile? </p>
+        <p>Do you want to delete "{{ $speaker->title . ". " . $speaker->first_name . " " .$speaker->last_name }}"  profile? </p>
         <div class="inputContainer Button between">
                 {!! Form::open(['action' => ['SpeakersController@destroy', $speaker->id], 'method' => 'POST']) !!}
                     {{Form::hidden('_method', 'DELETE')}}

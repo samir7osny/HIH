@@ -7,7 +7,7 @@
             <div class="tableCell">
                 <h1>
                     <div class="inputContainer">
-                        <input style="text-align:center;" disabled value="{{ $event->name }}" type="text" name="name">
+                        <input style="text-align:center;" value="{{ $event->name }}" type="text" name="name">
                         <label class="" for="name">Enter The name</label>
                     </div>
                 </h1>
