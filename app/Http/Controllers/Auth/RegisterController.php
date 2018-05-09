@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,16 +32,6 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
-    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -48,7 +39,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['type'] == 0){
+        if($data['type']==0){
             return Validator::make($data, [
                 'username' => 'required|string|max:255|unique:users',
                 'password' => 'required|string|min:6|confirmed',
@@ -61,8 +52,20 @@ class RegisterController extends Controller
                 'email' => 'required|email|unique:users',
                 'about' => 'string|nullable',
             ]);
-        } else if($data['type'] == 1){
-
+        } else {
+            return Validator::make($data, [
+                'username' => 'required|string|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'type' => 'required|integer|min:0|max:1',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'userImage' => 'image|nullable|max:5999',
+                'college' => 'required|integer',
+                'grade_of_college'=>'required|integer',
+                'phone_number' => 'required|string|max:11|min:11|unique:users',
+                'email' => 'required|email|unique:users',
+                'about' => 'string|nullable'
+                ]);
         }
     }
 
@@ -79,7 +82,10 @@ class RegisterController extends Controller
             $member->save();
             $data['id_of'] = $member->id;
         } else if($data['type'] == 1){
-            
+            $guest = new \App\Guest;
+            $guest->grade_of_college=$data['grade_of_college'];
+            $guest->save();
+            $data['id_of'] = $guest->id;
         }
         // Handle file upload
         if(array_key_exists('userImage',$data)){
@@ -97,17 +103,17 @@ class RegisterController extends Controller
             $fileNameToStore = 'user.jpg';
         }
         return User::create([
-            'username' => $data['username'],
-            'type' => $data['type'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
-            'about' => $data['about'],
-            'college_id' => $data['college'],
-            'photo_url' => $fileNameToStore,
-            'id_of' => $data['id_of'],
-            'password' => Hash::make($data['password']),
+                'username' => $data['username'],
+                'type' => $data['type'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number'],
+                'about' => $data['about'],
+                'college_id' => $data['college'],
+                'photo_url' => $fileNameToStore,
+                'id_of' => $data['id_of'],
+                'password' => Hash::make($data['password']),
         ]);
     }
 }

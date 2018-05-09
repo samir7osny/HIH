@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Storage;
 class SpeakersController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+         $this->middleware('pr_head')->except('index','show');
+        // $this->middleware('highboard')->except('index','show');
+        // $this->middleware('president')->except('index','show');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

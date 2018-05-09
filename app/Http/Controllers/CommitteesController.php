@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 class CommitteesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('highboard')->except('index','show');
+        // $this->middleware('president')->except('index','show');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
