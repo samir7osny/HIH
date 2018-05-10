@@ -19,7 +19,7 @@ class CommitteesController extends Controller
     {
         /*Middlewares to prevent any one from creating,editing or deleting committees*/
         // $this->middleware('highboard')->except('index','show');
-        // $this->middleware('president')->except('index','show');
+         $this->middleware('president')->except('index','show');
     }
     
     /**
@@ -88,6 +88,17 @@ class CommitteesController extends Controller
     {
         $committee = \App\Committee::find($id);
         return array("desc"=>"The committee exists","success"=>true,"name"=>$committee->name,"description"=>$committee->description);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**

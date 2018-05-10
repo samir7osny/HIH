@@ -20,7 +20,7 @@ class EventsController extends Controller
          $this->middleware('marketing_head')->except('enroll','index','show');
         // $this->middleware('highboard')->except('enroll','index','show');
         // $this->middleware('president')->except('enroll','index','show');
-        // $this->middleware('guest')->only('enroll');
+         $this->middleware('guest')->only('enroll');
     }
     
     /**
@@ -67,7 +67,8 @@ class EventsController extends Controller
             'galleryPhoto' => 'array',
             'galleryPhoto.*' => 'image'
         ]);
-
+        if($request->input('to')<$request->input('from'))
+            return redirect('event/create')->with('error','Invalid Time input');
         $event = new \App\Event;
         $event->name = $request->input('name');
         $event->description = $request->input('description');
@@ -162,6 +163,9 @@ class EventsController extends Controller
             'deletePhoto' => 'array',
             'deletePhoto.*' => 'string'
         ]);
+
+        if($request->input('to')<$request->input('from'))
+            return redirect('event/' . \App\Event::find($id)->$name. '/edit')->with('error','Invalid Time input');
 
         $event = \App\Event::find($id);
         $event->name=$request->input('name');

@@ -13,7 +13,7 @@ class MembersController extends Controller
      */
     public function __construct()
     {       
-         $this->middleware('hr_head')->except('index');
+        // $this->middleware('hr_head')->only('index');
         // $this->middleware('highboard')->except('index');
         // $this->middleware('president')->except('index');
     }

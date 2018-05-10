@@ -58,6 +58,11 @@ Route::resource('/workshop','WorkshopsController');
 Route::resource('/sponsor','SponsorsController');
 
 
+Route::get('event/create','EventsController@create')->middleware(['hr_head'||'guest']);
+Route::post('event','EventsController@store')->middleware('marketing_head' | 'president' | 'highboard');
+
+
+
 // //All Workshops
 // Route::get('/workshop', function(){
 //     return view('workshops/workshops');

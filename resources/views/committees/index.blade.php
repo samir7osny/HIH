@@ -10,11 +10,13 @@
                         <div class="tableCell">
                             <h1 class="data" placeholder="Enter the name" name="name">{{$committees[$i]->name}}</h1>
                             <p name="description" placeholder="Enter the description" class="data">{!!$committees[$i]->description!!}</p>
-                            <div class="inputContainer Button">
-                                <button class="edit">Edit</button>
-                                <button class="membersButton">Members</button>
-                                <button class="delete">Delete</button>
+                            @if((Auth::check())&&Auth::user()->type==0)
+                                <div class="inputContainer Button">
+                                    <button class="edit">Edit</button>
+                                    <button class="membersButton">Members</button>
+                                    <button class="delete">Delete</button>
                             </div>
+                            @endif
                         </div>
                         <div class="rightBoxBackground">
                             @include('inc.logo')
@@ -53,11 +55,13 @@
                         <div class="tableCell">
                             <h1 class="data" placeholder="Enter the name" name="name">{{$committees[$i]->name}}</h1>
                             <p name="description" placeholder="Enter the description" class="data">{!!$committees[$i]->description!!}</p>
-                            <div class="inputContainer Button">
-                                <button class="edit">Edit</button>
-                                <button class="membersButton">Members</button>
-                                <button class="delete">Delete</button>
-                            </div>
+                            @if((Auth::check())&&Auth::user()->type==0)
+                                <div class="inputContainer Button">
+                                    <button class="edit">Edit</button>
+                                    <button class="membersButton">Members</button>
+                                    <button class="delete">Delete</button>
+                                </div>
+                            @endif
                         </div>
                         <div class="rightBoxBackground">
                             @include('inc.logo')
