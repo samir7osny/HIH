@@ -12,20 +12,23 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
-        // $this->middleware('member')->only('update','edit','show');
-        // $this->middleware('guest');
-        // $this->middleware('president');
-        // $this->middleware('highboard');
-        // $this->middleware('hr_head')->only('create','store');
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-    
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $users = \App\User::all();
+        return view('users.index')->with('users', $users);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +40,7 @@ class UsersController extends Controller
         if(Auth::check()){
             return view('users.create')->with('universities',$universities);
         }
-        return view('users.create')->with('universities',$universities);
+        return redirect('/')->with('error', 'You can\'t access this');
     }
 
     /**
@@ -84,7 +87,7 @@ class UsersController extends Controller
         if($user){
             return view('users.edit')->with($data);
         }
-        return redirect('/')->with('error','User is not found');
+        return redirect('/')->with('error','The profile doesn\'t exist');
     }
 
     /**
@@ -96,9 +99,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $username)
     {
-        if(Auth::check())
-        {
-            $this->validate($request, [
+        $this->validate($request, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'userImage' => 'image|nullable|max:5999',
@@ -106,56 +107,38 @@ class UsersController extends Controller
             'phone_number' => 'required|string|max:11|min:11',
             'email' => 'required|email',
             'about' => 'string|nullable',
-            ]);
-        }
-        else{ 
-            $this->validate($request, [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'userImage' => 'image|nullable|max:5999',
-            'college' => 'required|integer',
-            'grade_of_college'=>'required|integer',
-            'phone_number' => 'required|string|max:11|min:11',
-            'email' => 'required|email',
-            'about' => 'string|nullable',
-            ]);
-        }
-        $user = \App\User::where('username' , '=', $username)->firstOrFail();
-        if($user)
-        {
-            if(!(Auth::check()))
-                $user->grade_of_college = $request->input('grade_of_college');
-            $user->first_name = $request->input('first_name');
-            $user->last_name = $request->input('last_name');
-            $user->college_id = $request->input('college');
-            $user->phone_number = $request->input('phone_number');
-            $user->email = $request->input('email');
-            $user->about = $request->input('about');
-            // Handle file upload
-            if($request->hasFile('userImage')){
-                if ($request->file('userImage') != $user->photo_url){
-                    // Get filename with the ext.
-                    $fileNameWithExt = $request->file('userImage')->getClientOriginalName();
-                    // Get just filename
-                    $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-                    // Get just ext.
-                    $extension = $request->file('userImage')->getClientOriginalExtension();
-                    // FileName To store
-                    $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-                    // Upload Image
-                    $path = $request->file('userImage')->storeAs('public/usersImages', $fileNameToStore);
+        ]);
 
-                    if($user->photo_url != 'user.jpg'){
-                        // Delete Image
-                        Storage::delete('public/usersImages/'.$user->photo_url);
-                    }
-                    $user->photo_url = $fileNameToStore;
+        $user = \App\User::where('username' , '=', $username)->firstOrFail();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->college_id = $request->input('college');
+        $user->phone_number = $request->input('phone_number');
+        $user->email = $request->input('email');
+        $user->about = $request->input('about');
+        // Handle file upload
+        if($request->hasFile('userImage')){
+            if ($request->file('userImage') != $user->photo_url){
+                // Get filename with the ext.
+                $fileNameWithExt = $request->file('userImage')->getClientOriginalName();
+                // Get just filename
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                // Get just ext.
+                $extension = $request->file('userImage')->getClientOriginalExtension();
+                // FileName To store
+                $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+                // Upload Image
+                $path = $request->file('userImage')->storeAs('public/usersImages', $fileNameToStore);
+
+                if($user->photo_url != 'user.jpg'){
+                    // Delete Image
+                    Storage::delete('public/usersImages/'.$user->photo_url);
                 }
+                $user->photo_url = $fileNameToStore;
             }
-            $user->save();
-            return redirect('/user/' . $user->username)->with('success', 'The profile is updated');
         }
-        return redirect('/')->with('error','The profile doesn\'t exist');
+        $user->save();
+        return redirect('/user/' . $user->username)->with('success', 'The profile is updated');
     }
 
     /**
@@ -180,7 +163,6 @@ class UsersController extends Controller
 
         $user->userInfo->delete();
         $user->delete();
-        Auth::logout();
         return redirect('/')->with('success', 'user Removed');
     }
     

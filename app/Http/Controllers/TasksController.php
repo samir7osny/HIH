@@ -8,20 +8,10 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        // $this->middleware('auth');
-        //  $this->middleware('member')->except('create','store');
-        //  $this->middleware('committee_head')->except('update');
-        // $this->middleware('president')->except('update');
-        // $this->middleware('hr_head')->except('update');
+        $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
@@ -143,12 +133,13 @@ class TasksController extends Controller
             $Task->answered = true;
             $Task->answer = true;
             $Task->save();
-             return redirect('/task')->with('success','The answer has been approved');
         }
-        $Task->answered = true;
-        $Task->answer = false;
-        $Task->save();
-        return redirect('/task')->with('success','The answer has been denied');
+        else{
+            $Task->answered = true;
+            $Task->answer = false;
+            $Task->save();
+        }
+        return redirect('/task')->with('success','The answer has been approved');
     }
 
     /**

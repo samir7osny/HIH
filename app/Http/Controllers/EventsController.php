@@ -9,19 +9,6 @@ use Illuminate\Http\Request;
 class EventsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('marketing_head')->except('enroll','index','show');
-        // $this->middleware('highboard')->except('enroll','index','show');
-        // $this->middleware('president')->except('enroll','index','show');
-        // $this->middleware('guest')->only('enroll');
-    }
-    
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -10,19 +10,10 @@ use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        // $this->middleware('auth');
-         $this->middleware('member');
-        // $this->middleware('highboard');
-        // $this->middleware('president');
+        $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *

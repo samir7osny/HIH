@@ -2,7 +2,7 @@
 
 @section('content')
 {!! Form::open(['action' => 'UsersController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'outerBox windowHeight']) !!}
-    <input type="hidden" name="type" @if(Auth::check()) value="0" @else value="1" @endif>
+    <input type="hidden" name="type" value="0">
     <div class="innerBox">
         <div class="leftBox">
             <div class="darkBackground">
@@ -64,20 +64,6 @@
                         </select>
                     </div>
                 </h2>
-                @if(!(Auth::check()))
-                <h2>
-                    <i class="headerIcon fa fa-graduation-cap" aria-hidden="true"></i>
-                    <div class="inputContainer">
-                            <select required class="requiredInput" name="grade_of_college">
-                                <option value="0" selected disabled hidden>Choose Your Grade</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                            </select>
-                    </div>
-                </h2>
-                @endif
                 <h2>
                     <i class="headerIcon fa fa-phone" aria-hidden="true"></i>
                     <div class="inputContainer">

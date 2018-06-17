@@ -7,18 +7,6 @@ use Illuminate\Http\Request;
 class MembersController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {       
-         $this->middleware('hr_head')->except('index');
-        // $this->middleware('highboard')->except('index');
-        // $this->middleware('president')->except('index');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

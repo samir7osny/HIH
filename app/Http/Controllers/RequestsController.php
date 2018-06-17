@@ -8,19 +8,10 @@ use Illuminate\Http\Request;
 
 class RequestsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        // $this->middleware('auth');
-        // $this->middleware('highboard')->except('create','store');
-        // $this->middleware('president')->except('create','store');
-         $this->middleware('hr_head')->except('update','edit');
+        $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
