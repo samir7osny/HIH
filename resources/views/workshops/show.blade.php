@@ -10,12 +10,10 @@
                         <p style="font-size:0.4em;text-align:center">Number of Forms: {{$workshop->Audience()->count()}}</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        @if(Auth::user()->type==1)
                         {!! Form::open(['action' => ['WorkshopsController@enroll',$workshop->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                             {{ csrf_field() }}
                             {{Form::submit('Enroll',['class'=>'enroll'])}}
                         {!! Form::close() !!}
-                        @endif
                         <a href="/workshop/{{$workshop['name']}}/edit"><button >Edit</button></a>
                         <button class="delete">Delete</button>
                     </div>

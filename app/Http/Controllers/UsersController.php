@@ -19,11 +19,11 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-         //$this->middleware('member')->only('update','edit','show');
+        // $this->middleware('member')->only('update','edit','show');
         // $this->middleware('guest');
         // $this->middleware('president');
         // $this->middleware('highboard');
-        //$this->middleware('hr_head')->only('create','store');
+        // $this->middleware('hr_head')->only('create','store');
     }
     
     /**

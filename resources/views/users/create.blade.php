@@ -2,17 +2,7 @@
 
 @section('content')
 {!! Form::open(['action' => 'UsersController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'outerBox windowHeight']) !!}
-    <input type="hidden" name="type" 
-            @if(Auth::check())
-                @if(Auth::user()->type==0)
-                    value="0"  
-                @elseif(Auth::user()->type==1)
-                    value="1"
-                @endif
-            @else
-                value="1"
-            @endif
-                    >
+    <input type="hidden" name="type" @if(Auth::check()) value="0" @else value="1" @endif>
     <div class="innerBox">
         <div class="leftBox">
             <div class="darkBackground">

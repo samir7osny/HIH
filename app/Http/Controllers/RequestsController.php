@@ -18,7 +18,7 @@ class RequestsController extends Controller
         /*Middlewares to prevent someone from mainpulating with requests*/
          // $this->middleware('auth');
         // $this->middleware('highboard')->except('create','store');
-         $this->middleware('president')->except('create','store');
+        // $this->middleware('president')->except('create','store');
          $this->middleware('hr_head')->except('update','edit');
     }
     

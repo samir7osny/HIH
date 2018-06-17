@@ -17,7 +17,7 @@ class SponsorsController extends Controller
     {
          $this->middleware('fr_head')->except('index','show');
         // $this->middleware('highboard')->except('index','show');
-         //$this->middleware('president')->except('index','show');
+        // $this->middleware('president')->except('index','show');
     }
 
     /**

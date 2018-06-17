@@ -244,8 +244,6 @@ class WorkshopsController extends Controller
             $timelineFrom = $request->get('timelineFrom');
             $timelineTo = $request->get('timelineTo');
             foreach ($timelineDates as  $key=>$timeline) {
-                if($timelineTo[$key]<$timelineFrom[$key])
-                    return redirect('workhsop/' . \App\Workshop::find($id)->$name. '/edit')->with('error','Invalid Time input');
                 $timeline = new \App\Timeline;
                 $timeline->workshop_id = $workshop->id;
                 $timeline->date_of_session = $timelineDates[$key];

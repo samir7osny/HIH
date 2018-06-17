@@ -10,13 +10,12 @@
                         <p style="font-size:0.4em;text-align:center">Number of Forms: {{$event->Audience()->count()}}</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        @if(Auth::user()->type==1)
-                            {!! Form::open(['action' => ['EventsController@enroll',$event->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
-                                {{ csrf_field() }}
-                                {{Form::submit('Enroll',['class'=>'enroll'])}}
-                            {!! Form::close() !!}
-                        @endif
+                        {!! Form::open(['action' => ['EventsController@enroll',$event->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
+                            {{ csrf_field() }}
+                            {{Form::submit('Enroll',['class'=>'enroll'])}}
+                        {!! Form::close() !!}
                         <a href="/event/{{$event['name']}}/edit"><button >Edit</button></a>
+                        <button class="membersButton">Sponsors</button>
                         <button class="delete">Delete</button>
                     </div>
                     <table class="eventWorkshopInfo">
