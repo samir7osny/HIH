@@ -15,7 +15,7 @@ class EventsController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('marketing_head')->except('enroll','index','show');
+        // $this->middleware('marketing_head')->except('enroll','index','show');
         // $this->middleware('highboard')->except('enroll','index','show');
         // $this->middleware('president')->except('enroll','index','show');
         // $this->middleware('guest')->only('enroll');

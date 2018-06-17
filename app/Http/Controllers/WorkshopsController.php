@@ -15,7 +15,7 @@ class WorkshopsController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('marketing_head')->except('enroll','index','show');
+        // $this->middleware('marketing_head')->except('enroll','index','show');
         // $this->middleware('highboard')->except('index','show');
         // $this->middleware('president')->except('index','show');
         // $this->middleware('guest')->only('enroll');
