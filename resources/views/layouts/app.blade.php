@@ -17,7 +17,7 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-        </head>
+</head>
 <body>
     @include('inc.messages')
     @yield('intro')

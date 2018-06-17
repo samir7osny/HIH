@@ -21,12 +21,12 @@ New Features
 -Edit sponsors
 -View sponsors
 -Delete sponsors
--Send deleting request
--View deleting request
--Answer deleting request
--Seen deleting request
+-Add request
+-View request
+-Answer request
+-Seen request
 -Chat
--Send task
+-Add task
 -View task
 -Answer task
 -Seen task
