@@ -13,11 +13,11 @@ class College extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function students() {//One to many relationship
+    public function students() {
         return $this->hasMany('App\User', 'college_id');
     }
 
-    public function university() {//Many to One relationship
+    public function university() {
         return $this->belongsTo('App\University', 'university_id');
     }    
 }

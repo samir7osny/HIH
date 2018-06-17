@@ -13,11 +13,11 @@ class Sponsor extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function sponsoringEvents(){//Many to many relationship
+    public function sponsoringEvents(){
         return $this->belongsToMany('App\Event', 'sponsring_events', 'sponsor_id', 'event_id');
     }
 
-    public function sponsoringWorkshops(){//Many to many relationship
+    public function sponsoringWorkshops(){
         return $this->belongsToMany('App\Workshop', 'sponsring_workshops', 'sponsor_id', 'workshop_id');
     }
 }

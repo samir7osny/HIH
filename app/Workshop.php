@@ -13,26 +13,26 @@ class Workshop extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function timelines() {//One to many relationship
+    public function timelines() {
         return $this->hasMany('App\Timeline', 'workshop_id');
     }
 
-    public function moderatedBy(){//Many to many relationship
+    public function moderatedBy(){
         return $this->belongsToMany('App\Member', 'moderating_workshops', 'workshop_id', 'member_id');
     }
 
-    public function Audience(){//Many to many relationship
+    public function Audience(){
         return $this->hasMany('App\WorkshopEnrollment', 'workshop_id');
     }
 
-    public function Sponsers(){//Many to many relationship
+    public function Sponsers(){
         return $this->belongsToMany('App\Sponsor', 'sponsring_workshops', 'workshop_id', 'sponser_id');
     }
 
-    public function gallery() {//One to many relationship
+    public function gallery() {
         return $this->hasMany('App\WorkshopPhoto', 'workshop_id');
     }
-    public function cover() {//One to One relationship
+    public function cover() {
         return $this->belongsTo('App\WorkshopPhoto', 'cover_id');
     }  
 }

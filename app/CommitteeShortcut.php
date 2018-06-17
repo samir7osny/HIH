@@ -13,7 +13,7 @@ class CommitteeShortcut extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function committee(){//One to many relationship
+    public function committee(){
         return $this->hasMany('App\Committee', 'shortcut_id');
     }
 }

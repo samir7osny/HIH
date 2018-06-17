@@ -13,15 +13,15 @@ class Guest extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function enrollInWorkshops(){//One to many relationship
+    public function enrollInWorkshops(){
         return $this->hasMany('App\WorkshopEnrollment', 'guest_id');
     }
 
-    public function enrollInEvents(){//One to many relationship
+    public function enrollInEvents(){
         return $this->hasMany('App\EventEnrollment', 'guest_id');
     }
 
-    public function user() {//One to One relationship
+    public function user() {
         return $this->hasOne('App\User', 'id_of');
     }
     public function isMember(){

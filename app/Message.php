@@ -13,11 +13,11 @@ class Message extends Model
     // Timestamps
     public $timestamps = true;
 
-    public function sender() {//One to One relationship
+    public function sender() {
         return $this->belongsTo('App\User', 'sender');
     }
 
-    public function receiver() {//One to One relationship
+    public function receiver() {
         return $this->belongsTo('App\User', 'receiver');
     }
 }

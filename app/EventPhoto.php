@@ -13,10 +13,10 @@ class EventPhoto extends Model
     // Timestamps
     public $timestamps = false;
 
-    public function event() {//One to many relationship
+    public function event() {
         return $this->belongsTo('App\Event', 'event_id');
     }
-    public function coverOf() {//One to One relationship
+    public function coverOf() {
         return $this->hasOne('App\Event', 'cover_id');
     }
 }

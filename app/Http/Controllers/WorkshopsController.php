@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use Illuminate\Http\Request;
 
-//This Controller is responsible for all functions manipulated with Workshop Model
 class WorkshopsController extends Controller
 {
     /**
@@ -16,7 +15,6 @@ class WorkshopsController extends Controller
      */
     public function __construct()
     {
-        /*Middlewares to prevent any one from creating ,editing or deleting workshops*/
          $this->middleware('marketing_head')->except('enroll','index','show');
         // $this->middleware('highboard')->except('index','show');
         // $this->middleware('president')->except('index','show');
@@ -28,7 +26,6 @@ class WorkshopsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for get all workshops from the database
     public function index()
     {
         $workshops= \App\Workshop::all();
@@ -40,7 +37,6 @@ class WorkshopsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for return the form of creating workshop to the user
     public function create()
     {
         return view('workshops.create');
@@ -52,10 +48,8 @@ class WorkshopsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for storing the form of creating workshop in the database
     public function store(Request $request)
     {
-        //Validation for the input
         $this->validate($request, [
             'name' => 'required|string|unique:workshop',
             'place' => 'required|string',
@@ -134,7 +128,6 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for showing the page of certain workshop
     public function show($name)
     {
         $workshop= \App\Workshop::where('name',$name)->first();
@@ -147,7 +140,6 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for return the form of editing workshop 
     public function edit($name)
     {
         $workshop= \App\Workshop::where('name',$name)->first();
@@ -160,8 +152,7 @@ class WorkshopsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */    
-    //This function is responsible for storing the form of editing workshop in the database
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -263,7 +254,6 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for deleting certain workshop from the database
     public function destroy($id)
     {
         $workshop= \App\Workshop::find($id);
@@ -285,7 +275,6 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for enrollment from the guests in a certain workshop
     public function enroll(Request $request,$id)
     {
         $workshop= \App\Workshop::find($id);

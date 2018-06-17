@@ -14,9 +14,8 @@ class RequestsController extends Controller
      * @return void
      */
     public function __construct()
-    {        
-        /*Middlewares to prevent someone from mainpulating with requests*/
-         // $this->middleware('auth');
+    {
+        // $this->middleware('auth');
         // $this->middleware('highboard')->except('create','store');
         // $this->middleware('president')->except('create','store');
          $this->middleware('hr_head')->except('update','edit');
@@ -37,7 +36,6 @@ class RequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for get all incoming requests from the database
     public function inbox()
     {
         if (!Auth::check()) {
@@ -55,7 +53,6 @@ class RequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for get all sent requests from the database
     public function outbox()
     {
         if (!Auth::check()) {
@@ -73,7 +70,6 @@ class RequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for return sending form request to the user
     public function create($userId)
     {
         $userToDelete = \App\User::find($userId);
@@ -88,7 +84,6 @@ class RequestsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for storing  request in the database
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -117,7 +112,6 @@ class RequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for return a certain request page to the user
     public function show($id)
     {
         $request = \App\Request::find($id);
@@ -140,7 +134,6 @@ class RequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //This function is responsible for updating a certian request in the database
     public function update(Request $request, $id)
     {
         $DRequest = \App\Request::find($id);

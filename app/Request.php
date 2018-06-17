@@ -13,11 +13,11 @@ class Request extends Model
     // Timestamps
     public $timestamps = true;
 
-    public function userSender() {//One to One relationship
+    public function userSender() {
         return $this->belongsTo('App\User', 'sender');
     }
 
-    public function userToDelete() {//One to One relationship
+    public function userToDelete() {
         return $this->belongsTo('App\User', 'member_to_delete_id');
     }
 }
