@@ -46,7 +46,11 @@ class EventsController extends Controller
             'place_cost' => 'required|integer',
             'description' => 'required|string',
             'galleryPhoto' => 'array',
-            'galleryPhoto.*' => 'image'
+            'galleryPhoto.*' => 'image',
+            'speaker'=> 'array',
+            'speaker.*'=> 'integer',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
         ]);
 
         $event = new \App\Event;
@@ -59,6 +63,24 @@ class EventsController extends Controller
         $event->date = $request->input('date');
         $event->no_of_forms = 0;
         $event->save();
+
+        if($request->input('speaker')){
+            foreach ($request->input('speaker') as $speaker) {
+                $eventSpeaker = new \App\EventSpeakers;
+                $eventSpeaker->event_id = $event->id;
+                $eventSpeaker->speaker_id = $speaker;
+                $eventSpeaker->save();
+            }
+        }
+
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $eventSponsor = new \App\EventSponsors;
+                $eventSponsor->event_id = $event->id;
+                $eventSponsor->sponsor_id = $sponsor;
+                $eventSponsor->save();
+            }
+        }
 
         $files = $request->file('galleryPhoto');
 
@@ -128,7 +150,6 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'string',
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i',
             'date' => 'required|date|after:today',
@@ -138,17 +159,38 @@ class EventsController extends Controller
             'galleryPhoto' => 'array',
             'galleryPhoto.*' => 'image',
             'deletePhoto' => 'array',
-            'deletePhoto.*' => 'string'
+            'deletePhoto.*' => 'string',
+            'speaker'=> 'array',
+            'speaker.*'=> 'integer',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
         ]);
 
         $event = \App\Event::find($id);
-        $event->name=$request->input('name');
         $event->description = $request->input('description');
         $event->place = $request->input('place');
         $event->place_cost = $request->input('place_cost');
         $event->from = $request->input('from');
         $event->to = $request->input('to');
         $event->date = $request->input('date');
+        \App\EventSpeakers::where('event_id',$event->id)->delete();
+        if($request->input('speaker')){
+            foreach ($request->input('speaker') as $speaker) {
+                $eventSpeaker = new \App\EventSpeakers;
+                $eventSpeaker->event_id = $event->id;
+                $eventSpeaker->speaker_id = $speaker;
+                $eventSpeaker->save();
+            }
+        }
+        \App\EventSponsors::where('event_id',$event->id)->delete();
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $eventSponsor = new \App\EventSponsors;
+                $eventSponsor->event_id = $event->id;
+                $eventSponsor->sponsor_id = $sponsor;
+                $eventSponsor->save();
+            }
+        }
         $event->save();
 
         $files = $request->file('galleryPhoto');
@@ -217,6 +259,9 @@ class EventsController extends Controller
             Storage::delete('/public/activitiesGallery/' . $photo->url);
             $photo->delete();
         }
+        \App\EventSpeakers::where('event_id',$event->id)->delete();
+        \App\EventSponsors::where('event_id',$event->id)->delete();
+
         $event->delete();
         return redirect('/event')->with('success', 'The event has been deleted.');
     }

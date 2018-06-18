@@ -51,6 +51,10 @@ class WorkshopsController extends Controller
             'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
+            'modirator'=> 'array',
+            'modirator.*'=> 'integer',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
         ]);
 
         $workshop = new \App\Workshop;
@@ -60,6 +64,24 @@ class WorkshopsController extends Controller
         $workshop->place_cost = $request->input('place_cost');
         $workshop->cost = $request->input('cost');
         $workshop->save();
+
+        if($request->input('modirator')){
+            foreach ($request->input('modirator') as $modirator) {
+                $workshopModirator = new \App\WorkshopModirators;
+                $workshopModirator->workshop_id = $workshop->id;
+                $workshopModirator->member_id = $modirator;
+                $workshopModirator->save();
+            }
+        }
+
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $workshopSponsor = new \App\WorkshopSponsors;
+                $workshopSponsor->workshop_id = $workshop->id;
+                $workshopSponsor->sponsor_id = $sponsor;
+                $workshopSponsor->save();
+            }
+        }
 
         $files = $request->file('galleryPhoto');
 
@@ -156,12 +178,34 @@ class WorkshopsController extends Controller
             'timelineDate.*' => 'required|date|after:today',
             'timelineFrom.*' => 'required|date_format:H:i',
             'timelineTo.*' => 'required|date_format:H:i',
+            'modirator'=> 'array',
+            'modirator.*'=> 'integer',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
         ]);
 
         $workshop = \App\Workshop::find($id);
         $workshop->description = $request->input('description');
         $workshop->place = $request->input('place');
         $workshop->place_cost = $request->input('place_cost');
+        \App\WorkshopModirators::where('workshop_id',$workshop->id)->delete();
+        if($request->input('modirator')){
+            foreach ($request->input('modirator') as $modirator) {
+                $workshopModirator = new \App\WorkshopModirators;
+                $workshopModirator->workshop_id = $workshop->id;
+                $workshopModirator->member_id = $modirator;
+                $workshopModirator->save();
+            }
+        }
+        \App\WorkshopSponsors::where('workshop_id',$workshop->id)->delete();
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $workshopSponsor = new \App\WorkshopSponsors;
+                $workshopSponsor->workshop_id = $workshop->id;
+                $workshopSponsor->sponsor_id = $sponsor;
+                $workshopSponsor->save();
+            }
+        }
         $workshop->save();
 
         $files = $request->file('galleryPhoto');
@@ -251,6 +295,9 @@ class WorkshopsController extends Controller
         foreach ($workshop->timelines as $timeline) {
             $timeline->delete();
         }
+        \App\WorkshopModirators::where('workshop_id',$workshop->id)->delete();
+        \App\WorkshopSponsors::where('workshop_id',$workshop->id)->delete();
+
         $workshop->delete();
         return redirect('/workshop')->with('success', 'The workshop has been deleted.');
     }

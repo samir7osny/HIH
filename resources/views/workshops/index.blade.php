@@ -11,8 +11,8 @@
                     <div class="rightBox">
                         <div class="tableCell">
                             <h1 class="data" placeholder="Enter the name" name="name">{{$workshops[$i]->name}}</h1>
-                            <p>Number of forms: {!!$workshops[$i]->Audience()->count()!!}</p>
-                            <p name="description" placeholder="Enter the description" class="data">{!!$workshops[$i]->description!!}</p>
+                            <p style="text-align:center;">Number of forms: {!!$workshops[$i]->Audience()->count()!!}</p>
+                            <p name="description" placeholder="Enter the description" class="data">{!!nl2br($workshops[$i]->description)!!}</p>
                         </div>
                         <div class="rightBoxBackground">
                             @include('inc.logo')
@@ -30,8 +30,8 @@
                     <div class="rightBox">
                         <div class="tableCell">
                             <h1 class="data" placeholder="Enter the name" name="name">{{$workshops[$i]->name}}</h1>
-                            <p>Number of forms: {!!$workshops[$i]->Audience()->count()!!}</p>
-                            <p name="description" placeholder="Enter the description" class="data">{!!$workshops[$i]->description!!}</p>
+                            <p style="text-align:center;">Number of forms: {!!$workshops[$i]->Audience()->count()!!}</p>
+                            <p name="description" placeholder="Enter the description" class="data">{!!nl2br($workshops[$i]->description)!!}</p>
                         </div>
                         <div class="rightBoxBackground">
                             @include('inc.logo')

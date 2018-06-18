@@ -25,8 +25,8 @@ class Workshop extends Model
         return $this->hasMany('App\WorkshopEnrollment', 'workshop_id');
     }
 
-    public function Sponsers(){
-        return $this->belongsToMany('App\Sponsor', 'sponsring_workshops', 'workshop_id', 'sponser_id');
+    public function Sponsors(){
+        return $this->belongsToMany('App\Sponsor', 'sponsring_workshops', 'workshop_id', 'sponsor_id');
     }
 
     public function gallery() {

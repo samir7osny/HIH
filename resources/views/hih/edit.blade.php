@@ -42,6 +42,12 @@
                                         <label class="" for="vision">vision</label>
                                         {{-- <p contenteditable="true" placeholder="about" class="CKEDITOR" name="about">{{ old('about') }}</p> --}}
                                 </div>
+                                <div class="inputContainer" style="width:50%;margin:10px auto;font-size:1.5em;display:block;">
+                                        <span>story</span>
+                                        <textarea contenteditable="true" class="requiredInput" name="story" class="CKEDITOR">{{$hih->story}}</textarea>
+                                        <label class="" for="story">story</label>
+                                        {{-- <p contenteditable="true" placeholder="about" class="CKEDITOR" name="about">{{ old('about') }}</p> --}}
+                                </div>
                                 <div class="inputContainer fullWidth submitInput">
                                         <input type="submit" style="margin-top: 30px;" value="Save The information">
                                 </div>

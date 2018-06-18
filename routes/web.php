@@ -13,7 +13,9 @@
 
 Route::resource('/committee', 'CommitteesController');
 Route::resource('/user', 'UsersController');
+Route::get('/speaker/search', 'SpeakersController@search');
 Route::resource('/speaker', 'SpeakersController');
+Route::get('/member/search', 'MembersController@search');
 Route::get('/member', 'MembersController@index');
 Route::get('/request/inbox', 'RequestsController@inbox');
 Route::get('/request/outbox', 'RequestsController@outbox');
@@ -55,6 +57,7 @@ Route::put('/workshop/enroll/{guestId}' , 'WorkshopsController@enroll');
 Route::put('/event/enroll/{guestId}', 'EventsController@enroll');
 Route::resource('/event','EventsController');
 Route::resource('/workshop','WorkshopsController');
+Route::get('/sponsor/search', 'SponsorsController@search');
 Route::resource('/sponsor','SponsorsController');
 
 

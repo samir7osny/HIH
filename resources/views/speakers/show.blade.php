@@ -20,7 +20,7 @@
                 <h2><i class="headerIcon fa fa-bookmark" aria-hidden="true"></i>{{$speaker->fields_of_interest}}</h2>
                 <h2><i class="headerIcon fa fa-address-book-o" aria-hidden="true"></i>{{$speaker->email}}</h2>
                 @if ($speaker->about != null)
-                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{{$speaker->about}}</p>
+                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{!!nl2br($speaker->about)!!}</p>
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/speaker/{{$speaker->id}}/edit"><button>Edit</button></a>

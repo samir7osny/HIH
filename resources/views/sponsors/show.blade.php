@@ -19,7 +19,7 @@
                 <h2><i class="headerIcon fa fa-phone" aria-hidden="true"></i>{{$sponsor->phone_number}}</h2>
                 <h2><i class="headerIcon fa fa-address-book-o" aria-hidden="true"></i>{{$sponsor->email}}</h2>
                 @if ($sponsor->about != null)
-                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{{$sponsor->about}}</p>
+                    <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{!!nl2br($sponsor->about)!!}</p>
                 @endif
                 <div class="inputContainer submitInput">
                     <a href="/sponsor/{{$sponsor->id}}/edit"><button>Edit</button></a>

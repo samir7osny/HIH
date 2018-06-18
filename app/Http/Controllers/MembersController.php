@@ -77,4 +77,15 @@ class MembersController extends Controller
         $members = \App\Member::with(['user'])->whereNull('committee_id')->get();
         return view('members.free')->with('members',$members);
     }
+
+    public function search(Request $request)
+    {
+        $members = \App\Member::whereHas('user', function ($query) {
+            global $request;
+            $query->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%');
+        })->paginate(8);
+        $data = view('members.search')->with('members',$members)->render();
+        return array("desc"=>"The search has been updated.","success"=>true,"data"=>$data);
+    }
 }

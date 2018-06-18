@@ -122,7 +122,7 @@ class SponsorsController extends Controller
         ]);
         
         $sponsor = \App\Sponsor::find($id);
-        $sponsor->title = $request->input('name');
+        $sponsor->name = $request->input('name');
         $sponsor->phone_number = $request->input('phone_number');
         $sponsor->email = $request->input('email');
         $sponsor->about = $request->input('about');
@@ -170,5 +170,15 @@ class SponsorsController extends Controller
         $name = $sponsor->name;
         $sponsor->delete();
         return redirect('/')->with('success', 'the sponsor ' . $name .' is removed');
+    }
+
+    public function search(Request $request)
+    {
+        $sponsors = \App\Sponsor::where(function($q) {
+            global $request;
+            $q->Where('name', 'LIKE', '%' . $request->searchKey . '%');
+        })->paginate(8);
+        $data = view('sponsors.search')->with('sponsors',$sponsors)->render();
+        return array("desc"=>"The search has been updated.","success"=>true,"data"=>$data);
     }
 }

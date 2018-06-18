@@ -9,7 +9,7 @@
             </h1>
             <div class="flexBox">
                     <a href="/speaker/create" class="flexChild addMember">
-                        <div class="inputContainer Button" style="height:100%;">
+                        <div class="inputContainer Button" style="height:inherit;">
                             <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                         </div>
                     </a>

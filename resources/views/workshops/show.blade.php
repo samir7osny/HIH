@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                             <td><i class="fa fa-sticky-note" aria-hidden="true"></i> Description</td>
-                            <td>{{$workshop['description']}}</td>
+                            <td>{!!nl2br($workshop['description'])!!}</td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-calendar" aria-hidden="true"></i>Timeline</td>
@@ -55,6 +55,23 @@
                                 @endforeach    
                             </td>
                         </tr>
+                        <tr>
+                                <td><i class="fa fa-users" aria-hidden="true"></i> Modirators</td>
+                                <td>
+                                    <div class="members">
+                                        <div class="flexBox">
+                                            @if($workshop->moderatedBy) 
+                                                @foreach ($workshop->moderatedBy as $modirator)
+                                                    <a target="blank" class="member" href="/user/{{$modirator->user->username}}" m="{{$modirator->id}}">
+                                                        <img src="/storage/usersImages/{{$modirator->user->photo_url}}" alt="{{$modirator->user->first_name . " " . $modirator->user->last_name}}">
+                                                        <h3 class="tableCell">{{$modirator->user->first_name . " " . $modirator->user->last_name}}</h3>
+                                                    </a>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                         <tr>
                             <td><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</td>
                             <td>
@@ -94,6 +111,16 @@
                             </td>
                         </tr>
                     </table>
+                    <div class="sponsors">
+                        @if ($workshop->Sponsors)
+                            @foreach($workshop->Sponsors as $sponsor)
+                            <a target="blank" href="/sponsor/{{$sponsor->id}}" class="member" s="{{$sponsor->id}}">
+                                <img src="{{asset('/storage/sponsorsImages/'.$sponsor->photo_url)}}"/>
+                            </a>
+                            @endforeach
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

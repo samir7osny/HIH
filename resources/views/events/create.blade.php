@@ -68,6 +68,19 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><i class="fa fa-microphone" aria-hidden="true"></i> Speakers</td>
+                        <td class="speakers">
+                            <div class="members">
+                                <div class="flexBox">
+                                    <div class="member addMember addSpeaker">
+                                        <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                                        </button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</td>
                         <td>
                             <div class="gallery edit">
@@ -91,6 +104,13 @@
                         </td>
                     </tr>
                 </table>
+                <div class="sponsors">
+                    <div class="member addMember addSponsor">
+                        <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
                 <div class="inputContainer submitInput">
                     <input type="submit" value="Submit">
                 </div>
@@ -102,8 +122,42 @@
     </div>
 {!! Form::close() !!}
 <div class="popUpWindow">
+    <div class="search" class="dark">
+        @include('inc.logo')
+        <div class="inputContainer">
+                <input placeholder="Search about speaker" type="text" name="searchKey">
+        </div>
+        <div class="members">
+            <div class="results flexBox">
+                <a target="blank" href="/speaker/create" class="member addMember">
+                    <div class="inputContainer Button" style="height: inherit;">
+                        <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popUpWindowSponsor">
+    <div class="sponsorSearch" class="dark">
+        @include('inc.logo')
+        <div class="inputContainer">
+                <input placeholder="Search about sponsor" type="text" name="searchKey">
+        </div>
+        <div class="members">
+            <div class="results flexBox">
+                <a target="blank" href="/sponsor/create" class="member addMember">
+                    <div class="inputContainer Button" style="height: inherit;">
+                        <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('js/form.js') }}"></script>
 <script src="{{ asset('js/activity.js') }}"></script>
+<script src="{{ asset('js/speaker.js') }}"></script>
+<script src="{{ asset('js/sponsor.js') }}"></script>
 @endsection

@@ -77,6 +77,29 @@
                         </td>
                     </tr>
                     <tr>
+                            <td><i class="fa fa-users" aria-hidden="true"></i> Modirators</td>
+                            <td class="modirators">
+                                <div class="members">
+                                    <div class="flexBox">
+                                        <div class="member addMember addModirator">
+                                            <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                                            </button></div>
+                                        </div>
+                                        @if($workshop->moderatedBy) 
+                                            @foreach ($workshop->moderatedBy as $modirator)
+                                                <a target="blank" class="member" href="/user/{{$modirator->user->username}}" m="{{$modirator->id}}">
+                                                    <img src="/storage/usersImages/{{$modirator->user->photo_url}}" alt="{{$modirator->user->first_name . " " . $modirator->user->last_name}}">
+                                                    <h3 class="tableCell">{{$modirator->user->first_name . " " . $modirator->user->last_name}}</h3>
+                                                    <span class="removeButton"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
+                                                    <input name="modirator[]" hidden type="integer" value="{{$modirator->id}}">
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <tr>
                         <td><i class="fa fa-picture-o" aria-hidden="true"></i>Gallery</td>
                         <td>
                             <div class="gallery edit">
@@ -107,6 +130,22 @@
                         </td>
                     </tr>
                 </table>
+                <div class="sponsors">
+                    @if ($workshop->Sponsors)
+                        @foreach($workshop->Sponsors as $sponsor)
+                        <a target="blank" href="/sponsor/{{$sponsor->id}}" class="member" s="{{$sponsor->id}}">
+                            <img src="{{asset('/storage/sponsorsImages/'.$sponsor->photo_url)}}"/>
+                            <input name="sponsor[]" hidden type="integer" value="{{$sponsor->id}}"/>
+                            <span class="removeButton"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
+                        </a>
+                        @endforeach
+                    @endif
+                    <a class="member addMember addSponsor">
+                        <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button></div>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
                 <div class="inputContainer submitInput">
                     <input type="submit" value="Submit">
                 </div>
@@ -115,8 +154,38 @@
     </div>
 {!! Form::close() !!}
 <div class="popUpWindow">
+    <div class="search" class="dark">
+        @include('inc.logo')
+        <div class="inputContainer">
+                <input placeholder="Search about member" type="text" name="searchKey">
+        </div>
+        <div class="members">
+            <div class="results flexBox">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popUpWindowSponsor">
+    <div class="sponsorSearch" class="dark">
+        @include('inc.logo')
+        <div class="inputContainer">
+                <input placeholder="Search about sponsor" type="text" name="searchKey">
+        </div>
+        <div class="members">
+            <div class="results flexBox">
+                <a target="blank" href="/sponsor/create" class="member addMember">
+                    <div class="inputContainer Button" style="height: inherit;">
+                        <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('js/form.js') }}"></script>
 <script src="{{ asset('js/activity.js') }}"></script>
+<script src="{{ asset('js/modirator.js') }}"></script>
+<script src="{{ asset('js/sponsor.js') }}"></script>
 @endsection

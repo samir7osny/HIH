@@ -15,8 +15,7 @@ class CreateSpeakingineventsTable extends Migration
     {
         Schema::create('speakers_in_events', function (Blueprint $table) {
             $table->integer('event_id');
-            $table->integer('speaker_id'); 
-            $table->timestamps();
+            $table->integer('speaker_id');
         });
     }
 

@@ -15,7 +15,7 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        //$this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -37,9 +37,9 @@ class UsersController extends Controller
     public function create()
     {
         $universities = \App\University::all();
-        if(Auth::check()){
+        // if(Auth::check()){
             return view('users.create')->with('universities',$universities);
-        }
+        // }
         return redirect('/')->with('error', 'You can\'t access this');
     }
 

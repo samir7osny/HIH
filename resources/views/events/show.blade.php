@@ -38,7 +38,24 @@
                         </tr>
                         <tr>
                             <td><i class="fa fa-sticky-note" aria-hidden="true"></i> Description</td>
-                            <td>{{$event['description']}}</td>
+                            <td>{!!nl2br($event['description'])!!}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-microphone" aria-hidden="true"></i> Speakers</td>
+                            <td>
+                                <div class="members">
+                                    <div class="flexBox">
+                                        @if($event->Speakers) 
+                                            @foreach ($event->Speakers as $speaker)
+                                                <a target="blank" class="member" href="/speaker/{{$speaker->id}}" s="{{$speaker->id}}">
+                                                    <img src="/storage/speakersImages/{{$speaker->photo_url}}" alt="{{$speaker->title . ". " . $speaker->first_name . " " . $speaker->last_name}}">
+                                                    <h3 class="tableCell">{{$speaker->title . ". " . $speaker->first_name . " " . $speaker->last_name}}</h3>
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</td>
@@ -79,26 +96,17 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="innerBox members" style="display:block;margin-top:50px">
-                        <div class="flexBox">
-                            @if($event->Sponsors) 
-                                @foreach ($event->Sponsors as $sponsor)
-                                    <a href="/sponsor/{{$sponsor->id}}" id="{{$sponsor->id}}">
-                                        <img src="/storage/sponsorsImages/{{$sponsor->photo_url}}" alt="{{$sponsor->name}}">
-                                        <h3 class="tableCell">{{$sponsor->name}}</h3>
-                                        <span class="removeButton"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
-                                    </a>
-                                @endforeach
-                            @endif
-                            <div class="member addMember">
-                                <div class="inputContainer Button"><button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                                </button></div>
-                                    <div class="chooseMember dropdown">
-                                            
-                                    </div>
-                            </div>
-                        </div>
-                    </div>    
+                    
+                    <div class="sponsors">
+                        @if ($event->Sponsors)
+                            @foreach($event->Sponsors as $sponsor)
+                            <a target="blank" href="/sponsor/{{$sponsor->id}}" class="member" s="{{$sponsor->id}}">
+                                <img src="{{asset('/storage/sponsorsImages/'.$sponsor->photo_url)}}"/>
+                            </a>
+                            @endforeach
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             
                 <div class="rightBoxBackground">

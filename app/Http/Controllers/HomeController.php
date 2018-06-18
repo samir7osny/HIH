@@ -99,6 +99,7 @@ class HomeController extends Controller
         $this->validate($request, [
             'mission' => 'required',
             'vision' => 'required',
+            'story' => 'required',
             'founder' => 'required',
             'college' => 'required|integer',
             'date_of_foundation' => 'required|date'
@@ -111,6 +112,7 @@ class HomeController extends Controller
         $hih->mission = $request->input('mission');
         $hih->vision = $request->input('vision');
         $hih->founder = $request->input('founder');
+        $hih->story = $request->input('story');
         $hih->college_id = $request->input('college');
         $hih->date_of_foundation = $request->input('date_of_foundation');
         $hih->president_id = Auth::user()->id;
@@ -130,6 +132,7 @@ class HomeController extends Controller
         $this->validate($request, [
             'mission' => 'required',
             'vision' => 'required',
+            'story' => 'required',
             /*'founder' => 'required',
             'college' => 'required|integer',
             'date_of_foundation' => 'required|date'*/
@@ -137,6 +140,7 @@ class HomeController extends Controller
         $hih = \App\HIH::first();
         $hih->mission = $request->input('mission');
         $hih->vision = $request->input('vision');
+        $hih->story = $request->input('story');
         $hih->save();
 
         return redirect('/aboutus')->with('success', 'The Hand In Hand\'s information has been updated.');

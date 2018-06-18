@@ -26,7 +26,7 @@
                 <h2>
                     <i class="headerIcon fa fa-user" aria-hidden="true"></i>
                     <div class="inputContainer">
-                            <input required class="requiredInput" value="{{ old('username') }}" type="text" name="username">
+                            <input required class="requiredInput" value="{{ old('username') }}" type="text" name="username" onkeyup="(function(e){e.value=e.value.toLowerCase();})(this)">
                             <label class="" for="username">Enter The Username</label>
                     </div>
                 </h2>

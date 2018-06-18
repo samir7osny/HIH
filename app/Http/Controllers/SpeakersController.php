@@ -183,4 +183,16 @@ class SpeakersController extends Controller
         $speaker->delete();
         return redirect('/')->with('success', 'the speaker ' . $name .' is removed');
     }
+
+    public function search(Request $request)
+    {
+        $speakers = \App\Speaker::where(function($q) {
+            global $request;
+            $q->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%')
+            ->orWhere('title', 'LIKE', '%' . $request->searchKey . '%');
+        })->paginate(8);
+        $data = view('speakers.search')->with('speakers',$speakers)->render();
+        return array("desc"=>"The search has been updated.","success"=>true,"data"=>$data);
+    }
 }
