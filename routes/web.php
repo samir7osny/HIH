@@ -44,6 +44,7 @@ Route::put('/member/assign','MembersController@assign');
 Route::put('/member/head','MembersController@assignHead');
 Route::put('/member/unassign','MembersController@unassign');
 Route::post('/member/free','MembersController@freeMemebers');
+Route::get('/member/{member}/president','MembersController@president');
 
 Auth::routes();
 

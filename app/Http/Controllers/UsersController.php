@@ -100,15 +100,29 @@ class UsersController extends Controller
      */
     public function update(Request $request, $username)
     {
-        $this->validate($request, [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'userImage' => 'image|nullable|max:5999',
-            'college' => 'required|integer',
-            'phone_number' => 'required|string|max:11|min:11',
-            'email' => 'required|email',
-            'about' => 'string|nullable',
-        ]);
+        if ($request->input('type') == "0") {
+            $this->validate($request, [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'userImage' => 'image|nullable|max:5999',
+                'college' => 'required|integer',
+                'phone_number' => 'required|string|max:11|min:11',
+                'email' => 'required|email',
+                'about' => 'string|nullable',
+            ]);
+        }
+        else {
+            $this->validate($request, [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'userImage' => 'image|nullable|max:5999',
+                'college' => 'required|integer',
+                'phone_number' => 'required|string|max:11|min:11',
+                'email' => 'required|email',
+                'about' => 'string|nullable',
+                'year_of_graduation' => 'required|date_format:Y',
+            ]);
+        }
 
         $user = \App\User::where('username' , '=', $username)->firstOrFail();
         $user->first_name = $request->input('first_name');
@@ -117,6 +131,10 @@ class UsersController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->email = $request->input('email');
         $user->about = $request->input('about');
+        if ($user->type == 1) {
+            $user->userInfo->year_of_graduation = $request->input('year_of_graduation');
+            $user->userInfo->save();
+        }
         // Handle file upload
         if($request->hasFile('userImage')){
             if ($request->file('userImage') != $user->photo_url){

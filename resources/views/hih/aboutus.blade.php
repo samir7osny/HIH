@@ -23,8 +23,6 @@
 </div>
 @if ($hih->story != null)
 <div style="overflow:hidden;" class="outerBox light windowHeight">
-    <a href="/aboutus/edit" style="cursor:pointer; position:fixed; top:128px; right:50px; z-index:50"><button style="color:#DDD;cursor:pointer; padding:10px 20px;" onmouseover="this.style.color='rgba(37, 98, 63,1)';" 
-        onmouseout="this.style.color='#DDD';">Edit</button></a>
     <div class="innerBox" style="overflow:initial;">
         <div class="leftBox">
             <img src="mission.jpg" alt="" class="fullArea">
@@ -42,8 +40,12 @@
 </div>
 @endif
 <div style="overflow:hidden;" class="outerBox @if ($hih->story != null) dark @else light @endif windowHeight">
-    <a href="/aboutus/edit" style="cursor:pointer; position:fixed; top:128px; right:50px; z-index:50"><button style="color:#DDD;cursor:pointer; padding:10px 20px;" onmouseover="this.style.color='rgba(37, 98, 63,1)';" 
-        onmouseout="this.style.color='#DDD';">Edit</button></a>
+    <div class="buttons" style="cursor:pointer; position:fixed; top:128px; right:50px; z-index:50">
+        <a href="/aboutus/edit"><button style="color:#DDD;cursor:pointer; padding:10px 20px;" onmouseover="this.style.color='rgba(37, 98, 63,1)';" 
+            onmouseout="this.style.color='#DDD';">Edit</button></a>
+        <a class="changePresident"><button style="color:#DDD;cursor:pointer; padding:10px 20px;" onmouseover="this.style.color='rgba(37, 98, 63,1)';" 
+            onmouseout="this.style.color='#DDD';">Change The President</button></a>
+    </div>
     <div class="innerBox" style="overflow:initial;">
         <div class="leftBox">
             <img src="mission.jpg" alt="" class="fullArea">
@@ -75,6 +77,18 @@
         </div>
     </div>
 </div>
+<div class="popUpWindow">
+    <div class="search" class="dark">
+        @include('inc.logo')
+        <div class="inputContainer">
+                <input placeholder="Search about member" type="text" name="searchKey">
+        </div>
+        <div class="members">
+            <div class="results flexBox">
 
-    <script src="{{ asset('js/hih-info.js') }}"></script>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/hih-info.js') }}"></script>
 @endsection

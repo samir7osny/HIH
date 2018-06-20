@@ -15,7 +15,7 @@ class CreateGuestTable extends Migration
     {
         Schema::create('guest', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('grade_of_college');
+            $table->year('year_of_graduation');
         });
     }
 

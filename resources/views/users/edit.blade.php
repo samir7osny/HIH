@@ -2,7 +2,7 @@
 
 @section('content')
 {!! Form::open(['action' => ['UsersController@update', $user->username], 'method' => 'PUT', 'enctype' => 'multipart/form-data', 'class' => 'outerBox windowHeight']) !!}
-    <input type="hidden" name="type" value="0">
+    <input type="hidden" name="type" value="{{$user->type}}">
     <div class="innerBox">
         <div class="leftBox">
             <div class="darkBackground">
@@ -59,6 +59,15 @@
                             </select>
                     </div>
                 </h2>
+                @if ($user->type == 1)
+                <h2>
+                    <i class="headerIcon fa fa-calendar" aria-hidden="true"></i>
+                    <div class="inputContainer">
+                            <input required class="requiredInput" value="{{ $user->userInfo->year_of_graduation }}" type="number" name="year_of_graduation">
+                            <label class="" for="year_of_graduation">Enter The Year Of Graduation</label>
+                    </div>
+                </h2>
+                @endif
                 <h2>
                     <i class="headerIcon fa fa-phone" aria-hidden="true"></i>
                     <div class="inputContainer">

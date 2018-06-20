@@ -114,4 +114,12 @@ class MembersController extends Controller
         return array("desc"=>"The changes has been saved.","success"=>true,"userRate"=>$member->rate,"totalRate"=>$member->rate);
         return array("desc"=>"The Committee doesn't exist!","success"=>false);
     }
+    public function president(Request $request, $id)
+    {
+        $member = \App\Member::find($id);
+        $hih = \App\HIH::first();
+        $hih->president_id = $member->id;
+        $hih->save();
+        return redirect('/aboutus')->with('success', 'The president is changed');
+    }
 }
