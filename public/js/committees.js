@@ -62,6 +62,7 @@ $(document).ready(function () {
                     dropdownThis.slideToggle();
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log(XMLHttpRequest);
                     alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
                 }  
             });

@@ -109,6 +109,23 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><i class="fa fa-question-circle" aria-hidden="true"></i>Questions</td>
+                        <td>
+                            <div class="inputContainer fullWidth">
+                                <div class="question">
+                                    <div class="flexBox">
+                                        <input required class="requiredInput" type="text" name="question[]" placeholder="Enter the question">
+                                        <span class="req" onclick="$(this).find('input').val($(this).find('input').val() === '1' ? '0' : '1'); $(this).toggleClass('checked');">
+                                            <input style="display:none;" hidden type="text" value="0" name="req[]" {{ old('req[]') ? 'checked' : '' }}>
+                                        </span>
+                                        <span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                        <span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
                 <div class="sponsors">
                     <div class="member addMember addSponsor">

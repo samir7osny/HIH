@@ -21,6 +21,21 @@ class MembersController extends Controller
         return view('members.index')->with($data);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $type = 0;
+        $universities = \App\University::all();
+        // if(Auth::check()){
+            return view('users.create')->with(['universities'=>$universities,'type'=>$type]);
+        // }
+        return redirect('/')->with('error', 'You can\'t access this');
+    }
+
 
     public function assign(Request $request){
         $member = \App\Member::find($request->id);
@@ -87,5 +102,16 @@ class MembersController extends Controller
         })->paginate(8);
         $data = view('members.search')->with('members',$members)->render();
         return array("desc"=>"The search has been updated.","success"=>true,"data"=>$data);
+    }
+    public function rate(Request $request, $username)
+    {
+        $this->validate($request, [
+            'rate' => 'required'
+        ]);
+        $member = \App\User::where('username' , '=', $username)->firstOrFail()->userInfo;
+        $member->rate = $request->rate;
+        $member->save();
+        return array("desc"=>"The changes has been saved.","success"=>true,"userRate"=>$member->rate,"totalRate"=>$member->rate);
+        return array("desc"=>"The Committee doesn't exist!","success"=>false);
     }
 }

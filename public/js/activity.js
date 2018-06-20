@@ -60,7 +60,7 @@ $(document).ready(function () {
         }
     });
 
-    // Delete the photo
+    // Delete the timeline
     $('body').on("click", '.timeline span.delete',function (e) { 
         e.preventDefault();
         if($('.timeline').length > 1 && timelineAnimation){
@@ -72,6 +72,78 @@ $(document).ready(function () {
                 },
                 complete:function(){
                     timelineAnimation = true;
+                    $(this).remove();
+                }
+            });
+        }
+    });
+
+    // add question
+    let questionAnimation = true;
+    $('body').on("click", '.question span.add',function (e) { 
+        e.preventDefault();
+        if (questionAnimation) {
+            $('.question').parent('.inputContainer').append(
+            '<div style="display:none;" class="question">'
+            + '<div class="flexBox">'
+            + '<input required class="requiredInput" type="text" name="question[]" placeholder="Enter the question">'
+            + '<span class="req" onclick="$(this).find(\'input\').val($(this).find(\'input\').val() === \'1\' ? \'0\' : \'1\'); $(this).toggleClass(\'checked\');">'
+            + '<input style="display:none;" hidden type="text" value="0" name="req[]">'
+            + '</span>'
+            + '<span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>'
+            + '<span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>'
+            + '</div>'
+            + '</div>');
+            $('.question[style="display:none;"]').slideToggle({
+                duration:250,
+                start:function(){
+                    questionAnimation = false;
+                    $(this).css("transition","none");
+                },
+                complete:function(){
+                    questionAnimation = true;
+                    $(this).removeAttr('style');
+                }
+            });
+        }
+    });
+
+    // Delete the question
+    $('body').on("click", '.question span.delete',function (e) { 
+        e.preventDefault();
+        if($('.question').length > 1 && questionAnimation){
+            if ($(this).parents('.question')[0].hasAttribute('q')) {
+                $(this).parents('.inputContainer').eq(0).append('<input hidden type="text" value="' + $(this).parents('.question').eq(0).attr('q') + '" name="deleteQuestion[]">');
+            }
+            $(this).parents('.question').slideToggle({
+                duration:250,
+                start:function(){
+                    questionAnimation = false;
+                    $(this).css("transition","none");
+                },
+                complete:function(){
+                    questionAnimation = true;
+                    $(this).remove();
+                }
+            });
+        }
+        else if($('.question').length ==  1 && questionAnimation && $(this).parents('.question')[0].hasAttribute('q')){
+            $(this).parents('.question').eq(0).parent('.inputContainer').append(
+                '<div class="question">'
+                + '<div class="flexBox">'
+                + '<input required class="requiredInput" disabled value="No questions!" type="text"  placeholder="Enter the question">'
+                + '<span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>'
+                + '</div>'
+                + '</div>');
+            
+            $(this).parents('.question').slideToggle({
+                duration:250,
+                start:function(){
+                    questionAnimation = false;
+                    $(this).css("transition","none");
+                },
+                complete:function(){
+                    questionAnimation = true;
                     $(this).remove();
                 }
             });
@@ -108,39 +180,6 @@ $(document).ready(function () {
             $(this).parent().find('.photo[new="new"] input').click();
         }
     });
-
-
-    // // Get new images and check if each isn't image file
-    // $('body').on("change", 'input#gallery',function (evt) {   
-    //     var inputUserImage = $(this);
-    //     if(inputUserImage[0].files){
-    //         for (let index = 0; index < inputUserImage[0].files.length; index++) {
-    //                 let fileName = inputUserImage[0].files[index].name;
-    //                 let idxDot = fileName.lastIndexOf(".") + 1;
-    //                 let extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    //                 if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
-    //                     let tgt = evt.target || window.event.srcElement,
-    //                     files = tgt.files;
-
-    //                     // FileReader support
-    //                     if (FileReader && files && files.length) {
-    //                         let fr = new FileReader();
-    //                         fr.onload = (function (theFile) {
-    //                             return function (e) {
-    //                                 $(".photo.addPhoto").before('<div class="photo"><img src="' + e.target.result + '" class="galleryPhoto" id="cover"><div class="inputImgHover"><span>Click To Edit</span></div><input multiple type="file" accept="image/*" hidden name="galleryPhoto[]"><span class="removeButton"><i class="fa fa-minus-square" aria-hidden="true"></i></span></div>');
-    //                                 $(".photo.addPhoto").prev().find('input')[0].files[0] = theFile;
-    //                                 console.log($(".photo.addPhoto").prev().find('input')[0].files[0]);
-    //                             };
-    //                         })(inputUserImage[0].files[index]);
-    //                         fr.readAsDataURL(inputUserImage[0].files[index]);
-    //                     }
-    //                 }else{
-    //                     alert("Only jpg/jpeg and png files are allowed!");
-    //                 }
-                
-    //         }
-    //     }
-    // });
 
     // change the image and check if each isn't image file
     $('body').on("change", '.photo input',function (evt) {

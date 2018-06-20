@@ -32,7 +32,7 @@ class Member extends Model
     }
 
     public function user() {
-        return $this->hasOne('App\User', 'id_of');
+        return $this->hasOne('App\User', 'id_of')->where('type',0);
     }
     public function isHead(){
         if (DB::table('highboards')->where('member_id',$this->id)->count() != 0) {

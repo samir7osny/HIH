@@ -36,9 +36,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $type = 1;
         $universities = \App\University::all();
         // if(Auth::check()){
-            return view('users.create')->with('universities',$universities);
+            return view('users.create')->with(['universities'=>$universities,'type'=>$type]);
         // }
         return redirect('/')->with('error', 'You can\'t access this');
     }

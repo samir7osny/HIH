@@ -83,6 +83,16 @@ class WorkshopsController extends Controller
             }
         }
 
+        if($request->input('question')){
+            foreach ($request->input('question') as $key => $question) {
+                $questionWorkshop = new \App\QuestionWorkshop;
+                $questionWorkshop->workshop_id = $workshop->id;
+                $questionWorkshop->question_content = $question;
+                $questionWorkshop->required = $request->input('req')[$key];
+                $questionWorkshop->save();
+            }
+        }
+
         $files = $request->file('galleryPhoto');
 
         if($request->hasFile('galleryPhoto'))
@@ -206,6 +216,20 @@ class WorkshopsController extends Controller
                 $workshopSponsor->save();
             }
         }
+        if($request->input('deleteQuestion')){
+            foreach ($request->input('deleteQuestion') as $question) {
+                \App\QuestionWorkshop::find($question)->delete();
+            }
+        }
+        if($request->input('question')){
+            foreach ($request->input('question') as $key => $question) {
+                $questionWorkshop = new \App\QuestionWorkshop;
+                $questionWorkshop->workshop_id = $workshop->id;
+                $questionWorkshop->question_content = $question;
+                $questionWorkshop->required = $request->input('req')[$key];
+                $questionWorkshop->save();
+            }
+        }
         $workshop->save();
 
         $files = $request->file('galleryPhoto');
@@ -306,29 +330,139 @@ class WorkshopsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
-    public function enroll(Request $request,$id)
+    public function enroll(Request $request, $name)
     {
-        $workshop= \App\Workshop::find($id);
-        if(Auth::user()){
+        $workshop= \App\Workshop::where('name',$name)->first();
+        if($workshop == null){
+            return redirect('/workshop')->with('error', 'The workshop doesn\'t exist!');
+        }
+        if(Auth::user() && Auth::user()->type != 0){
         $checkExist=\App\WorkshopEnrollment::where([
-            ['workshop_id','=',$id],
-            ['guest_id','=',Auth::user()->id]
+            ['workshop_id','=',$workshop->id],
+            ['guest_id','=',Auth::user()->userInfo->id]
             ])->get();
+        }
+        else if(Auth::user() && Auth::user()->type != 0){
+            return redirect('/workshop/'.$workshop->name)->with('error', 'You can\'t do this!');
         }
         else{
             return redirect('/login');
         }
         if($checkExist->count()==0)
         {
-            $enroll=new \App\WorkshopEnrollment();
-            $enroll->workshop_id=$id;
-            $enroll->guest_id=Auth::user()->id;
+            if(count($workshop->questions) > 0){
+                return redirect('/workshop/'.$workshop->name.'/enrollform');
+            }
+            $enroll=new \App\WorkshopEnrollment;
+            $enroll->workshop_id=$workshop->id;
+            $enroll->guest_id=Auth::user()->userInfo->id;
             $enroll->save();        
             return redirect('/workshop/'.$workshop->name)->with('success', 'You have been enrolled in '.$workshop->name. ' workshop.');
         }
-        return redirect('/workshop/'.$workshop->name)->with('error', 'You have already been enrolled in '.$workshop->name. ' workshop.');
+        
+        return redirect('/workshop/'.$workshop->name.'/'.Auth::user()->username);
+    }
+
+    public function enrollForm($name)
+    {
+        $workshop= \App\Workshop::where('name',$name)->first();
+        return view('workshops.enroll')->with('workshop',$workshop);
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function enrollWithAnswers(Request $request, $name)
+    {
+        $this->validate($request, [
+            'answer'=> 'array',
+        ]);
+        $workshop= \App\Workshop::where('name',$name)->first();
+        if($workshop == null){
+            return redirect('/workshop')->with('error', 'The workshop doesn\'t exist!');
+        }
+        if(Auth::user() && Auth::user()->type != 0){
+        $checkExist=\App\WorkshopEnrollment::where([
+            ['workshop_id','=',$workshop->id],
+            ['guest_id','=',Auth::user()->userInfo->id]
+            ])->get();
+        }
+        else if(Auth::user() && Auth::user()->type != 0){
+            return redirect('/workshop/'.$workshop->name)->with('error', 'You can\'t do this!');
+        }
+        else{
+            return redirect('/login');
+        }
+        if($checkExist->count()==0)
+        {
+            $enroll=new \App\WorkshopEnrollment;
+            $enroll->workshop_id=$workshop->id;
+            $enroll->guest_id=Auth::user()->userInfo->id;
+            foreach ($request->input('answer') as $key => $answerInput) {
+                if($answerInput != ""){
+                    $answer = new \App\AnswerWorkshop;
+                    $answer->question_id = $key;
+                    $answer->workshop_id = $workshop->id;
+                    $answer->guest_id = Auth::user()->userInfo->id;
+                    $answer->answer_content = $answerInput;
+                    $answer->save();
+                }
+            }
+            $enroll->save();        
+            return redirect('/workshop/'.$workshop->name)->with('success', 'You have been enrolled in '.$workshop->name. ' workshop.');
+        }
+        
+        return redirect('/workshop/'.$workshop->name.'/'.Auth::user()->username);
+        
+    }
+    public function showEnrollment($name,$username)
+    {
+        if($username == "edit"){
+            return $this->edit($name);
+        }
+        if($username == 'audience'){
+            return $this->audience($name);
+        }
+        $workshop= \App\Workshop::where('name',$name)->first();
+        $user= \App\User::where('username',$username)->first();
+        if($user->type != 1){
+            return redirect('/workshop/'.$workshop->name)->with('error', 'No thing there!');
+        }
+        $user = $user->userInfo;
+        return view('workshops.enrollment')->with(['workshop'=>$workshop,'user'=>$user]);
+    }
+    public function audience($name)
+    {
+        $workshop= \App\Workshop::where('name',$name)->first();
+        return view('workshops.audience')->with('workshop',$workshop);
+    }
+    public function rate(Request $request, $name)
+    {
+        $this->validate($request, [
+            'rate' => 'required'
+        ]);
+        $workshop= \App\Workshop::where('name',$name)->first();
+        if($workshop) {
+            $oldRate = \App\WorkshopRate::where('workshop_id',$workshop->id)->where('guest_id',Auth::user()->userInfo->id)->first();
+            if ($oldRate){
+                $oldRate->rate = $request->rate;
+                $oldRate->save();
+            }
+            else {
+                $newRate = new \App\WorkshopRate;
+                $newRate->workshop_id = $workshop->id;
+                $newRate->guest_id = Auth::user()->userInfo->id;
+                $newRate->rate = $request->rate;
+                $newRate->save();
+            }
+            return array("desc"=>"The changes has been saved.","success"=>true,"userRate"=>$request->rate,"totalRate"=>$workshop->totalRate());
+        }
+        return array("desc"=>"The Committee doesn't exist!","success"=>false);
     }
 }

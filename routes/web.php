@@ -12,6 +12,8 @@
 */
 
 Route::resource('/committee', 'CommitteesController');
+Route::get('/member/create/', 'MembersController@create');
+Route::put('/user/{user}/rate', 'MembersController@rate');
 Route::resource('/user', 'UsersController');
 Route::get('/speaker/search', 'SpeakersController@search');
 Route::resource('/speaker', 'SpeakersController');
@@ -53,8 +55,18 @@ Route::post('/aboutus', 'HomeController@store');
 Route::put('/aboutus', 'HomeController@update');
 
 
-Route::put('/workshop/enroll/{guestId}' , 'WorkshopsController@enroll');
-Route::put('/event/enroll/{guestId}', 'EventsController@enroll');
+Route::get('/workshop/{workshop}/enroll' , 'WorkshopsController@enroll');
+Route::get('/event/{event}/enroll', 'EventsController@enroll');
+Route::get('/workshop/{workshop}/enrollform' , 'WorkshopsController@enrollForm');
+Route::get('/event/{event}/enrollform', 'EventsController@enrollForm');
+Route::post('/workshop/{workshop}/enrollform' , 'WorkshopsController@enrollWithAnswers');
+Route::post('/event/{event}/enrollform', 'EventsController@enrollWithAnswers');
+Route::get('/event/{event}/{guest}', 'EventsController@showEnrollment');
+Route::get('/workshop/{workshop}/{guest}', 'WorkshopsController@showEnrollment');
+Route::put('/event/{event}/rate', 'EventsController@rate');
+Route::put('/workshop/{workshop}/rate', 'WorkshopsController@rate');
+Route::get('/event/{event}/audience', 'EventsController@audience');
+Route::get('/workshop/{workshop}/audience', 'WorkshopsController@audience');
 Route::resource('/event','EventsController');
 Route::resource('/workshop','WorkshopsController');
 Route::get('/sponsor/search', 'SponsorsController@search');

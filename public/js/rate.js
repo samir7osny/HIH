@@ -23,7 +23,7 @@ $(document).ready(function() {
             },
             success: function(response){ // What to do if we succeed
                 if (response.success) {
-                    $('.userRate').html('You give it <span></span>/5');
+                    $('.userRate').html('<span></span>/5');
                     $('.userRate span').text(Math.round( response.userRate * 10 ) / 10);
                     $('.rateBar').attr('totalValue',(response.totalRate*100.0/5.0).toString() + '%');
                     $('.bar').width($('.rateBar').attr('totalValue'));

@@ -42,7 +42,7 @@ $(document).ready(function () {
     positioningNavBar();
     function positioningNavBar(){
         var navOffset = $("#navContainer").next().offset().top - $("#navContainer").height();
-        if ($(window).scrollTop() >= navOffset && !$('#navContainer').hasClass('fixedNav')) {
+        if ($(window).scrollTop() + parseInt($("#navContainer").next().css('margin-top')) >= navOffset && !$('#navContainer').hasClass('fixedNav')) {
             $('#navContainer').addClass('fixedNav');
         } else if ($(window).scrollTop() < navOffset && $('#navContainer').hasClass('fixedNav')) {
             $('#navContainer').removeClass('fixedNav');
@@ -106,7 +106,7 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-    $('.delete').click(function () {
+    $('div.outerBox .delete').click(function () {
         $('.popUpWindow').css('display', 'block');
         confirmation = true; $('.confirmationPopup').animate({
             width: '50%'

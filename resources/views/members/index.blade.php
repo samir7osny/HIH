@@ -8,7 +8,7 @@
                 {{$title}}
             </h1>
             <div class="flexBox">
-                    <a href="/user/create" class="flexChild addMember">
+                    <a href="/member/create" class="flexChild addMember">
                         <div class="inputContainer Button" style="height: inherit;">
                             <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                         </div>

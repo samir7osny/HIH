@@ -116,6 +116,33 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td><i class="fa fa-question-circle" aria-hidden="true"></i>Questions</td>
+                        <td>
+                            <div class="inputContainer fullWidth">
+                                @if (count($event->questions) > 0) 
+                                    @foreach ($event->questions as $question)
+                                    <div q="{{$question->id}}" class="question">
+                                        <div class="flexBox">
+                                            <input required class="requiredInput" disabled value="{{$question->question_content}}" type="text" placeholder="Enter the question">
+                                            <span style="cursor:initial;" class="req @if($question->required == 1) checked @endif">
+                                            </span>
+                                            <span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                            <span class="delete"><i class="fa fa-minus-square" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                @else
+                                    <div class="question">
+                                        <div class="flexBox">
+                                            <input required class="requiredInput" disabled value="No questions!" type="text"  placeholder="Enter the question">
+                                            <span class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
                 </table>
                 <div class="sponsors">
                     @if ($event->Sponsors)

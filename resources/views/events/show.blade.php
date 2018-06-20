@@ -8,10 +8,24 @@
                     <h1>
                         {{$event['name']}}
                         <p style="font-size:0.4em;text-align:center">Number of Forms: {{$event->Audience()->count()}}</p>
+                        <div style="font-size:0.4em;text-align:center" class="rateBar" totalValue="{{ sprintf('%4.2f', ($event->totalRate())*100.0/5.0) }}%">
+                            <div class="bar" style="width:{{ sprintf('%4.2f', ($event->totalRate())*100.0/5.0) }}%">
+                                @include('inc.RateB')
+                            </div>
+                            @include('inc.RateS')
+                        </div>
+                        <p class="userRate" style="font-size:0.4em;text-align:center"> @if (Auth::check() && $event->isGuestRate(Auth::user()->id)) You give it <span>{{round(($event->guestRate(Auth::user()->id))*10.0)/10.0}}</span>/5 @endif</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        <button class="eventEnrollButton">Enroll</button>
+                        @if (Auth::check() && $event->enrolled(Auth::user()->id) && count($event->questions) == 0)
+                            <button>Enrolled</button>
+                        @elseif (Auth::check() && $event->enrolled(Auth::user()->id))
+                            <a href="/event/{{$event['name']}}/enroll"><button >Enroll Form</button></a>
+                        @else
+                            <a href="/event/{{$event['name']}}/enroll"><button >Enroll</button></a>
+                        @endif
                         <a href="/event/{{$event['name']}}/edit"><button >Edit</button></a>
+                        <a href="/event/{{$event['name']}}/audience"><button >Audience</button></a>
                         <button class="membersButton">Sponsors</button>
                         <button class="delete">Delete</button>
                     </div>
@@ -92,6 +106,30 @@
                                     @foreach ($event->gallery as $photo)
                                         <img src="{{asset('/storage/activitiesGallery/'.$photo->url)}}">
                                     @endforeach
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</td>
+                            <td>
+                                <div class="inputContainer fullWidth">
+                                    @if (count($event->questions) > 0) 
+                                        @foreach ($event->questions as $question)
+                                        <div q="{{$question->id}}" class="question">
+                                            <div class="flexBox">
+                                                <input required class="requiredInput" disabled value="{{$question->question_content}}" type="text" placeholder="Enter the question">
+                                                <span style="cursor:initial;" class="req @if($question->required == 1) checked @endif">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    @else
+                                        <div class="question">
+                                            <div class="flexBox">
+                                                <input required class="requiredInput" disabled value="No questions!" type="text"  placeholder="Enter the question">
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

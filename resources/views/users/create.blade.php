@@ -2,7 +2,7 @@
 
 @section('content')
 {!! Form::open(['action' => 'UsersController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'outerBox windowHeight']) !!}
-    <input type="hidden" name="type" value="0">
+    <input type="hidden" name="type" value="{{$type}}">
     <div class="innerBox">
         <div class="leftBox">
             <div class="darkBackground">

@@ -48,22 +48,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['type'] == 0){
-            return Validator::make($data, [
-                'username' => 'required|string|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-                'type' => 'required|integer|min:0|max:1',
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'userImage' => 'image|nullable|max:5999',
-                'college' => 'required|integer',
-                'phone_number' => 'required|string|max:11|min:11|unique:users',
-                'email' => 'required|email|unique:users',
-                'about' => 'string|nullable',
-            ]);
-        } else if($data['type'] == 1){
-
-        }
+        return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'type' => 'required|integer|min:0|max:1',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'userImage' => 'image|nullable|max:5999',
+            'college' => 'required|integer',
+            'phone_number' => 'required|string|max:11|min:11|unique:users',
+            'email' => 'required|email|unique:users',
+            'about' => 'string|nullable',
+        ]);
     }
 
     /**
@@ -79,7 +75,9 @@ class RegisterController extends Controller
             $member->save();
             $data['id_of'] = $member->id;
         } else if($data['type'] == 1){
-            
+            $guest = new \App\Guest;
+            $guest->save();
+            $data['id_of'] = $guest->id;
         }
         // Handle file upload
         if(array_key_exists('userImage',$data)){

@@ -8,8 +8,36 @@
                 <div class="tableCell">
                     <div class="square">
                         <img src="/storage/usersImages/{{$user->photo_url}}" alt="">
+                        @if ($user->type == 0)
+                            <span style="
+                            color: #FFF;
+                            font-size: 2em;
+                            background: #25623f;
+                            border-radius: 50%;
+                            width: 70px;
+                            height: 70px;
+                            line-height: 70px;">M</span>
+                        @else
+                            <span style="
+                            color: #FFF;
+                            font-size: 2em;
+                            background: #464779;
+                            border-radius: 50%;
+                            width: 70px;
+                            height: 70px;
+                            line-height: 70px;">G</span>
+                        @endif
                     </div>
                     <h1>{{$user->first_name . " " . $user->last_name}}</h1>
+                    @if ($user->userInfo->isMember())
+                    <div style="font-size:0.4em;text-align:center" class="rateBar" totalValue="{{sprintf('%4.2f', ($user->userInfo->rate)*100.0/5.0)}}%">
+                        <div class="bar" style="width:{{sprintf('%4.2f', ($user->userInfo->rate)*100.0/5.0)}}%">
+                            @include('inc.RateB')
+                        </div>
+                        @include('inc.RateS')
+                    </div>
+                    <p class="userRate" style="font-size:1em;text-align:center"><span>{{round(($user->userInfo->rate)*10.0)/10.0}}</span>/5</p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -36,4 +64,5 @@
         </div>
     </div>
 </div>
+<script src="{{asset('js/rate.js')}}"></script>
 @endsection

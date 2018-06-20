@@ -94,6 +94,9 @@ hr.green{
     margin: 10px auto;
 
 }
+textarea{
+    transition: all 0.3s ease-in-out, height 0s;
+}
 /* Header */
 .headerVideoContainer{
     width: 100%;
@@ -254,7 +257,11 @@ div#navContainer.fixedNav nav#mainNav{
     object-fit: cover;
     margin: 5px;
 }
-#mainNav div#user ul{
+#mainNav li.hasDropdown{
+    cursor:initial;
+}
+#mainNav div#user ul,
+#mainNav li.hasDropdown ul{
     position: absolute;
     width: 100%;
     top: calc(100% + 5px);
@@ -267,23 +274,30 @@ div#navContainer.fixedNav nav#mainNav{
     height: 0;
     left: 0;
 }
-#mainNav div#user:hover ul{
+#mainNav li.hasDropdown ul{
+    top: calc(100% + 11px);
+}
+#mainNav div#user:hover ul,
+#mainNav li.hasDropdown:hover ul{
     height: 400%;
 }
-#mainNav div#user ul li{
+#mainNav div#user ul li,
+#mainNav li.hasDropdown ul li{
     display: table;
     overflow: hidden;
     height: 20%;
     line-height: 100%;
     width: 100%;
 }
-#mainNav div#user ul li a{
+#mainNav div#user ul li a,
+#mainNav li.hasDropdown ul li a{
     height: 100%;
     width: 100%;
     display: table-cell;
     vertical-align: middle;
 }
-#mainNav div#user ul li:hover{
+#mainNav div#user ul li:hover,
+#mainNav li.hasDropdown ul li:hover{
     transform: none;
     background-color: #DDD;
 }
@@ -306,7 +320,7 @@ div#navContainer.fixedNav nav#mainNav{
     position: relative
 }
 #mainNav ul{
-    width: 40%;
+    width: 50%;
     list-style: none;
     display: flex;
     float: right;
@@ -324,6 +338,8 @@ div#navContainer.fixedNav nav#mainNav{
     font-size: 1.15em;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 1);
+    z-index: 50;
+    border-bottom: 5px solid rgba(37, 98, 63,0);
 }
 #mainNav ul li a{
     display: block;
@@ -464,6 +480,26 @@ div#navContainer.fixedNav nav#mainNav{
     vertical-align: top;
     position: static;
     display: inline-block;
+}
+ div.rateBar{
+    width: 160px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+ div.rateBar>svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: #fff200;
+}
+ div.rateBar div.bar{
+   overflow: hidden;
+   transition: initial;
+}
+ div.rateBar div.bar svg{
+    width: 160px;
+    fill: #ccc54f;
 }
 .outerBox{
     padding: 0;
@@ -1134,17 +1170,20 @@ input[type="time"],input[type="date"]{
     cursor: text;
 }
 .timeline,
-.timelineHeader{
+.timelineHeader,
+.question{
     width: 100%;
     overflow: hidden;
 }
 .timeline .flexBox,
-.timelineHeader .flexBox{
+.timelineHeader .flexBox,
+.question .flexBox{
     flex-wrap: initial;
 }
 
 .timeline div *,
-.timelineHeader div * {
+.timelineHeader div *,
+.question div * {
     margin: 5px 0.2%;
     padding: 5px 0.2%;
     display: inline-block;
@@ -1191,22 +1230,50 @@ h5.date:nth-of-type(even){
     color: rgb(37, 98, 63);
 }
 .timeline span,
-.timelineHeader span {
+.timelineHeader span,
+.question span {
     display: inline-block;
     padding: 0;
     cursor: pointer;
     flex-basis: 5%;
 }
 .timeline span i,
-.timelineHeader span i {    
+.timelineHeader span i,
+.question span i {    
     font-size: 1.5em;
     width: 100%;
     text-align: center;
 }
 .rightBox .timeline span.delete,
-.rightBox .timelineHeader span.delete{
+.rightBox .timelineHeader span.delete,
+.rightBox .question span.delete{
     color: #e42121;
     background: none;
+}
+.question input::placeholder,
+.inputContainer textarea::placeholder{
+    color: rgba(221, 221, 221, 0.5);
+    font-size: 0.8em;
+}
+.question span.req{
+    background: #DDD5;
+    border-radius: 5px;
+    position: relative;
+}
+.question span.checked.req {
+    background: #35a94f;
+}
+.question span.req::after{
+    content: "O";
+    text-align: center;
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.question span.req.checked::after{
+    content: "R";
 }
 .rightBox .inputContainer label{
     font-size: 0.7em;
