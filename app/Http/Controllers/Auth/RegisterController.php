@@ -87,6 +87,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         if($data['type'] == 0){
+            
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,HR')
+        ->only(['create']);
+            if(!(\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','HR'])))
+            {
+                return redirect('/')->with('error', 'You haven\'t the permission to do that!');
+            }
             $member = new \App\Member;
             $member->save();
             $data['id_of'] = $member->id;

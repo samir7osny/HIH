@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,MK')
+            ->only(['create','store', 'edit', 'update', 'destroy']);
+        
+        $this->middleware('AccessPermissions:GUEST')
+            ->only(['enroll', 'enrollForm', 'enrollWithAnswers', 'rate']);
+
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD,MEMBER,GUEST')
+            ->only(['showEnrollment']);
+
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD,MEMBER')
+            ->only(['audience']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -399,6 +413,11 @@ class EventsController extends Controller
         }
         $event= \App\Event::where('name',$name)->first();
         $user= \App\User::where('username',$username)->first();
+        if(Auth::check() && !Auth::user()->userInfo->isMember() ){
+            if(   ! ($username == Auth::user()->username && \App\User::havePermission(['EVENT_AUD', $event->id])))    {
+                return redirect('/event/'.$event->name)->with('error', 'You haven\'t the permission to do that!');
+            }
+        }
         if($user->type != 1){
             return redirect('/event/'.$event->name)->with('error', 'No thing there!');
         }
@@ -412,15 +431,18 @@ class EventsController extends Controller
     }
     public function rate(Request $request, $name)
     {
+
         $this->validate($request, [
             'rate' => 'required'
         ]);
         $event= \App\Event::where('name',$name)->first();
         if($event) {
-            $oldRate = \App\EventRate::where('event_id',$event->id)->where('guest_id',Auth::user()->userInfo->id)->first();
+            if( !(Auth::check() && !Auth::user()->userInfo->isMember() && \App\EventEnrollment::where('event_id', $event->id)->where('guest_id', Auth::user()->userInfo->id))  ){
+                return array("desc"=>"You can\'t rate this event!","success"=>false);
+            }
+            $oldRate = \App\EventRate::where('event_id',$event->id)->where('guest_id',Auth::user()->userInfo->id);
             if ($oldRate){
-                $oldRate->rate = $request->rate;
-                $oldRate->save();
+                $oldRate->update(['rate' => $request->rate]);
             }
             else {
                 $newRate = new \App\EventRate;
@@ -431,6 +453,6 @@ class EventsController extends Controller
             }
             return array("desc"=>"The changes has been saved.","success"=>true,"userRate"=>$request->rate,"totalRate"=>$event->totalRate());
         }
-        return array("desc"=>"The Committee doesn't exist!","success"=>false);
+        return array("desc"=>"The Event doesn't exist!","success"=>false);
     }
 }

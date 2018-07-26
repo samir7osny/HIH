@@ -14,8 +14,12 @@ class CreateSpeakingineventsTable extends Migration
     public function up()
     {
         Schema::create('speakers_in_events', function (Blueprint $table) {
-            $table->integer('event_id');
-            $table->integer('speaker_id');
+            $table->integer('event_id')->unsigned();
+            $table->integer('speaker_id')->unsigned();
+
+            
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
+            $table->foreign('speaker_id')->references('id')->on('speaker')->onDelete('cascade');
         });
     }
 

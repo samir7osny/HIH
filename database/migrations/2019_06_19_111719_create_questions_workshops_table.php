@@ -15,9 +15,12 @@ class CreateQuestionsWorkshopsTable extends Migration
     {
         Schema::create('questions_workshops', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('workshop_id');
+            $table->integer('workshop_id')->unsigned();
             $table->string('question_content');
             $table->boolean('required');
+
+            
+            $table->foreign('workshop_id')->references('id')->on('workshop')->onDelete('cascade');
         });
     }
 

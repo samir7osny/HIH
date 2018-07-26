@@ -19,4 +19,7 @@ class HIH extends Model
     public function college() {
         return $this->belongsTo('App\College', 'college_id');
     }
+    public function Sponsors(){
+        return \App\HIHSponsors::all();
+    }
 }

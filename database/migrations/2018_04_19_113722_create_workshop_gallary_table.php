@@ -16,7 +16,10 @@ class CreateWorkshopGallaryTable extends Migration
         Schema::create('workshop_gallary', function (Blueprint $table) {
             $table->increments('id');
             $table->string('url');
-            $table->integer('workshop_id');
+            $table->integer('workshop_id')->unsigned();
+
+            
+            $table->foreign('workshop_id')->references('id')->on('workshop')->onDelete('cascade');
         });
     }
 

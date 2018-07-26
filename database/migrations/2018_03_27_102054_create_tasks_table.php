@@ -16,13 +16,17 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('content');
-            $table->integer('receiver');
-            $table->integer('sender');
+            $table->integer('receiver')->unsigned();
+            $table->integer('sender')->unsigned();
             $table->boolean('answer')->nullable();
             $table->boolean('seen');
             $table->timestamps();
             $table->timestamp('seen_at')->nullable();
             $table->boolean('answered');
+
+            
+            $table->foreign('receiver')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sender')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

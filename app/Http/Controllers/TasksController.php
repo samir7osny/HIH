@@ -10,7 +10,11 @@ class TasksController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('AccessPermissions:HIGHBOARD,BOARD,MEMBER')
+            ->only(['inbox']);
+
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD')
+            ->only(['create','store','edit','update','destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +23,10 @@ class TasksController extends Controller
      */
     public function index()
     {
-        return $this->inbox();
+        if(\App\User::havePermission(['PRESIDENT']))
+            return redirect('task/outbox');
+        else
+            return $this->inbox();
     }
 
     /**
@@ -64,6 +71,9 @@ class TasksController extends Controller
      */
     public function create($userId)
     {
+        if(! \App\User::havePermission(['PRESIDENT','TASK_HIGHBOARD',$user->id,'TASK_BOARD',$user->id]) ){
+            return redirect('/')->with('error', 'You haven\'t the permission to do that!');
+        }
         $receiver = \App\User::find($userId);
         if ($receiver != null)
             return view('tasks.create')->with('receiver',$receiver);
@@ -78,6 +88,9 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        if(! \App\User::havePermission(['PRESIDENT','TASK_HIGHBOARD',$user->id,'TASK_BOARD',$user->id]) ){
+            return redirect('/')->with('error', 'You haven\'t the permission to do that!');
+        }
         $this->validate($request, [
             'receiver' => 'required|integer',
             'content' => 'required|string|max:255',

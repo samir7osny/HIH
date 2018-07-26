@@ -14,7 +14,9 @@ class CreateHighboardsTable extends Migration
     public function up()
     {
         Schema::create('highboards', function (Blueprint $table) {
-            $table->integer('member_id');
+            $table->integer('member_id')->unsigned();
+
+            $table->foreign('member_id')->references('id')->on('member')->onDelete('cascade');
         });
     }
 

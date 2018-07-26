@@ -17,17 +17,22 @@
                         <p class="userRate" style="font-size:0.4em;text-align:center"> @if (Auth::check() && $event->isGuestRate(Auth::user()->id)) You give it <span>{{round(($event->guestRate(Auth::user()->id))*10.0)/10.0}}</span>/5 @endif</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        @if (Auth::check() && $event->enrolled(Auth::user()->id) && count($event->questions) == 0)
-                            <button>Enrolled</button>
-                        @elseif (Auth::check() && $event->enrolled(Auth::user()->id))
-                            <a href="/event/{{$event['name']}}/enroll"><button >Enroll Form</button></a>
-                        @else
-                            <a href="/event/{{$event['name']}}/enroll"><button >Enroll</button></a>
+                        @if (\App\User::havePermission(['GUEST']))
+                            @if (Auth::check() && $event->enrolled(Auth::user()->id) && count($event->questions) == 0)
+                                <button>Enrolled</button>
+                            @elseif (Auth::check() && $event->enrolled(Auth::user()->id))
+                                <a href="/event/{{$event['name']}}/enroll"><button >Enroll Form</button></a>
+                            @else
+                                <a href="/event/{{$event['name']}}/enroll"><button >Enroll</button></a>
+                            @endif
                         @endif
-                        <a href="/event/{{$event['name']}}/edit"><button >Edit</button></a>
+                        @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','BOARD','MEMBER']))
                         <a href="/event/{{$event['name']}}/audience"><button >Audience</button></a>
-                        <button class="membersButton">Sponsors</button>
+                        @endif
+                        @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','MK']))
+                        <a href="/event/{{$event['name']}}/edit"><button >Edit</button></a>
                         <button class="delete">Delete</button>
+                        @endif
                     </div>
                     <table class="eventWorkshopInfo">
                         <tr>
@@ -169,7 +174,10 @@
         </div>
     </div>
 </div>
+@if (\App\User::havePermission(['GUEST']) && 
+    (\App\EventEnrollment::where('event_id', $event->id)->where('guest_id', Auth::user()->userInfo->id)->first()))
 <script src="{{asset('js/event.js')}}"></script>
+@endif
 <script src="{{asset('js/panelCreator.js')}}"></script>
 <script>addPanelS()</script>
 @endsection

@@ -14,9 +14,12 @@ class CreateWorkshopsRateTable extends Migration
     public function up()
     {
         Schema::create('workshops_rate', function (Blueprint $table) {
-            $table->integer('workshop_id');
-            $table->integer('guest_id');
+            $table->integer('workshop_id')->unsigned();
+            $table->integer('guest_id')->unsigned();
             $table->float('rate');
+            
+            $table->foreign('workshop_id')->references('id')->on('workshop')->onDelete('cascade');
+            $table->foreign('guest_id')->references('id')->on('guest')->onDelete('cascade');
         });
     }
 

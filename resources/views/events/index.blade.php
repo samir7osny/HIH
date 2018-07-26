@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="outerBox masonryTwoColumn paddedBox">
+    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','MK']))
     <div class="inputContainer Button"><a href="/event/create"><button class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a></div>
+    @endif
     <div class="masonryColumn">
             @for ($i = 0; $i < count($events); $i+=2)
             <a href="/event/{{$events[$i]->name}}" class="outerBox withoutOverflow" event="{{$events[$i]->id}}" style="
@@ -43,6 +45,5 @@
     </div>
 </div>
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('js/events.js') }}"></script>
 
 @endsection

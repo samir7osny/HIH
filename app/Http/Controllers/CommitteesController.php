@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CommitteesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD')
+            ->only(['create', 'store', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

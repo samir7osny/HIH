@@ -5,8 +5,6 @@
         <div class="innerBox">
             <div class="rightBox paddedBox">
                 <div class="flexBox">
-                    <a class="messageControll" href="/request/inbox" content="Inbox" @if($section == 'inbox')id="activeSection"@endif>Inbox</a>
-                    <a class="messageControll" href="/request/outbox" content="Outbox" @if($section == 'outbox')id="activeSection"@endif>Outbox</a>
                     <div class="Table">
                         @if ($section == 'inbox')
                             <div class="TableHeader">

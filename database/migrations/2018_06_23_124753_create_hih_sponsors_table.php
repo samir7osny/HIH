@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSponsringeventsTable extends Migration
+class CreateHihSponsorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateSponsringeventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sponsring_events', function (Blueprint $table) {
-            $table->integer('event_id')->unsigned();
+        Schema::create('hih_sponsors', function (Blueprint $table) {
             $table->integer('sponsor_id')->unsigned();
 
-            
-            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
             $table->foreign('sponsor_id')->references('id')->on('sponsor')->onDelete('cascade');
         });
     }
@@ -30,6 +27,6 @@ class CreateSponsringeventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sponsring_events');
+        Schema::dropIfExists('hih_sponsors');
     }
 }

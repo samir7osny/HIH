@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'member' => \App\Http\Middleware\member::class,
         'audience' => \App\Http\Middleware\audience::class,
         'pr_head' => \App\Http\Middleware\prhead::class,
+        'AccessPermissions' => \App\Http\Middleware\AccessPermissions::class,
     ];
 }

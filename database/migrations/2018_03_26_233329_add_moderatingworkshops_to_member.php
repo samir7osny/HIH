@@ -13,9 +13,11 @@ class AddModeratingworkshopsToMember extends Migration
      */
     public function up()
     {
-        Schema::table('member', function($table) {
+        /*Schema::table('member', function($table) {
             $table->integer('workshop_id')->nullable();
-        });
+        });*/
+
+        // handeled in moderating_workshops
     }
 
     /**
@@ -25,8 +27,8 @@ class AddModeratingworkshopsToMember extends Migration
      */
     public function down()
     {
-        Schema::table('member', function (Blueprint $table) {
+        /*Schema::table('member', function (Blueprint $table) {
             $table->dropColumn('workshop_id');
-        });
+        });*/
     }
 }

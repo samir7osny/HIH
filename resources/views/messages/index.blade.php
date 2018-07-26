@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 @section('content')
 <div class="outerBox windowHeight">
-    <div class="innerBox fullHeight">   
+    <div class="innerBox">   
         <div class="leftBox contactsBar">
             <div style="position:relative">
                     <input type="text" placeholder="Search about a contact" name="search">
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
                 @endforeach
             </div>
         </div>
-        <div class="rightBox" style="padding:0">
+        <div class="rightBox" style="padding:0;display:block;">
             <div class="chat">
                 @if (isset($chat))
                     @if ($count > $chat->count())

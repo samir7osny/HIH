@@ -61,9 +61,8 @@ $(document).ready(function () {
                     dropdownThis.html(result);
                     dropdownThis.slideToggle();
                 },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log(XMLHttpRequest);
-                    alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
                 }  
             });
         } else {
@@ -84,19 +83,23 @@ $(document).ready(function () {
             },
             success : function(result){
                 if(result.success){
-                    freeMemeber.parents('.member').before("<a href=\"/user/" + result.user.username + "\" id=\"" + result.member.id + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span class=\"headButton\"><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span><span class=\"removeButton\"><i class=\"fa fa-minus-square\" aria-hidden=\"true\"></i></span>");
+                    var newMember = "<a href=\"/user/" + result.user.username + "\" id=\"" + result.member.id + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span class=\"headButton\"><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span><span class=\"removeButton\"><i class=\"fa fa-minus-square\" aria-hidden=\"true\"></i></span>";
+                    if ($('span#headDisallowed').length) {
+                        var newMember = "<a href=\"/user/" + result.user.username + "\" id=\"" + result.member.id + "\" class=\"member\"><img src=\"/storage/usersImages/" + result.user.photo_url + "\" alt=\"" + result.user.first_name + " " + result.user.last_name + "\"><h3 class=\"tableCell\">" + result.user.first_name + " " + result.user.last_name + "</h3><span class=\"headButton disabled\"><i class=\"fa fa-header\" aria-hidden=\"true\"></i></span><span class=\"removeButton\"><i class=\"fa fa-minus-square\" aria-hidden=\"true\"></i></span>";
+                    }
+                    freeMemeber.parents('.member').before(newMember);
                 } else {
                     alert("an error occurs");
                 }
                 freeMemeber.parents('.dropdown').slideToggle();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+                alert(XMLHttpRequest.responseText);
             }  
         });
     });
 
-    $("body").on("click", ".headButton",function (e) {
+    $("body").on("click", ".headButton:not(.disabled)",function (e) {
         let toBeHead = $(this);
         e.preventDefault();
         if(toBeHead.parents('.member').hasClass('head')){
@@ -118,7 +121,7 @@ $(document).ready(function () {
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+                alert(XMLHttpRequest.responseText);
             }  
         });
     });
@@ -141,7 +144,7 @@ $(document).ready(function () {
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+                alert(XMLHttpRequest.responseText);
             }  
         });
     });
@@ -164,14 +167,6 @@ $(document).ready(function () {
         }
     });
 
-
-    let members = $('.members');
-    $('.members').slideToggle(0);
-    $("body").on("click", "button.membersButton",function (e) {
-        let members = $(this).parents('.outerBox[committee]').find('.members');
-        members.css('transition','none');
-        members.slideToggle("fast");
-    });
 
     $("body").on("click", "button.add",function (e) {
         let containerOfTheNew = "";
@@ -346,7 +341,7 @@ function getDataAJAX(committeeBox){
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+            alert(XMLHttpRequest.responseText);
         }  
     });
 }
@@ -364,7 +359,7 @@ function deleteAJAX(committeeBox){
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            alert("an error has occured" + textStatus + errorThrown + XMLHttpRequest);
+            alert(XMLHttpRequest.responseText);
         }  
     });
 }

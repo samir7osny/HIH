@@ -19,6 +19,10 @@ class Member extends Model
         return $this->hasOne('App\Committee', 'head_id');
     }
 
+    public function highboard() {
+        return $this->hasOne('App\Highboard', 'member_id');
+    }
+
     public function hihPresident() {
         return $this->hasOne('App\HIH', 'president_id');
     }
@@ -34,11 +38,8 @@ class Member extends Model
     public function user() {
         return $this->hasOne('App\User', 'id_of')->where('type',0);
     }
-    public function isHead(){
-        if (DB::table('highboards')->where('member_id',$this->id)->count() != 0) {
-            return true;
-        }
-        return false;
+    public function isHighboard(){
+        return $this->highboard != null;
     }
     public function isMember(){
         return true;

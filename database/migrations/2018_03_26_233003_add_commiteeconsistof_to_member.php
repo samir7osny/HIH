@@ -14,7 +14,10 @@ class AddCommiteeconsistofToMember extends Migration
     public function up()
     {
         Schema::table('member', function($table) {
-            $table->integer('committee_id')->nullable();
+            $table->integer('committee_id')->unsigned()->nullable();
+
+            
+            $table->foreign('committee_id')->references('id')->on('committee')->onDelete('set null');
         });
     }
 

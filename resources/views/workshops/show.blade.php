@@ -17,16 +17,22 @@
                         <p class="userRate" style="font-size:0.4em;text-align:center"> @if (Auth::check() && $workshop->isGuestRate(Auth::user()->id)) You give it <span>{{round(($workshop->guestRate(Auth::user()->id))*10.0)/10.0}}</span>/5 @endif</p>
                     </h1>
                     <div class="inputContainer Button between">
-                        @if (Auth::check() && $workshop->enrolled(Auth::user()->userInfo->id) && count($workshop->questions) == 0)
-                            <button>Enrolled</button>
-                        @elseif (Auth::check() && $workshop->enrolled(Auth::user()->userInfo->id))
-                            <a href="/workshop/{{$workshop['name']}}/enroll"><button >Enroll Form</button></a>
-                        @else
-                            <a href="/workshop/{{$workshop['name']}}/enroll"><button >Enroll</button></a>
-                        @endif                        
-                        <a href="/workshop/{{$workshop['name']}}/edit"><button >Edit</button></a>
+                        @if (\App\User::havePermission(['GUEST']))
+                            @if (Auth::check() && $workshop->enrolled(Auth::user()->id) && count($workshop->questions) == 0)
+                                <button>Enrolled</button>
+                            @elseif (Auth::check() && $workshop->enrolled(Auth::user()->id))
+                                <a href="/workshop/{{$workshop['name']}}/enroll"><button >Enroll Form</button></a>
+                            @else
+                                <a href="/workshop/{{$workshop['name']}}/enroll"><button >Enroll</button></a>
+                            @endif                        
+                        @endif    
+                        @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','BOARD','MEMBER']))
                         <a href="/workshop/{{$workshop['name']}}/audience"><button >Audience</button></a>
+                        @endif    
+                        @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','MK']))
+                        <a href="/workshop/{{$workshop['name']}}/edit"><button >Edit</button></a>
                         <button class="delete">Delete</button>
+                        @endif
                     </div>
                     <table class="eventWorkshopInfo">
                         <tr>
@@ -176,7 +182,10 @@
         </div>
     </div>
 </div>
+@if (\App\User::havePermission(['GUEST']) && 
+    (\App\WorkshopEnrollment::where('workshop_id', $workshop->id)->where('guest_id', Auth::user()->userInfo->id)->first()))
 <script src="{{asset('js/workshop.js')}}"></script>
+@endif
 <script src="{{asset('js/panelCreator.js')}}"></script>
 <script>addPanelS()</script>
 @endsection

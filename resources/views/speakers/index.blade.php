@@ -8,11 +8,13 @@
                 Speakers
             </h1>
             <div class="flexBox">
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','PR','TYPE_MEMBER','PR']))
                     <a href="/speaker/create" class="flexChild addMember">
                         <div class="inputContainer Button" style="height:inherit;">
                             <button class="addMember"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                         </div>
                     </a>
+                    @endif
                     @foreach ($speakers as $speaker)
                         <a href="/speaker/{{$speaker->id}}" class="flexChild">
                             <img src="/storage/speakersImages/{{$speaker->photo_url}}" alt="{{$speaker->title . ". " . $speaker->first_name . " " . $speaker->last_name}}">

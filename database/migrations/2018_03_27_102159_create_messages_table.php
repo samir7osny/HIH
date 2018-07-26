@@ -16,10 +16,14 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('content');
-            $table->integer('receiver');
-            $table->integer('sender');
+            $table->integer('receiver')->unsigned();
+            $table->integer('sender')->unsigned();
             $table->boolean('seen');
             $table->timestamps();
+
+            
+            $table->foreign('receiver')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sender')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

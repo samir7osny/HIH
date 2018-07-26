@@ -14,9 +14,13 @@ class CreateEnrollmentInEventsTable extends Migration
     public function up()
     {
         Schema::create('enrollment_in_events', function (Blueprint $table) {
-            $table->integer('event_id');
-            $table->integer('guest_id'); 
+            $table->integer('event_id')->unsigned();
+            $table->integer('guest_id')->unsigned(); 
             $table->timestamps();
+
+            
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
+            $table->foreign('guest_id')->references('id')->on('guest')->onDelete('cascade');
         });
     }
 

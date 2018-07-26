@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class SponsorsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,FR,TYPE_MEMBER,FR')
+            ->only(['create','store','edit','update']);
+        
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,FR')
+            ->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

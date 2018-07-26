@@ -15,12 +15,16 @@ class CreateHihTable extends Migration
     {
         Schema::create('hih', function (Blueprint $table) {
             $table->date('date_of_foundation'); 
-            $table->integer('college_id');
+            $table->integer('college_id')->unsigned();
             $table->mediumText('mission');
             $table->mediumText('vision');
             $table->mediumText('story')->nullable();
             $table->string('founder');
-            $table->integer('president_id');
+            $table->integer('president_id')->unsigned();
+            
+            
+            $table->foreign('president_id')->references('id')->on('member')->onDelete('RESTRICT');
+            $table->foreign('college_id')->references('id')->on('college')->onDelete('cascade');
         });
     }
 

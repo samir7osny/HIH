@@ -14,11 +14,13 @@ class CreateSessiontimelineTable extends Migration
     public function up()
     {
         Schema::create('sessiontimeline', function (Blueprint $table) {
-            $table->integer('workshop_id');
+            $table->integer('workshop_id')->unsigned();
             $table->integer('session_number');
             $table->date('date_of_session'); 
             $table->time('to')->nullable(); 
-            $table->time('from')->nullable(); 
+            $table->time('from')->nullable();
+            
+            $table->foreign('workshop_id')->references('id')->on('workshop')->onDelete('cascade');
            
         });
     }

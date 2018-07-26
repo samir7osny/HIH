@@ -23,8 +23,12 @@
                     <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{!!nl2br($speaker->about)!!}</p>
                 @endif
                 <div class="inputContainer submitInput">
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','PR','TYPE_MEMBER','PR']))
                     <a href="/speaker/{{$speaker->id}}/edit"><button>Edit</button></a>
+                    @endif
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','PR']))
                     <input class="delete" type="submit" value="Delete">
+                    @endif
                 </div>
             </div>
             <div class="rightBoxBackground">
@@ -33,10 +37,11 @@
         </div>
     </div>
 </div>
+@if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','PR']))
 <div class="popUpWindow">
     <div class="confirmationPopup">
         <h1>Confirm</h1>
-        <p>Do you want to delete "{{ $speaker->name }}"  profile? </p>
+        <p>Do you want to delete "{{ $speaker->title . ". " . $speaker->first_name . " " . $speaker->last_name }}"  profile? </p>
         <div class="inputContainer Button between">
                 {!! Form::open(['action' => ['SpeakersController@destroy', $speaker->id], 'method' => 'POST']) !!}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -46,4 +51,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

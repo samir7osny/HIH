@@ -8,14 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('AccessPermissions:PRESIDENT')
+            ->only(['edit', 'update']);
     }
 
     /**
@@ -102,7 +98,9 @@ class HomeController extends Controller
             'story' => 'required',
             'founder' => 'required',
             'college' => 'required|integer',
-            'date_of_foundation' => 'required|date'
+            'date_of_foundation' => 'required|date',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
         ]);
         $hih = \App\HIH::count();
         if ($hih != 0){
@@ -117,6 +115,23 @@ class HomeController extends Controller
         $hih->date_of_foundation = $request->input('date_of_foundation');
         $hih->president_id = Auth::user()->id;
         $hih->save();
+
+        \App\Highboard::truncate();
+        if($request->input('highboard')){
+            foreach ($request->input('highboard') as $highboard) {
+                $Highboard = new \App\Highboard;
+                $Highboard->member_id = $highboard;
+                $Highboard->save();
+            }
+        }
+        
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $HIHSponsor = new \App\HIHSponsors;
+                $HIHSponsor->sponsor_id = $sponsor;
+                $HIHSponsor->save();
+            }
+        }
 
         return redirect('/aboutus')->with('success', 'The Hand In Hand\'s information has been created.');
         
@@ -133,11 +148,29 @@ class HomeController extends Controller
             'mission' => 'required',
             'vision' => 'required',
             'story' => 'required',
+            'sponsor'=> 'array',
+            'sponsor.*'=> 'integer'
             /*'founder' => 'required',
             'college' => 'required|integer',
             'date_of_foundation' => 'required|date'*/
         ]);
         $hih = \App\HIH::first();
+        \App\HIHSponsors::truncate();
+        if($request->input('sponsor')){
+            foreach ($request->input('sponsor') as $sponsor) {
+                $HIHSponsor = new \App\HIHSponsors;
+                $HIHSponsor->sponsor_id = $sponsor;
+                $HIHSponsor->save();
+            }
+        }
+        \App\Highboard::truncate();
+        if($request->input('highboard')){
+            foreach ($request->input('highboard') as $highboard) {
+                $Highboard = new \App\Highboard;
+                $Highboard->member_id = $highboard;
+                $Highboard->save();
+            }
+        }
         $hih->mission = $request->input('mission');
         $hih->vision = $request->input('vision');
         $hih->story = $request->input('story');

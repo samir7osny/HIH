@@ -3,9 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class MembersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT')
+            ->only(['president']);
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD')
+            ->only(['index']);
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,HR')
+            ->only(['create']);
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,HR,TYPE_MEMBER,HR')
+            ->only(['assign', 'freeMemebers', 'unassign']);
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD')
+            ->only(['assignHead']);
+        $this->middleware('AccessPermissions:PRESIDENT,TYPE_HEAD,HR,TYPE_MEMBER,HR')
+            ->only(['rate']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -89,17 +105,42 @@ class MembersController extends Controller
 
     public function freeMemebers()
     {
-        $members = \App\Member::with(['user'])->whereNull('committee_id')->get();
+        if(\App\HIH::first()) {
+            $members = \App\Member::with(['user'])->whereNull('committee_id')
+            ->where('id' , '!=', \App\HIH::first()->president->id)
+            ->whereNotIn('id', \App\Highboard::all()->pluck('member_id'))->get();
+        }
+        else{
+            $members = null;
+        }
         return view('members.free')->with('members',$members);
     }
 
     public function search(Request $request)
     {
-        $members = \App\Member::whereHas('user', function ($query) {
-            global $request;
-            $query->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
-            ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%');
-        })->paginate(8);
+        if ($request->highboard && \App\HIH::first()) {
+            $members = \App\Member::where('id', '!=', \App\HIH::first()->president->id)
+            ->whereHas('user', function ($query) {
+                global $request;
+                $query->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%');
+            })->paginate(8);
+        }
+        else if($request->highboard){
+            $members = \App\Member::where('id', '!=', Auth::user()->userInfo->id)
+            ->whereHas('user', function ($query) {
+                global $request;
+                $query->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%');
+            })->paginate(8);
+        }
+        else{
+            $members = \App\Member::whereHas('user', function ($query) {
+                global $request;
+                $query->Where('first_name', 'LIKE', '%' . $request->searchKey . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->searchKey . '%');
+            })->paginate(8);
+        }
         $data = view('members.search')->with('members',$members)->render();
         return array("desc"=>"The search has been updated.","success"=>true,"data"=>$data);
     }
@@ -117,6 +158,9 @@ class MembersController extends Controller
     public function president(Request $request, $id)
     {
         $member = \App\Member::find($id);
+        if (\App\Highboard::where('member_id',$id)) {
+            \App\Highboard::where('member_id',$id)->delete();
+        }
         $hih = \App\HIH::first();
         $hih->president_id = $member->id;
         $hih->save();

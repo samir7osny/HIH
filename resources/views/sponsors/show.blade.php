@@ -22,8 +22,12 @@
                     <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{!!nl2br($sponsor->about)!!}</p>
                 @endif
                 <div class="inputContainer submitInput">
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','FR','TYPE_MEMBER','FR']))
                     <a href="/sponsor/{{$sponsor->id}}/edit"><button>Edit</button></a>
+                    @endif
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','FR']))
                     <input class="delete" type="submit" value="Delete">
+                    @endif
                 </div>
             </div>
             <div class="rightBoxBackground">
@@ -32,6 +36,7 @@
         </div>
     </div>
 </div>
+@if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','FR']))
 <div class="popUpWindow">
     <div class="confirmationPopup">
         <h1>Confirm</h1>
@@ -45,5 +50,5 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/sponsor.js')}}"></script>
+@endif
 @endsection

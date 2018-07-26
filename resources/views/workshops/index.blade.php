@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="outerBox masonryTwoColumn paddedBox">
+    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','TYPE_HEAD','MK']))
     <div class="inputContainer Button"><a href="/workshop/create"><button class="add"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a></div>
+    @endif
     <div class="masonryColumn">
             @for ($i = 0; $i < count($workshops); $i+=2)
             <a href="/workshop/{{$workshops[$i]->name}}" class="outerBox withoutOverflow" workshop="{{$workshops[$i]->id}}" style="

@@ -14,7 +14,9 @@ class AddShortcutIdToCommitteesTable extends Migration
     public function up()
     {
         Schema::table('committee', function($table) {
-            $table->integer('shortcut_id');
+            $table->integer('shortcut_id')->unsigned();
+
+            $table->foreign('shortcut_id')->references('id')->on('committees_codes')->onDelete('cascade');
         });
     }
 

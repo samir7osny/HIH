@@ -15,9 +15,11 @@ class CreateQuestionsEventsTable extends Migration
     {
         Schema::create('questions_events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id');
+            $table->integer('event_id')->unsigned();
             $table->string('question_content');
             $table->boolean('required');
+
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
         });
     }
 

@@ -5,7 +5,9 @@
         <div class="innerBox">
             <div class="rightBox paddedBox">
                 <div class="flexBox">
+                    @if(!\App\User::havePermission(['PRESIDENT']))
                     <a class="messageControll" href="/task/inbox" content="Inbox" @if($section == 'inbox')id="activeSection"@endif>Inbox</a>
+                    @endif
                     <a class="messageControll" href="/task/outbox" content="Outbox" @if($section == 'outbox')id="activeSection"@endif>Outbox</a>
                     <div class="Table">
                         @if ($section == 'inbox')

@@ -24,9 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
             $table->string('photo_url')->nullable();
-            $table->integer('college_id');
+            $table->integer('college_id')->unsigned();
             $table->rememberToken();
-            
+
+            $table->foreign('college_id')->references('id')->on('college')->onDelete('cascade');
         });
     }
 

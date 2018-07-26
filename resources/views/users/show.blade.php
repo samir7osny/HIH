@@ -54,9 +54,16 @@
                     <p><i class="headerIcon fa fa-sticky-note-o" aria-hidden="true"></i>{!! nl2br($user->about) !!}</p>
                 @endif
                 <div class="inputContainer submitInput">
+                    @if(\App\User::havePermission(['PRESIDENT','TASK_HIGHBOARD',$user->id,'TASK_BOARD',$user->id]) 
+                        && Auth::check() && Auth::user()->id != $user->id)
                     <a href="/task/create/{{$user->id}}"><button class="">Send task</button></a>
-                    <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
+                    @endif
+                    @if (Auth::check() && $user->username == Auth::user()->username)
+                        <a href="/user/{{$user->username}}/edit"><button>Edit</button></a>
+                    @endif
+                    @if (\App\User::havePermission(['PRESIDENT','TYPE_HEAD','HR']) || Auth::check() && Auth::user()->id == $user->id)
                     <a href="/request/create/{{$user->id}}"><button class="delete">Delete</button></a>
+                    @endif
                 </div>
             </div>
             <div class="rightBoxBackground">
@@ -65,5 +72,7 @@
         </div>
     </div>
 </div>
+@if (\App\User::havePermission(['PRESIDENT','TYPE_HEAD','HR','TYPE_MEMBER','HR']))
 <script src="{{asset('js/rate.js')}}"></script>
+@endif
 @endsection

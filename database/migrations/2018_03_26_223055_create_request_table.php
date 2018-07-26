@@ -18,7 +18,7 @@ class CreateRequestTable extends Migration
             $table->string('content');
             $table->string('deleted_user_name')->nullable();
             $table->integer('sender');
-            $table->integer('member_to_delete_id');
+            $table->integer('member_to_delete_id'); // No need to cascade
             $table->boolean('answer')->nullable();
             $table->boolean('answered');
             $table->boolean('seen');

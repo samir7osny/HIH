@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class WorkshopsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,MK')
+            ->only(['create','store', 'edit', 'update', 'destroy']);
+        
+        $this->middleware('AccessPermissions:GUEST')
+            ->only(['enroll', 'enrollForm', 'enrollWithAnswers', 'rate']);
+
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD,MEMBER,GUEST')
+            ->only(['showEnrollment']);
+
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,BOARD,MEMBER')
+            ->only(['audience']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -431,6 +445,11 @@ class WorkshopsController extends Controller
         }
         $workshop= \App\Workshop::where('name',$name)->first();
         $user= \App\User::where('username',$username)->first();
+        if(Auth::check() && !Auth::user()->userInfo->isMember() ){
+            if(   ! ($username == Auth::user()->username && \App\User::havePermission(['WORKSHOP_AUD', $workshop->id])))    {
+                return redirect('/workshop/'.$workshop->name)->with('error', 'You haven\'t the permission to do that!');
+            }
+        }
         if($user->type != 1){
             return redirect('/workshop/'.$workshop->name)->with('error', 'No thing there!');
         }
@@ -449,10 +468,12 @@ class WorkshopsController extends Controller
         ]);
         $workshop= \App\Workshop::where('name',$name)->first();
         if($workshop) {
-            $oldRate = \App\WorkshopRate::where('workshop_id',$workshop->id)->where('guest_id',Auth::user()->userInfo->id)->first();
+            if( !(Auth::check() && !Auth::user()->userInfo->isMember() && \App\WorkshopEnrollment::where('workshop_id', $workshop->id)->where('guest_id', Auth::user()->userInfo->id))  ){
+                return array("desc"=>"You can\'t rate this workshop!","success"=>false);
+            }
+            $oldRate = \App\WorkshopRate::where('workshop_id',$workshop->id)->where('guest_id',Auth::user()->userInfo->id);
             if ($oldRate){
-                $oldRate->rate = $request->rate;
-                $oldRate->save();
+                $oldRate->update(['rate' => $request->rate]);
             }
             else {
                 $newRate = new \App\WorkshopRate;
@@ -463,6 +484,6 @@ class WorkshopsController extends Controller
             }
             return array("desc"=>"The changes has been saved.","success"=>true,"userRate"=>$request->rate,"totalRate"=>$workshop->totalRate());
         }
-        return array("desc"=>"The Committee doesn't exist!","success"=>false);
+        return array("desc"=>"The Workshop doesn't exist!","success"=>false);
     }
 }

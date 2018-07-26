@@ -14,11 +14,15 @@ class AddCoverAttrActivities extends Migration
     public function up()
     {
         Schema::table('event', function($table) {
-            $table->integer('cover_id')->nullable();
+            $table->integer('cover_id')->unsigned()->nullable();
+            
+            $table->foreign('cover_id')->references('id')->on('event_gallary')->onDelete('set null');
         });
 
         Schema::table('workshop', function($table) {
-            $table->integer('cover_id')->nullable();
+            $table->integer('cover_id')->unsigned()->nullable();
+            
+            $table->foreign('cover_id')->references('id')->on('workshop_gallary')->onDelete('set null');
         });
     }
 

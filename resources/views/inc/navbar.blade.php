@@ -45,8 +45,15 @@
                 <ul>
                     <li><a href="/user/{{Auth::user()->username}}">Profile</a></li>
                     <li><a href="/chat">Message</a></li>
+                    @if (\App\User::havePermission(['PRESIDENT','TYPE_HEAD','HR']))
                     <li><a href="/task">Tasks</a></li>
+                    @endif
+                    @if (\App\User::havePermission(['PRESIDENT','TYPE_HEAD','HR']))
                     <li><a href="/request">Requests</a></li>
+                    @endif
+                    @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','BOARD']))
+                    <li><a href="/contactus">Feedback</a></li>
+                    @endif
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -69,7 +76,9 @@
             </li>
             <li class="hasDropdown">People
                     <ul>
+                        @if (\App\User::havePermission(['PRESIDENT','HIGHBOARD','BOARD']))
                         <li><a href="/member">Members</a></li>
+                        @endif
                         <li><a href="/sponsor">Sponsors</a></li>
                         <li><a href="/speaker">Speakers</a></li>
                     </ul>

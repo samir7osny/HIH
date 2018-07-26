@@ -26,8 +26,33 @@
     <script src="{{ asset('js/hih.js') }}"></script>
 
     <footer>
-        <div id="contactus"></div>
-        <div id="copyright"></div>
+        <div id="contactus">
+            <div class="container">
+                    {!! Form::open(['action' => 'ContactUsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'feedback']) !!}
+                        <h1>Contact Us</h1>
+                        <input required type="text" placeholder="Enter your name" name="sender_name">
+                        <input required type="email" placeholder="Enter your email" name="sender_email">
+                        <textarea required placeholder="Enter your message" name="content"></textarea>
+                        <input type="submit" value="Submit">
+                    {!! Form::close() !!}
+                    <div class="sponsors">
+                        @if (\App\HIH::first() && \App\HIH::first()->Sponsors())
+                            @foreach(\App\HIH::first()->Sponsors() as $sponsor)
+                            <div style="height:148px;width:148px; float:left; margin: 10px;">
+                                <a target="blank" href="/sponsor/{{$sponsor->sponsor->id}}" class="member">
+                                    <img src="{{asset('/storage/sponsorsImages/'.$sponsor->sponsor->photo_url)}}"/>
+                                </a>
+                            </div>  
+                            @endforeach
+                        @endif
+                    </div>
+            </div>
+        </div>
+        <div id="copyright">
+            <a href="https://www.facebook.com/HIH.CUFE"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/hand-in-hand-cufe-90739512a"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/hih_cufe/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </div>
     </footer>
 </body>
 </html>

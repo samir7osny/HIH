@@ -14,10 +14,14 @@ class CreateAnswersEventsTable extends Migration
     public function up()
     {
         Schema::create('answers_events', function (Blueprint $table) {
-            $table->integer('question_id');
-            $table->integer('event_id');
-            $table->integer('guest_id');
+            $table->integer('question_id')->unsigned();
+            $table->integer('event_id')->unsigned();
+            $table->integer('guest_id')->unsigned();
             $table->mediumText('answer_content')->nullable();
+            
+            $table->foreign('question_id')->references('id')->on('questions_events')->onDelete('cascade');
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
+            $table->foreign('guest_id')->references('id')->on('guest')->onDelete('cascade');
         });
     }
 

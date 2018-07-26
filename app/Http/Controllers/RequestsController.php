@@ -10,7 +10,14 @@ class RequestsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('AccessPermissions:PRESIDENT,TYPE_HEAD,HR,MEMBER')
+            ->only(['index','show']);
+        
+        $this->middleware('AccessPermissions:PRESIDENT')
+            ->only([ 'inbox', 'update']);
+        
+        $this->middleware('AccessPermissions:TYPE_HEAD,HR,MEMBER')
+            ->only(['outbox', 'create', 'store']);
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +26,10 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        return $this->inbox();
+        if(\App\User::havePermission(['PRESIDENT']))
+            return $this->inbox();
+        else
+            return $this->outbox();
     }
 
     /**
@@ -63,7 +73,13 @@ class RequestsController extends Controller
      */
     public function create($userId)
     {
+        if(! \App\User::havePermission(['TYPE_HEAD','HR']) && Auth::check() && Auth::user()->id != $userId){
+            return redirect('/')->with('error', 'You haven\'t the permission to do that!');
+        }
         $userToDelete = \App\User::find($userId);
+        if( \App\User::havePermission(['PRESIDENT'])){
+            app('App\Http\Controllers\UsersController')->destroy($userToDelete->username);
+        }
         if ($userToDelete != null)
             return view('requests.create')->with('userToDelete',$userToDelete);
         return redirect('/')->with('error', 'The user doesn\'t exist!');
@@ -77,6 +93,9 @@ class RequestsController extends Controller
      */
     public function store(Request $request)
     {
+        if(! \App\User::havePermission(['TYPE_HEAD','HR']) && Auth::check() && Auth::user()->id != $userId){
+            return redirect('/')->with('error', 'You haven\'t the permission to do that!');
+        }
         $this->validate($request, [
             'userid' => 'required',
             'content' => 'required|string|max:255',

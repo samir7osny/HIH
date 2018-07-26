@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class SpeakersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,PR,TYPE_MEMBER,PR')
+            ->only(['create','store','edit','update']);
+        
+        $this->middleware('AccessPermissions:PRESIDENT,HIGHBOARD,TYPE_HEAD,PR')
+            ->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

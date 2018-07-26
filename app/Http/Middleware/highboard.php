@@ -16,7 +16,7 @@ class highboard
      */
     public function handle($request, Closure $next)
     {
-        if (    !(Auth::check() && Auth::user()->userInfo->isHead())   ) {
+        if (    !(Auth::check() && Auth::user()->userInfo->isHighboard())   ) {
             return redirect('/')->with('error', 'You haven\'t the permission to do that!');
         }
         return $next($request);

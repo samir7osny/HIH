@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventGallaryTable extends Migration
+class CreateCollegeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateEventGallaryTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_gallary', function (Blueprint $table) {
+        Schema::create('college', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
-            $table->integer('event_id')->unsigned();
+            $table->string('name');
+            $table->integer('university_id')->unsigned();
 
             
-            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
+            $table->foreign('university_id')->references('id')->on('university')->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateEventGallaryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_gallary');
+        Schema::dropIfExists('college');
     }
 }

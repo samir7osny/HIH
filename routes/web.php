@@ -73,6 +73,7 @@ Route::resource('/workshop','WorkshopsController');
 Route::get('/sponsor/search', 'SponsorsController@search');
 Route::resource('/sponsor','SponsorsController');
 
+Route::resource('/contactus', 'ContactUsController')->only(['index','store','show','destroy']);
 
 // //All Workshops
 // Route::get('/workshop', function(){
